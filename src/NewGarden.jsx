@@ -16,7 +16,6 @@ const daysHebrew = {
 };
 
 export default function NewGarden() {
-  const gardens = useGardens();
 
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");

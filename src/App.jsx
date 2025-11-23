@@ -71,7 +71,7 @@ function App() {
             >
               <div className={styles.imageWrapper}>
                 <img
-                  src={g.imageURL || "./assets/1.jpg"}
+                  src={g.imageURL || "/assets/1.jpg"}
                   className={styles.image}
                   alt={g.name}
                 />
