@@ -3,6 +3,7 @@ import { useGardens } from "./hooks/useGardens";
 import styles from "./app.module.css";
 import { addDoc, collection } from "firebase/firestore";
 import { db } from "./firebase/config";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const days = ["sunday", "monday", "tuesday", "wednesday", "thursday"];
 
@@ -22,23 +23,35 @@ export default function NewGarden() {
   const [day, setDay] = useState("");
   const [imageURL, setImageURL] = useState("");
   const [outDays, setOutDays] = useState("");
+  const [lat, setLat] = useState("");
+  const [lng, setLng] = useState("");
 
- async function handleSubmit(e) {
+async function handleSubmit(e) {
   e.preventDefault();
 
   const newGarden = {
     name,
     address,
     day,
+    outDays,
     imageURL,
+    location: {
+  lat: isNaN(parseFloat(lat)) ? 0 : parseFloat(lat),
+  lng: isNaN(parseFloat(lng)) ? 0 : parseFloat(lng),
+},
     lastVisit: null,
     notes: [],
     visitLogs: [],
   };
 
-  await addDoc(collection(db, "gardens"), newGarden);
-
-  window.location.href = "/";
+  try {
+    await addDoc(collection(db, "gardens"), newGarden);
+    alert("הגן נוסף בהצלחה!"); // success message
+    window.location.href = "/";
+  } catch (error) {
+    console.error("Error adding garden:", error);
+    alert("שגיאה בהוספת הגן. בדוק את הקונסול לפרטים."); // error message
+  }
 }
 
   return (
@@ -84,6 +97,26 @@ export default function NewGarden() {
   onChange={(e) => setOutDays(e.target.value)}
   placeholder="לדוגמה: א, ג, ד"
 />
+<label>קו רוחב (Latitude)</label>
+<input
+  className={styles.input}
+  type="number"
+  step="any"
+  value={lat}
+  required
+  onChange={(e) => setLat(e.target.value)}
+/>
+
+<label>קו אורך (Longitude)</label>
+<input
+  className={styles.input}
+  type="number"
+  step="any"
+  value={lng}
+  required
+  onChange={(e) => setLng(e.target.value)}
+/>
+
 
 
           <label>תמונה (URL)</label>

@@ -2,10 +2,7 @@ import { useGardens } from "./hooks/useGardens";
 import styles from "./app.module.css";
 import { useState } from "react";
 
-// Original English days
 const days = ["sunday", "monday", "tuesday", "wednesday", "thursday"];
-
-// Map English day names to Hebrew
 const daysHebrew = {
   sunday: "ראשון",
   monday: "שני",
@@ -22,91 +19,89 @@ function App() {
     ? gardens.filter((g) => g.day === selectedDay)
     : gardens;
 
-    function formatDate(dateString) {
-  if (!dateString) return "";
-  const date = new Date(dateString);
-  const day = String(date.getDate()).padStart(2, "0");
-  const month = String(date.getMonth() + 1).padStart(2, "0"); // months are 0-indexed
-  const year = String(date.getFullYear()).slice(-2); // get last 2 digits
-  return `${day}/${month}/${year}`;
-}
-
+  function formatDate(dateString) {
+    if (!dateString) return "";
+    const date = new Date(dateString);
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const year = String(date.getFullYear()).slice(-2);
+    return `${day}/${month}/${year}`;
+  }
 
   return (
-    <div style={{ padding: "20px", fontFamily: "sans-serif", direction: "rtl" }} className={styles.appContainer}>
-      <h1>ניהול גנים</h1>
+    <div className={styles.appContainer}>
+      <h1 className={styles.appTitle}>ניהול גינות</h1>
 
-      {gardens.length === 0 && <p>אין גנים עדיין.</p>}
-
+      {/* Filter + Add Garden */}
       <div className={styles.control}>
         <div className={styles.dayBar}>
-        {days.map((day) => (
+          {days.map((day) => (
+            <button
+              key={day}
+              onClick={() => setSelectedDay(day)}
+              className={`${styles.dayButton} ${selectedDay === day ? styles.active : ""}`}
+            >
+              {daysHebrew[day]}
+            </button>
+          ))}
           <button
-            key={day}
-            onClick={() => setSelectedDay(day)}
-            className={
-              selectedDay === day
-                ? `${styles.dayButton} ${styles.active}`
-                : styles.dayButton
-            }
+            onClick={() => setSelectedDay("")}
+            className={`${styles.dayButton} ${selectedDay === "" ? styles.active : ""}`}
           >
-            {daysHebrew[day]}
+            הכל
           </button>
-        ))}
-
+        </div>
         <button
-          onClick={() => setSelectedDay("")}
-          className={
-            selectedDay === ""
-              ? `${styles.dayButton} ${styles.active}`
-              : styles.dayButton
-          }
+          className={styles.addGardenButton}
+          onClick={() => (window.location.href = "/new-garden")}
         >
-          הכל
+          ➕ הוסף גן חדש
         </button>
-        
-      </div>
-      <button
-  className={styles.dayButton}
-  onClick={() => (window.location.href = "/new-garden")}
->
-  ➕ הוסף גן חדש
-</button>
       </div>
 
-      <ul className={styles.list}>
-        {visibleGardens.map((g) => (
-          <li
-            key={g.id}
-            className={styles.card}
-            onClick={() => (window.location.href = `/garden/${g.id}`)}
-          >
-            <div className={styles.info}>
-              <div className={styles.title}>{g.name}</div>
-              <div className={styles.address}>{g.address}</div>
+      {gardens.length === 0 ? (
+        <p className={styles.emptyMessage}>אין גנים עדיין.</p>
+      ) : (
+        <ul className={styles.list}>
+          {visibleGardens.map((g) => (
+            <li
+              key={g.id}
+              className={styles.card}
+              onClick={() => (window.location.href = `/garden/${g.id}`)}
+            >
+              <div className={styles.imageWrapper}>
+                <img
+                  src={g.imageURL || "/assets/1.jpg"}
+                  className={styles.image}
+                  alt={g.name}
+                />
+              </div>
 
-              <div className={styles.lastVisit}>
-  ביקור אחרון: <strong>{g.lastVisit ? formatDate(g.lastVisit) : "אין ביקורים עדיין"}</strong>
-</div>
-
-
-              <button
-                className={styles.button}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  alert("ניווט בקרוב!");
-                }}
-              >
-                ניווט
-              </button>
-            </div>
-
-            <div className={styles.imageWrapper}>
-              <img src="/assets/1.jpg" className={styles.image} alt={g.name} />
-            </div>
-          </li>
-        ))}
-      </ul>
+              <div className={styles.info}>
+                <div className={styles.title}>{g.name}</div>
+                <div className={styles.address}>{g.address}</div>
+                <div className={styles.lastVisit}>
+                  ביקור אחרון:{" "}
+                  <strong>
+                    {g.lastVisit ? formatDate(g.lastVisit) : "אין ביקורים עדיין"}
+                  </strong>
+                </div>
+                <div className={styles.cardButtons}>
+                  <button
+                    className={styles.button}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      alert("ניווט בקרוב!");
+                    }}
+                  >
+                    ניווט
+                  </button>
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }

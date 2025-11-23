@@ -25,18 +25,27 @@ function GardenDetail() {
   thursday: "חמישי",
 };
 
-  useEffect(() => {
-    async function fetchGarden() {
+useEffect(() => {
+  async function fetchGarden() {
+    try {
       const docRef = doc(db, "gardens", id);
       const docSnap = await getDoc(docRef);
+
       if (docSnap.exists()) {
         setGarden(docSnap.data());
       } else {
+        console.warn(`Garden with id "${id}" not found.`);
         setGarden(null);
       }
+    } catch (error) {
+      console.error("Error fetching garden:", error);
+      alert("שגיאה בטעינת הגן. בדוק את הקונסול לפרטים.");
     }
-    fetchGarden();
-  }, [id]);
+  }
+
+  fetchGarden();
+}, [id]);
+
 
   if (!garden) return <p>Loading garden...</p>;
 
