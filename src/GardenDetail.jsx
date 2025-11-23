@@ -135,7 +135,7 @@ async function handleAddVisit() {
       <div className={styles.section}>
         <div className={styles.gardenImageWrapper}>
           {garden.imageURL ? (
-            <img src="/assets/1.jpg" alt={garden.name} className={styles.gardenImage} />
+            <img src="./assets/1.jpg" alt={garden.name} className={styles.gardenImage} />
           ) : (
             <div className={styles.gardenImagePlaceholder}>No Image</div>
           )}
