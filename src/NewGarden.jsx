@@ -56,7 +56,7 @@ const encodedAddress = encodeURIComponent(address);
 
       <div className={styles.card} style={{ cursor: "default" }}>
         <form className={styles.form} onSubmit={handleSubmit}>
-          <label>שם הגן</label>
+          <label>שם הגינה</label>
           <input
             className={styles.input}
             value={name}

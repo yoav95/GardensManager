@@ -51,6 +51,7 @@ function App() {
           >
             הכל
           </button>
+          
         </div>
         <button
   className={styles.fabAdd}
@@ -58,6 +59,7 @@ function App() {
 >
   +
 </button>
+        
       </div>
 
       {gardens.length === 0 ? (
