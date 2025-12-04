@@ -61,7 +61,7 @@ useEffect(() => {
     if (!newNote.trim()) return;
     const docRef = doc(db, "gardens", id);
     const updatedNotes = garden.notes ? [...garden.notes, newNote] : [newNote];
-    await updateDoc(docRef, { notes: updatedNotes });
+    await updateDoc(docRef, { notes: updatedNotes }, { merge: true });
     setGarden(prev => ({ ...prev, notes: updatedNotes }));
     setNewNote("");
     setAddingNote(false);
@@ -79,7 +79,7 @@ useEffect(() => {
   async function handleDeleteNote(index) {
     const docRef = doc(db, "gardens", id);
     const updatedNotes = garden.notes.filter((_, i) => i !== index);
-    await updateDoc(docRef, { notes: updatedNotes });
+    await updateDoc(docRef, { notes: updatedNotes }, { merge: true });
     setGarden(prev => ({ ...prev, notes: updatedNotes }));
   }
 
@@ -101,7 +101,7 @@ async function handleAddVisit() {
   await updateDoc(docRef, { 
     visitLogs: updatedLogs,
     lastVisit: visitDate
-  });
+  },{ merge: true });
 
   setGarden(prev => ({ 
     ...prev, 
@@ -119,7 +119,7 @@ async function handleUpdateDay() {
 
   const docRef = doc(db, "gardens", id);
 
-  await updateDoc(docRef, { day: newDay });
+  await updateDoc(docRef, { day: newDay }, { merge: true });
 
   setGarden(prev => ({ ...prev, day: newDay }));
   setEditingDay(false);
@@ -129,7 +129,8 @@ async function handleUpdateOutDays() {
 
   const docRef = doc(db, "gardens", id);
 
-  await updateDoc(docRef, { outDays: newOutDays });
+  await updateDoc(docRef, { outDays: newOutDays }, { merge: true });
+
 
   setGarden(prev => ({ ...prev, outDays: newOutDays }));
   setEditingOutDays(false);
@@ -140,7 +141,7 @@ async function handleUpdateOutDays() {
   async function handleDeleteVisit(index) {
     const docRef = doc(db, "gardens", id);
     const updatedLogs = garden.visitLogs.filter((_, i) => i !== index);
-    await updateDoc(docRef, { visitLogs: updatedLogs   });
+    await updateDoc(docRef, { visitLogs: updatedLogs   },{ merge: true });
     setGarden(prev => ({ ...prev, visitLogs: updatedLogs }));
   }
 

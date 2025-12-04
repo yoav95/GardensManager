@@ -29,16 +29,16 @@ async function handleSubmit(e) {
   e.preventDefault();
 const encodedAddress = encodeURIComponent(address);
   const newGarden = {
-    name,
-    address,
-    day,
-    outDays,
-    imageURL,
-    locationURL: `https://waze.com/ul?q=${encodedAddress}`,
-    lastVisit: null,
-    notes: [],
-    visitLogs: [],
-  };
+  name,
+  address,
+  day,
+  outDays,
+  imageURL: imageURL || "",
+  locationURL: `https://waze.com/ul?q=${encodedAddress}`,
+  lastVisit: null,
+  notes: [],
+  visitLogs: [],
+};
 
   try {
     await addDoc(collection(db, "gardens"), newGarden);
