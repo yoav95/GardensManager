@@ -2,6 +2,8 @@ import { useGardens } from "./hooks/useGardens";
 import styles from "./App.module.css";
 
 import { useState } from "react";
+import GardenView from "./GardenView";
+import TasksView from "./TasksView";
 
 const days = ["sunday", "monday", "tuesday", "wednesday", "thursday"];
 const daysHebrew = {
@@ -11,9 +13,11 @@ const daysHebrew = {
   wednesday: "רביעי",
   thursday: "חמישי",
 };
+const tasksCount = 5;
 
 function App() {
   const gardens = useGardens();
+  const [view, setView] = useState("gardens");
   const [selectedDay, setSelectedDay] = useState("");
 
   const visibleGardens = selectedDay
@@ -31,79 +35,31 @@ function App() {
 
   return (
     <div className={styles.appContainer}>
-      <h1 className={styles.appTitle}>ניהול גינות</h1>
+      <div className={styles.topBox}>
+  <button
+    className={`${styles.gardenViewButton} ${view === "gardens" ? styles.active : ""}`}
+    onClick={() => setView("gardens")}
+  >
+    גינות
+  </button>
 
-      {/* Filter + Add Garden */}
-      <div className={styles.control}>
-        <div className={styles.dayBar}>
-          {days.map((day) => (
-            <button
-              key={day}
-              onClick={() => setSelectedDay(day)}
-              className={`${styles.dayButton} ${selectedDay === day ? styles.active : ""}`}
-            >
-              {daysHebrew[day]}
-            </button>
-          ))}
-          <button
-            onClick={() => setSelectedDay("")}
-            className={`${styles.dayButton} ${selectedDay === "" ? styles.active : ""}`}
-          >
-            הכל
-          </button>
-          
-        </div>
-        <button
-  className={styles.fabAdd}
-  onClick={() => (window.location.href = "/new-garden")}
+  <button
+  className={`${styles.tasksViewButtom} ${
+    view === "tasks" ? styles.active : ""
+  }`}
+  onClick={() => setView("tasks")}
 >
-  +
+  משימות
+
+  {tasksCount > 0 && (
+    <span className={styles.taskBadge}>
+      {tasksCount}
+    </span>
+  )}
 </button>
-        
-      </div>
+</div>
 
-      {gardens.length === 0 ? (
-        <p className={styles.emptyMessage}>אין גנים עדיין.</p>
-      ) : (
-        <ul className={styles.list}>
-          {visibleGardens.map((g) => (
-            <li
-              key={g.id}
-              className={styles.card}
-              onClick={() => (window.location.href = `/garden/${g.id}`)}
-            >
-              <div className={styles.imageWrapper}>
-                <img
-                  src={g.imageURL}
-                  className={styles.image}
-                  alt={g.name}
-                />
-              </div>
-
-              <div className={styles.info}>
-                <div className={styles.title}>{g.name}</div>
-                <div className={styles.address}>{g.address}</div>
-                <div className={styles.lastVisit}>
-                  ביקור אחרון:{" "}
-                  {g.lastVisit ? <p className={styles.okVisit}>{formatDate(g.lastVisit)}</p> : <p className={styles.noVisit}>אין ביקורים עדיין</p>}
-                 
-                </div>
-                <div className={styles.cardButtons}>
-                  <button
-                    className={styles.navButton}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      window.location.href = `https://waze.com/ul?q=${g.locationURL ? g.locationURL : ""}`
-                    }}
-                  >
-                    ניווט
-                  </button>
-                </div>
-              </div>
-            </li>
-          ))}
-        </ul>
-      )}
+      {view === "gardens" ? <GardenView /> : <TasksView />}
     </div>
   );
 }

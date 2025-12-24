@@ -17,7 +17,7 @@ html, body {
 
 }
 
-.appContainer {
+.container {
   padding: 20px;
   font-family: "Inter", sans-serif;
   max-width: 800px;
@@ -361,74 +361,4 @@ margin-right: 5px;
   border: none;
   cursor: pointer;
   margin-top: 16px;
-}
-
-.topBox {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  display: flex;
-  gap: 8px;
-  padding: 10px;
-  border-bottom: 1px solid #eaeaea;
-  margin-bottom: 1rem;
-}
-
-.gardenViewButton,
-.tasksViewButtom {
-  flex: 1;
-  padding: 12px 0;
-  border-radius: 10px;
-  border: none;
-  background: #f3f4f6;
-  color: #555;
-  font-size: 15px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
-
-}
-
-/* Hover (desktop only, still safe on mobile) */
-.gardenViewButton:hover,
-.tasksViewButtom:hover {
-  background: #e9ecef;
-}
-
-/* ACTIVE STATE */
-.active {
-  background: #1f7a4d; /* premium green */
-  color: #ffffff;
-  box-shadow: 0 4px 12px rgba(31, 122, 77, 0.25);
-}
-
-/* Optional icon/text alignment */
-.buttonContent {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-}
-.taskBadge {
-  position: absolute;
-  top: 6px;
-  left: 10px; /* RTL-friendly: appears on the “inner” side */
-  min-width: 18px;
-  height: 18px;
-  padding: 4px 8px;
-  border-radius: 9px;
-  background: #e5533d; /* soft red */
-  color: #ffffff;
-  font-size: 13px;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 1;
-}
-
-/* When button is active, slightly soften badge */
-.active .taskBadge {
-  background: #ffffff;
-  color: #1f7a4d;
 }

@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { doc, getDoc,updateDoc, arrayUnion, serverTimestamp, Timestamp } from "firebase/firestore";
 import { db } from "./firebase/config";
 import styles from "./GardenDetail.module.css";
 
@@ -14,7 +14,7 @@ function GardenDetail() {
 
   const [addingVisit, setAddingVisit] = useState(false);
   const [visitDate, setVisitDate] = useState(() => new Date().toISOString().split("T")[0]);
-  const [tasksDone, setTasksDone] = useState("");
+  const [tasksDone, setTasksDone] = useState(""); 
   const [nextTasks, setNextTasks] = useState("");
   const [expandedVisit, setExpandedVisit] = useState(null); // store index of expanded visit
   const [editingDay, setEditingDay] = useState(false);
@@ -57,15 +57,22 @@ useEffect(() => {
   // -----------------------
   // SAVE NOTE TO FIRESTORE
   // -----------------------
-  async function handleAddNote() {
-    if (!newNote.trim()) return;
-    const docRef = doc(db, "gardens", id);
-    const updatedNotes = garden.notes ? [...garden.notes, newNote] : [newNote];
-    await updateDoc(docRef, { notes: updatedNotes }, { merge: true });
-    setGarden(prev => ({ ...prev, notes: updatedNotes }));
-    setNewNote("");
-    setAddingNote(false);
-  }
+async function handleAddNote() {
+  if (!newNote.trim()) return;
+
+  const docRef = doc(db, "gardens", id);
+
+  const updatedNotes = garden.notes
+    ? [...garden.notes, newNote]
+    : [newNote];
+
+  await updateDoc(docRef, { notes: updatedNotes });
+
+  setGarden(prev => ({ ...prev, notes: updatedNotes }));
+  setNewNote("");
+  setAddingNote(false);
+}
+
   function formatDate(dateString) {
   if (!dateString) return "";
   const date = new Date(dateString);
@@ -83,33 +90,31 @@ useEffect(() => {
     setGarden(prev => ({ ...prev, notes: updatedNotes }));
   }
 
+
 async function handleAddVisit() {
   if (!tasksDone.trim() && !nextTasks.trim()) return;
 
   const docRef = doc(db, "gardens", id);
 
   const newLog = {
-    date: visitDate,
+    date: visitDate, // string / date you already use
     tasks: tasksDone.split("\n").filter(t => t.trim()),
     nextVisitTasks: nextTasks.split("\n").filter(t => t.trim()),
+    createdAt: Timestamp.now(), // ✅ allowed
   };
 
-  const updatedLogs = garden.visitLogs
-    ? [...garden.visitLogs, newLog]
-    : [newLog];
+  await updateDoc(docRef, {
+    visitLogs: arrayUnion(newLog),
+    lastVisit: visitDate,
+  });
 
-  await updateDoc(docRef, { 
-    visitLogs: updatedLogs,
-    lastVisit: visitDate
-  },{ merge: true });
-
-  setGarden(prev => ({ 
-    ...prev, 
-    visitLogs: updatedLogs,
-    lastVisit: visitDate
+  // optimistic UI update
+  setGarden(prev => ({
+    ...prev,
+    visitLogs: [...(prev.visitLogs || []), newLog],
+    lastVisit: visitDate,
   }));
 
-  setVisitDate(new Date().toISOString().split("T")[0]);
   setTasksDone("");
   setNextTasks("");
   setAddingVisit(false);
@@ -286,12 +291,19 @@ async function handleUpdateOutDays() {
 
         {garden.notes?.length > 0 ? (
           <div className={styles.notesList}>
-            {garden.notes.map((note, idx) => (
-              <div key={idx} className={styles.noteItem}>
-                <span>{note}</span>
-                <button className={styles.deleteButton} onClick={() => handleDeleteNote(idx)}>✕</button>
-              </div>
-            ))}
+          {garden.notes.map((note, idx) => (
+  <div key={idx} className={styles.noteItem}>
+    <span>
+      {typeof note === "string" ? note : note.text}
+    </span>
+    <button
+      className={styles.deleteButton}
+      onClick={() => handleDeleteNote(idx)}
+    >
+      ✕
+    </button>
+  </div>
+))}
           </div>
         ) : (
           <p className={styles.noNotes}>אין הערות עדיין.</p>
