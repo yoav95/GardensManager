@@ -4,6 +4,14 @@ import styles from "./GardenView.module.css";
 import { useState } from "react";
 
 const days = ["sunday", "monday", "tuesday", "wednesday", "thursday"];
+const colorMap = {
+  sunday: "#FF6B6B",     // Red-ish
+  monday: "#4ECDC4",     // Turquoise
+  tuesday: "#dcb611",    // Yellow
+  wednesday: "#6A4C93",  // Purple
+  thursday: "#FFA500",   // Orange
+};
+
 const daysHebrew = {
   sunday: "ראשון",
   monday: "שני",
@@ -30,29 +38,30 @@ function GardenView() {
   }
 
   return (
-    <div className={styles.appContainer}>
+    <div className={styles.container}>
 
       {/* Filter + Add Garden */}
       <div className={styles.control}>
 
-        <div className={styles.dayBar}>
-          {days.map((day) => (
-            <button
-              key={day}
-              onClick={() => setSelectedDay(day)}
-              className={`${styles.dayButton} ${selectedDay === day ? styles.active : ""}`}
-            >
-              {daysHebrew[day]}
-            </button>
-          ))}
-          <button
-            onClick={() => setSelectedDay("")}
-            className={`${styles.dayButton} ${selectedDay === "" ? styles.active : ""}`}
-          >
-            הכל
-          </button>
-          
-        </div>
+     <div className={styles.dayBar}>
+  {days.map((day) => (
+    <button
+      key={day}
+      onClick={() => setSelectedDay(day)}
+      className={`${styles.dayButton} ${styles[day]} ${selectedDay === day ? styles.active : ""}`}
+    >
+      {daysHebrew[day]}
+    </button>
+  ))}
+  <button
+    onClick={() => setSelectedDay("")}
+    className={`${styles.dayButton} ${styles.all} ${selectedDay === "" ? styles.active : ""}`}
+  >
+    הכל
+  </button>
+</div>
+
+
         <button
   className={styles.fabAdd}
   onClick={() => (window.location.href = "/new-garden")}
@@ -72,6 +81,8 @@ function GardenView() {
               className={styles.card}
               onClick={() => (window.location.href = `/garden/${g.id}`)}
             >
+              <div className={`${styles.dayIndicator} ${styles[`day${g.day.charAt(0).toUpperCase() + g.day.slice(1)}`]}`}></div>
+              
               <div className={styles.imageWrapper}>
                 <img
                   src={g.imageURL}
@@ -81,6 +92,7 @@ function GardenView() {
               </div>
 
               <div className={styles.info}>
+                
                 <div className={styles.title}>{g.name}</div>
                 <div className={styles.address}>{g.address}</div>
                 <div className={styles.lastVisit}>
@@ -98,8 +110,11 @@ function GardenView() {
                   >
                     ניווט
                   </button>
+                  
+
                 </div>
               </div>
+              
             </li>
           ))}
         </ul>

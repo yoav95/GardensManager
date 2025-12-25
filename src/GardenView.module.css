@@ -51,7 +51,7 @@ html, body {
   padding: 8px 14px;
   font-size: 14px;
   border: 1px solid #ddd;
-  background: #fafafa;
+  background: #f1f1f1;
   border-radius: 10px;
   cursor: pointer;
   white-space: nowrap;
@@ -59,18 +59,40 @@ html, body {
 }
 
 .dayButton:hover {
-  background: #f0f0f0;
-}
-.dayButton.active {
-  background-color: #4caf50;
-  border-color: #4caf50;
-  color: white;
+  filter: brightness(1.15);
 }
 
+/* Active effect */
 .active {
-  background-color: #4caf50;
-  border-color: #4caf50;
-  color: white;
+  transform: scale(1.05);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+/* Colors for each day */
+.sunday {
+  color:white;
+  background-color: #FF6B6B;
+}
+
+.monday {
+  color:white;
+  background-color: #4ECDC4;
+}
+
+.tuesday {
+  background-color: #dcb611;
+  color:white;
+}
+
+.wednesday {
+  color:white;
+  background-color: #6A4C93;
+}
+
+.thursday {
+  color:white;
+  background-color: #FFA500;
+  color: black;
 }
 
 /* ======================
@@ -83,6 +105,7 @@ html, body {
 }
 
 .card {
+  position: relative;
   background: #F8F9FA;
   border-radius: 12px;
   padding: 14px;
@@ -95,8 +118,33 @@ html, body {
   transition: transform 0.15s ease;
 }
 
+
 .card:hover {
   transform: translateY(-2px);
+}
+/* GardenView.module.css */
+.dayIndicator {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  border-radius: 0 0 8px 8px;
+}
+
+/* Example day colors */
+.daySunday { background-color: #FF6B6B; }
+.dayMonday { background-color: #4ECDC4; }
+.dayTuesday { background-color: #dcb611; }
+.dayWednesday { background-color: #6A4C93; }
+.dayThursday { background-color: #FFA500; }
+
+
+/* Hover effect: slightly brighten */
+.card:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 .tasksButton {
   position: relative;
