@@ -1,7 +1,8 @@
 import { useGardens } from "./hooks/useGardens";
 import styles from "./App.module.css";
+import { collection, onSnapshot } from "firebase/firestore";import { db } from "./firebase/config";
 
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import GardenView from "./GardenView";
 import TasksView from "./TasksView";
 
@@ -13,12 +14,12 @@ const daysHebrew = {
   wednesday: "רביעי",
   thursday: "חמישי",
 };
-const tasksCount = 5;
 
 function App() {
   const gardens = useGardens();
   const [view, setView] = useState("gardens");
   const [selectedDay, setSelectedDay] = useState("");
+    const [tasksCount, setTasksCount] = useState(0);
 
   const visibleGardens = selectedDay
     ? gardens.filter((g) => g.day === selectedDay)
@@ -32,7 +33,16 @@ function App() {
     const year = String(date.getFullYear()).slice(-2);
     return `${day}/${month}/${year}`;
   }
-
+   useEffect(() => {
+    const colRef = collection(db, "tasks");
+    const unsub = onSnapshot(colRef, snapshot => {
+      const tasks = snapshot.docs.map(doc => doc.data());
+      const unfinishedCount = tasks.filter(t => !t.done).length;
+      setTasksCount(unfinishedCount);
+    });
+    return () => unsub();
+  }, []);
+// 
   return (
     <div className={styles.appContainer}>
       <div className={styles.topBox}>
@@ -43,20 +53,17 @@ function App() {
     גינות
   </button>
 
-  <button
-  className={`${styles.tasksViewButtom} ${
-    view === "tasks" ? styles.active : ""
-  }`}
-  onClick={() => setView("tasks")}
->
-  משימות
-
-  {tasksCount > 0 && (
-    <span className={styles.taskBadge}>
-      {tasksCount}
-    </span>
-  )}
-</button>
+   <button
+          className={`${styles.tasksViewButtom} ${view === "tasks" ? styles.active : ""}`}
+          onClick={() => setView("tasks")}
+        >
+          משימות
+          {tasksCount > 0 && (
+  <span className={`${styles.taskBadge}`}>
+    {tasksCount}
+  </span>
+)}
+        </button>
 </div>
 
       {view === "gardens" ? <GardenView /> : <TasksView />}

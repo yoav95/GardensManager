@@ -425,10 +425,29 @@ margin-right: 5px;
   align-items: center;
   justify-content: center;
   line-height: 1;
+  animation: popLoop 4s ease-in-out infinite;  transform: scale(1);
 }
 
 /* When button is active, slightly soften badge */
 .active .taskBadge {
   background: #ffffff;
   color: #1f7a4d;
+}
+
+@keyframes popLoop {
+  0% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.2);
+  }
+  40% {
+    transform: scale(1);
+  }
+  55% {
+    transform: scale(1.2);
+  }
+  60% {
+    transform: scale(1);
+  }
 }
