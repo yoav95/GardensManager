@@ -4,10 +4,10 @@ import { useEffect, useState } from "react";
 import L from "leaflet";
 import styles from "./AreasMap.module.css"; // reuse the same styles
 
-import { areasGeoJson } from "./data/areasGeoJson";
-import { gardensToGeoJson } from "./utils/gardensToGeoJson";
+import { areasGeoJson } from "../../data/areasGeoJson.js";
+import { gardensToGeoJson } from "../../utils/gardensToGeoJson.js";
 import { collection, getDocs } from "firebase/firestore";
-import { db } from "./firebase/config.js";
+import { db } from "../../firebase/config.js";
 const israelCenterBounds = [
   [32.4, 34.7], // north-west corner (Netanya area)
   [32.0, 35.0], // south-east corner (Tel Aviv / Petah Tikva)
@@ -33,6 +33,11 @@ const wasteDaysByArea = {
   G: "שבת",
   H: "ראשון",
 };
+
+function getPolygonCenter(layer) {
+  // L.Polygon provides getBounds(), we can use getCenter()
+  return layer.getBounds().getCenter();
+}
 
 export default function AreasMap() {
   const [gardensGeoJson, setGardensGeoJson] = useState(null);
@@ -80,33 +85,40 @@ export default function AreasMap() {
   weight: 2,
 })}
  onEachFeature={(feature, layer) => {
-    const area = feature.properties.area;
-    const wasteDays = wasteDaysByArea[area] ?? "לא ידוע";
+  const area = feature.properties.area;
+  const wasteDays = wasteDaysByArea[area] ?? "לא ידוע";
+  const baseColor = areaColors[area]; // keep the color reference
 
-    layer.bindTooltip(
-      `אזור ${area} – ימי פינוי: ${wasteDays}`,
-      {
-        sticky: true,
-        direction: "top",
-        className: "areaTooltip",
-      }
-    );
+  layer.bindTooltip(
+    `אזור ${area} – ימי פינוי: ${wasteDays}`,
+    {
+      sticky: true,
+      direction: "top",
+      className: "areaTooltip",
+    }
+  );
 
-    layer.on({
-      mouseover: (e) => {
-        e.target.setStyle({
-          fillOpacity: 0.45,
-          weight: 3,
-        });
-      },
-      mouseout: (e) => {
-        e.target.setStyle({
-          fillOpacity: 0.2,
-          weight: 2,
-        });
-      },
+  layer.on({
+  mouseover: (e) => {
+    e.target.setStyle({
+      fillOpacity: 0.6, // make it darker on hover
+      weight: 3,
     });
-  }}
+  },
+    mouseout: (e) => {
+    e.target.setStyle({
+      fillOpacity: 0.35, // back to normal
+      weight: 2,
+    });
+  },click: (e) => {
+    e.target.setStyle({
+      fillOpacity: 0.8,       // darker on click
+      weight: 3,
+      color: "#333",          // optional: change border color
+    });
+  },
+  });
+}}
       />
 
       {/* Gardens points */}
@@ -116,11 +128,18 @@ export default function AreasMap() {
  const dayClass = props.day
     ? styles[`day${props.day.charAt(0).toUpperCase() + props.day.slice(1)}`]
     : "";
-        const gardenDotIcon = new L.DivIcon({
-    className: `${styles.gardenDot} ${dayClass}`,
-    iconSize: [28, 28],
-    iconAnchor: [14, 14], // center the dot
-  });
+  const gardenDotIcon = new L.DivIcon({
+  className: styles.gardenMarker,
+  html: `
+    <div class="${styles.gardenDot} ${dayClass}"></div>
+    <div class="${styles.gardenLabel}">${props.name}</div>
+  `,
+  iconSize: null, // Let CSS control the size
+  iconAnchor: [14, 14], // Center the dot on the coordinate
+});
+
+
+
 
         return (
           <Marker key={props.id} position={[lat, lng]} icon={gardenDotIcon}>

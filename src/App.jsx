@@ -3,10 +3,10 @@ import styles from "./App.module.css";
 import { collection, onSnapshot } from "firebase/firestore";import { db } from "./firebase/config";
 import { getCoordinates } from "./utils/getCoordinates.js";
 import { useState,useEffect } from "react";
-import GardenView from "./GardenView";
-import TasksView from "./TasksView";
+import GardenView from "./components/GardenView/GardenView.jsx";
+import TasksView from "./components/TaskView/TasksView.jsx";
 import { findArea } from "./utils/findArea.js";
-import AreasMap from "./AreasMap.jsx";
+import AreasMap from "./components/AreaMap/AreasMap.jsx";
 
 const days = ["sunday", "monday", "tuesday", "wednesday", "thursday"];
 const daysHebrew = {

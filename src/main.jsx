@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
-import GardenDetail from "./GardenDetail";
-import NewGarden from "./NewGarden";
+import GardenDetail from "./components/GardenDetail/GardenDetail.jsx";
+import NewGarden from "./components/NewGarden/NewGarden.jsx";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 ReactDOM.createRoot(document.getElementById("root")).render(

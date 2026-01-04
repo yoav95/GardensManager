@@ -1,13 +1,33 @@
 /* ============================
    GARDEN DOT ICONS
 ============================ */
+.gardenMarker {
+  display: flex;
+  align-items: center;
+  gap: 3px;          /* small gap between dot and label */
+  pointer-events: auto;
+}
+
 .gardenDot {
-  width: 28px;
-  height: 28px;
-  background-color: #45a049;
+  width: 19px;
+  height: 19px;
   border-radius: 50%;
-  border: 2px solid white;
+  border: 3px solid white;
   box-shadow: 0 0 2px rgba(0,0,0,0.5);
+}
+.gardenLabel {
+  font-size: 10px;              /* smaller */
+  max-width: 100px;             /* cap width */
+  white-space: nowrap;           /* single line */
+  overflow: hidden;
+  text-overflow: ellipsis;      /* truncate if too long */
+  background: rgba(255,255,255,0.85);
+  padding: 1px 3px;
+  border-radius: 3px;
+  color: #111;
+}
+ path:focus {
+  outline: none/* subtle gray outline */
 }
 
 /* Optional colors for days */
@@ -151,11 +171,11 @@
     flex-direction: column; /* stack buttons on mobile */
   }
 }
-.daySunday { background-color: #FF6B6B; }
-.dayMonday { background-color: #4ECDC4; }
-.dayTuesday { background-color: #dcb611; }
-.dayWednesday { background-color: #6A4C93; }
-.dayThursday { background-color: #FFA500; }
+.daySunday { background-color: #E76F51; }
+.dayMonday { background-color: #2A9D8F; }
+.dayTuesday { background-color: #E9C46A; }
+.dayWednesday { background-color: #577590; }
+.dayThursday { background-color: #D9822B; }
 
 
 /*  */
@@ -232,7 +252,6 @@
   opacity: 0.85;
 }
 .areaTooltip {
-  direction: rtl;
   font-size: 13px;
   font-weight: 500;
   background: rgba(255, 255, 255, 0.95);
@@ -241,4 +260,11 @@
   color: #111;
   border: 1px solid #ddd;
   box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  text-align: center;
 }
+
+.areaTooltipMarker {
+  pointer-events: none; /* ensures marker doesn't block map interaction */
+}
+
+

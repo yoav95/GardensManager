@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { collection, onSnapshot, updateDoc, doc, deleteDoc, addDoc } from "firebase/firestore";
-import { db } from "./firebase/config";
+import { db } from "../../firebase/config";
 import styles from "./TasksView.module.css";
 
 function TasksView() {

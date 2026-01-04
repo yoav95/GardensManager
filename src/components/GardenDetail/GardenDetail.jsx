@@ -1,7 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { doc, getDoc,updateDoc, arrayUnion, serverTimestamp, Timestamp } from "firebase/firestore";
-import { db } from "./firebase/config";
+import { db } from "../../firebase/config.js";
 import styles from "./GardenDetail.module.css";
 
 function GardenDetail() {
@@ -21,6 +21,9 @@ function GardenDetail() {
 const [newDay, setNewDay] = useState("");
 const [editingOutDays, setEditingOutDays] = useState(false);
 const [newOutDays, setNewOutDays] = useState("");
+const [editingImage, setEditingImage] = useState(false);
+const [newImageURL, setNewImageURL] = useState("");
+
 
   const daysHebrew = {
   sunday: "ראשון",
@@ -81,6 +84,17 @@ async function handleAddNote() {
   const year = String(date.getFullYear()).slice(-2);
   return `${day}/${month}/${year}`;
 }
+async function handleUpdateImage() {
+  if (!newImageURL.trim()) return;
+
+  const docRef = doc(db, "gardens", id);
+
+  await updateDoc(docRef, { imageURL: newImageURL });
+
+  setGarden(prev => ({ ...prev, imageURL: newImageURL }));
+  setEditingImage(false);
+}
+
 
 
   async function handleDeleteNote(index) {
@@ -387,6 +401,52 @@ async function handleUpdateOutDays() {
           </div>
         )}
       </div>
+      {/* TEMP IMAGE EDIT CARD */}
+<div className={styles.section} style={{ marginTop: 32 }}>
+  <h3 className={styles.label}>🖼️ תמונת גינה (זמני)</h3>
+
+  {!editingImage && (
+    <>
+      <p className={styles.value}>
+        {garden.imageURL ? garden.imageURL : "אין תמונה"}
+      </p>
+      <button
+        className={styles.buttonSmall}
+        onClick={() => {
+          setNewImageURL(garden.imageURL || "");
+          setEditingImage(true);
+        }}
+      >
+        ערוך תמונה
+      </button>
+    </>
+  )}
+
+  {editingImage && (
+    <div className={styles.editDayWrapper}>
+      <input
+        type="text"
+        className={styles.input}
+        placeholder="הדבק URL של תמונה"
+        value={newImageURL}
+        onChange={(e) => setNewImageURL(e.target.value)}
+      />
+
+      <button className={styles.saveNoteButton} onClick={handleUpdateImage}>
+        שמור
+      </button>
+
+      <button
+        className={styles.deleteButtonSmall}
+        style={{ marginLeft: 8 }}
+        onClick={() => setEditingImage(false)}
+      >
+        ביטול
+      </button>
+    </div>
+  )}
+</div>
+
     </div>
   );
 }

@@ -79,28 +79,30 @@ html, body {
 /* Colors for each day */
 .sunday {
   color:white;
-  background-color: #FF6B6B;
+  background-color: #E76F51;
 }
 
 .monday {
   color:white;
-  background-color: #4ECDC4;
+  background-color: #2A9D8F;
 }
 
 .tuesday {
-  background-color: #dcb611;
+  background-color: #E9C46A;
   color:white;
 }
 
 .wednesday {
   color:white;
-  background-color: #6A4C93;
+  background-color: #577590;
 }
 
 .thursday {
   color:white;
-  background-color: #FFA500;
+  background-color: #D9822B;
 }
+
+
 
 /* ======================
    GARDEN LIST
@@ -156,11 +158,12 @@ html, body {
 }
 
 /* Example day colors */
-.daySunday { background-color: #FF6B6B; }
-.dayMonday { background-color: #4ECDC4; }
-.dayTuesday { background-color: #dcb611; }
-.dayWednesday { background-color: #6A4C93; }
-.dayThursday { background-color: #FFA500; }
+.daySunday { background-color: #E76F51; }
+.dayMonday { background-color: #2A9D8F; }
+.dayTuesday { background-color: #E9C46A; }
+.dayWednesday { background-color: #577590; }
+.dayThursday { background-color: #D9822B; }
+
 
 
 /* Hover effect: slightly brighten */
@@ -417,9 +420,8 @@ margin-right: 5px;
   transform: scale(0.97);
 }
 .control {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  position: relative;
+  padding-bottom: 12px;
 }
 .addGardenButton {
   background: #5d56df;
@@ -465,4 +467,33 @@ margin-right: 5px;
   border: none;
   cursor: pointer;
   margin-top: 16px;
+}
+.searchWrapper {
+  margin-top: 10px;
+}
+.searchInput {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid #ddd;
+  font-size: 16px;
+  outline: none;
+}
+
+.searchInput:focus {
+  border-color: #6a4c93;
+}
+.fabAdd {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  font-size: 28px;
+  background: #6a4c93;
+  color: white;
+  border: none;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+  cursor: pointer;
 }

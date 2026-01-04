@@ -1,16 +1,17 @@
-import { useGardens } from "./hooks/useGardens";
+import { useGardens } from "../../hooks/useGardens";
 import styles from "./GardenView.module.css";
 
 import { useState } from "react";
 
 const days = ["sunday", "monday", "tuesday", "wednesday", "thursday"];
 const colorMap = {
-  sunday: "#FF6B6B",     // Red-ish
-  monday: "#4ECDC4",     // Turquoise
-  tuesday: "#dcb611",    // Yellow
-  wednesday: "#6A4C93",  // Purple
-  thursday: "#FFA500",   // Orange
+  sunday: "#E76F51",     // Muted terracotta red
+  monday: "#2A9D8F",     // Calm teal green
+  tuesday: "#E9C46A",    // Soft mustard
+  wednesday: "#577590",  // Slate blue
+  thursday: "#F4A261",   // Warm sand / orange
 };
+
 
 const daysHebrew = {
   sunday: "ראשון",
@@ -23,10 +24,20 @@ const daysHebrew = {
 function GardenView() {
   const gardens = useGardens();
   const [selectedDay, setSelectedDay] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
+  
 
-  const visibleGardens = selectedDay
-    ? gardens.filter((g) => g.day === selectedDay)
-    : gardens;
+
+const visibleGardens = gardens.filter((g) => {
+  const matchesDay = selectedDay ? g.day === selectedDay : true;
+  const matchesSearch = g.name
+    ?.toLowerCase()
+    .includes(searchTerm.toLowerCase());
+
+  return matchesDay && matchesSearch;
+});
+
+
 
   function formatDate(dateString) {
     if (!dateString) return "";
@@ -42,34 +53,54 @@ function GardenView() {
 
       {/* Filter + Add Garden */}
       <div className={styles.control}>
+  
+  {/* Day filter bar */}
+  <div className={styles.dayBar}>
+    {days.map((day) => (
+      <button
+        key={day}
+        onClick={() => setSelectedDay(day)}
+        className={`${styles.dayButton} ${styles[day]} ${
+          selectedDay === day ? styles.active : ""
+        }`}
+      >
+        {daysHebrew[day]}
+      </button>
+    ))}
 
-     <div className={styles.dayBar}>
-  {days.map((day) => (
     <button
-      key={day}
-      onClick={() => setSelectedDay(day)}
-      className={`${styles.dayButton} ${styles[day]} ${selectedDay === day ? styles.active : ""}`}
+      onClick={() => setSelectedDay("")}
+      className={`${styles.dayButton} ${styles.all} ${
+        selectedDay === "" ? styles.active : ""
+      }`}
     >
-      {daysHebrew[day]}
+      הכל
     </button>
-  ))}
+  </div>
+
+  {/* Search */}
+  <div className={styles.searchWrapper}>
+    <input
+  type="text"
+  className={styles.searchInput}
+  placeholder="חפש גינה..."
+  value={searchTerm}
+  onFocus={() => setSelectedDay("")}   // 👈 important
+  onChange={(e) => setSearchTerm(e.target.value)}
+/>
+
+  </div>
+
+  {/* Floating Add Button */}
   <button
-    onClick={() => setSelectedDay("")}
-    className={`${styles.dayButton} ${styles.all} ${selectedDay === "" ? styles.active : ""}`}
+    className={styles.fabAdd}
+    onClick={() => (window.location.href = "/new-garden")}
   >
-    הכל
+    +
   </button>
+
 </div>
 
-
-        <button
-  className={styles.fabAdd}
-  onClick={() => (window.location.href = "/new-garden")}
->
-  +
-</button>
-        
-      </div>
 
       {gardens.length === 0 ? (
         <p className={styles.emptyMessage}>אין גנים עדיין.</p>
@@ -115,7 +146,7 @@ function GardenView() {
     </div>
   </div>
 </li>
-
+  
 
           ))}
         </ul>

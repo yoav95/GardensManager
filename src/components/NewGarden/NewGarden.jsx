@@ -1,9 +1,8 @@
 import { useState } from "react";
-import { useGardens } from "./hooks/useGardens";
-import styles from "./App.module.css";
 import { addDoc, collection } from "firebase/firestore";
-import { db } from "./firebase/config";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { db } from "../../firebase/config.js";
+import styles from "./NewGarden.module.css";
+import { getCoordinates } from "../../utils/getCoordinates.js"; // <-- import your function
 
 const days = ["sunday", "monday", "tuesday", "wednesday", "thursday"];
 
@@ -16,44 +15,51 @@ const daysHebrew = {
 };
 
 export default function NewGarden() {
-
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [day, setDay] = useState("");
   const [imageURL, setImageURL] = useState("");
   const [outDays, setOutDays] = useState("");
-  const [lat, setLat] = useState("");
-  const [lng, setLng] = useState("");
 
-async function handleSubmit(e) {
-  e.preventDefault();
-const encodedAddress = encodeURIComponent(address);
-  const newGarden = {
-  name,
-  address,
-  day,
-  outDays,
-  imageURL: imageURL || "",
-  locationURL: `https://waze.com/ul?q=${encodedAddress}`,
-  lastVisit: null,
-  notes: [],
-  visitLogs: [],
-};
+  async function handleSubmit(e) {
+    e.preventDefault();
 
-  try {
-    await addDoc(collection(db, "gardens"), newGarden);
-    alert("הגן נוסף בהצלחה!"); // success message
-    window.location.href = "/";
-  } catch (error) {
-    console.error("Error adding garden:", error);
-    alert("שגיאה בהוספת הגן. בדוק את הקונסול לפרטים."); // error message
+    // Fetch coordinates from address
+    const coords = await getCoordinates(address);
+    if (!coords) {
+      alert("לא ניתן למצוא את המיקום של הכתובת שהזנת");
+      return;
+    }
+
+    const encodedAddress = encodeURIComponent(address);
+
+    const newGarden = {
+      name,
+      address,
+      day,
+      outDays,
+      imageURL: imageURL || "",
+      locationURL: `https://waze.com/ul?q=${encodedAddress}`,
+      lat: coords.lat,
+      lng: coords.lng,
+      lastVisit: null,
+      notes: [],
+      visitLogs: [],
+    };
+
+    try {
+      await addDoc(collection(db, "gardens"), newGarden);
+      alert("הגן נוסף בהצלחה!");
+      window.location.href = "/";
+    } catch (error) {
+      console.error("Error adding garden:", error);
+      alert("שגיאה בהוספת הגן. בדוק את הקונסול לפרטים.");
+    }
   }
-}
 
   return (
     <div className={styles.appContainer}>
       <h1 className={styles.appTitle}>הוסף גינה חדשה</h1>
-
       <div className={styles.card} style={{ cursor: "default" }}>
         <form className={styles.form} onSubmit={handleSubmit}>
           <label>שם הגינה</label>
@@ -86,23 +92,14 @@ const encodedAddress = encodeURIComponent(address);
               </option>
             ))}
           </select>
-          <label>ימי הוצאה </label>
-<input
-  className={styles.input}
-  value={outDays}
-  onChange={(e) => setOutDays(e.target.value)}
-  placeholder="לדוגמה: א, ג, ד"
-/>
 
-
-
-
-          {/* <label>תמונה (URL)</label>
+          <label>ימי הוצאה</label>
           <input
             className={styles.input}
-            value={imageURL}
-            onChange={(e) => setImageURL(e.target.value)}
-          /> */}
+            value={outDays}
+            onChange={(e) => setOutDays(e.target.value)}
+            placeholder="לדוגמה: א, ג, ד"
+          />
 
           <button className={styles.button} type="submit">
             שמור גן
