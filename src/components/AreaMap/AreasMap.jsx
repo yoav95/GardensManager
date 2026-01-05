@@ -66,6 +66,8 @@ export default function AreasMap() {
     return `${day}/${month}/${year}`;
   }
 
+  
+
   return (
     <MapContainer
       bounds={israelCenterBounds}
@@ -132,7 +134,12 @@ export default function AreasMap() {
   className: styles.gardenMarker,
   html: `
     <div class="${styles.gardenDot} ${dayClass}"></div>
-    <div class="${styles.gardenLabel}">${props.name}</div>
+  <div class="${styles.gardenLabel}">
+    <div class="${styles.gardenTitle}">${props.name}</div>
+    <div class="${styles.gardenLastVisit}">
+      ${props.lastVisit ? formatDate(props.lastVisit) : "אין ביקורים"}
+    </div>
+  </div>
   `,
   iconSize: null, // Let CSS control the size
   iconAnchor: [14, 14], // Center the dot on the coordinate
