@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { doc, getDoc,updateDoc, arrayUnion, serverTimestamp, Timestamp } from "firebase/firestore";
+import { doc, getDoc,updateDoc, arrayUnion, serverTimestamp, Timestamp, deleteDoc } from "firebase/firestore";
 import { db } from "../../firebase/config.js";
 import styles from "./GardenDetail.module.css";
 
@@ -54,9 +54,30 @@ useEffect(() => {
   fetchGarden();
 }, [id]);
 
+async function handleDeleteGarden() {
+  const confirmed = window.confirm(
+    "האם אתה בטוח שברצונך למחוק את הגינה?\nהפעולה אינה ניתנת לביטול."
+  );
 
-  if (!garden) return <p>Loading garden...</p>;
+  if (!confirmed) return;
 
+  try {
+    const docRef = doc(db, "gardens", id);
+    await deleteDoc(docRef);
+
+    alert("הגינה נמחקה בהצלחה");
+    navigate("/");
+  } catch (error) {
+    console.error("Error deleting garden:", error);
+    alert("שגיאה במחיקת הגינה");
+  }
+}
+
+
+
+  
+
+  
   // -----------------------
   // SAVE NOTE TO FIRESTORE
   // -----------------------
@@ -163,6 +184,8 @@ async function handleUpdateOutDays() {
     await updateDoc(docRef, { visitLogs: updatedLogs   },{ merge: true });
     setGarden(prev => ({ ...prev, visitLogs: updatedLogs }));
   }
+
+  if (!garden) return <p>Loading garden...</p>;
 
   return (
     <div className={styles.container} style={{ direction: "rtl" }}>
@@ -445,8 +468,17 @@ async function handleUpdateOutDays() {
       </button>
     </div>
   )}
-</div>
+  
 
+</div>
+<div className={styles.section} style={{ marginTop: 40 }}>
+  <button
+    className={styles.deleteGardenButton}
+    onClick={handleDeleteGarden}
+  >
+    🗑️ מחק גינה
+  </button>
+</div>
     </div>
   );
 }
