@@ -147,3 +147,53 @@
 .modalButtons button:not(.deleteButton):hover {
   background-color: #2980b9;
 }
+
+.issueTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.issueText {
+  font-weight: 600;
+  font-size: 16px;
+  color: #333;
+}
+
+.issueStatus {
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 12px;
+  white-space: nowrap;
+}
+
+.resolved {
+  background-color: #e6f4ea;
+  color: #2e7d32;
+}
+
+.unresolved {
+  background-color: #fdecea;
+  color: #c62828;
+}
+
+.issueMeta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #777;
+}
+
+.issueGarden {
+  font-weight: 500;
+}
+
+.issueDate {
+  font-style: italic;
+}
+
+/* optional: resolved look */
+.completed {
+  opacity: 0.65;
+}

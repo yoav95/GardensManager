@@ -424,3 +424,136 @@
 .deleteGardenButton:hover {
   background: #c62828;
 }
+/* Requires Attention Section */
+.issuesSection {
+  margin-top: 24px;
+  padding: 16px;
+  background-color: #fff8f0;
+  border-radius: 12px;
+  border: 1px solid #ffd3a3;
+  margin-bottom: 16px;
+}
+
+.issuesHeader {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.issuesList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.issueCard {
+  background-color: #fff4e5;
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 1px solid #ffcc80;
+  
+  transition: background-color 0.2s, opacity 0.2s;
+}
+
+.issueCard:hover {
+  background-color: #ffe0b2;
+}
+
+.issueContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.issueText span {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.issueText small {
+  display: block;
+  margin-top: 4px;
+  color: #666;
+  font-size: 12px;
+}
+
+.issueActions {
+  display: flex;
+  gap: 8px;
+}
+
+.resolveButton {
+  padding: 4px 10px;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.resolveButton:hover {
+  background-color: #45a049;
+}
+
+.deleteButton {
+  padding: 4px 10px;
+  background-color: #f44336;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.deleteButton:hover {
+  background-color: #d32f2f;
+}
+
+/* Add Issue Form */
+.addIssueWrapper {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.addIssueInput {
+  flex: 1;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.addIssueButton {
+  padding: 8px 12px;
+  border-radius: 8px;
+  background-color: #1976d2;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.addIssueButton:hover {
+  background-color: #1565c0;
+}
+
+.toggleAddIssueButton {
+  margin-top: 12px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background-color: #ffa726;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.toggleAddIssueButton:hover {
+  background-color: #fb8c00;
+}
+
+.noIssues {
+  color: #666;
+  font-size: 14px;
+  margin-top: 8px;
+}

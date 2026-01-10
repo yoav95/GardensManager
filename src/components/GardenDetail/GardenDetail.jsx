@@ -3,6 +3,9 @@ import { useEffect, useState } from "react";
 import { doc, getDoc,updateDoc, arrayUnion, serverTimestamp, Timestamp, deleteDoc } from "firebase/firestore";
 import { db } from "../../firebase/config.js";
 import styles from "./GardenDetail.module.css";
+function generateId() {
+  return crypto.randomUUID();
+}
 
 function GardenDetail() {
   const { id } = useParams();
@@ -23,6 +26,8 @@ const [editingOutDays, setEditingOutDays] = useState(false);
 const [newOutDays, setNewOutDays] = useState("");
 const [editingImage, setEditingImage] = useState(false);
 const [newImageURL, setNewImageURL] = useState("");
+const [addingIssue, setAddingIssue] = useState(false);
+const [newIssueText, setNewIssueText] = useState("");
 
 
   const daysHebrew = {
@@ -72,6 +77,59 @@ async function handleDeleteGarden() {
     alert("שגיאה במחיקת הגינה");
   }
 }
+
+async function handleAddIssue() {
+  if (!newIssueText.trim()) return;
+
+  const newIssue = {
+    id: crypto.randomUUID(),
+    gardenId: id,
+    gardenName: garden.name,
+    text: newIssueText,
+    createdAt: Timestamp.now(),
+    resolved: false,
+  };
+
+  const docRef = doc(db, "gardens", id);
+
+  await updateDoc(docRef, {
+    requiresAttention: arrayUnion(newIssue),
+  });
+
+  setGarden(prev => ({
+    ...prev,
+    requiresAttention: [...(prev.requiresAttention || []), newIssue],
+  }));
+}
+
+
+
+
+async function handleDeleteIssue(issueId) {
+  const updatedIssues = (garden.requiresAttention || []).filter(
+    issue => issue.id !== issueId
+  );
+
+  const docRef = doc(db, "gardens", id);
+  await updateDoc(docRef, { requiresAttention: updatedIssues });
+
+  setGarden(prev => ({ ...prev, requiresAttention: updatedIssues }));
+}
+
+
+async function toggleIssueResolved(issueId) {
+  const updatedIssues = (garden.requiresAttention || []).map(issue =>
+    issue.id === issueId
+      ? { ...issue, resolved: !issue.resolved }
+      : issue
+  );
+
+  const docRef = doc(db, "gardens", id);
+  await updateDoc(docRef, { requiresAttention: updatedIssues });
+
+  setGarden(prev => ({ ...prev, requiresAttention: updatedIssues }));
+}
+
 
 
 
@@ -362,6 +420,78 @@ async function handleUpdateOutDays() {
           + הוסף הערה
         </button>
       </div>
+      {/* Requires Attention Section */}
+{/* Requires Attention Section */}
+<div className={styles.issuesSection}>
+  <div className={styles.issuesHeader}>
+    ⚠️ דורש טיפול
+  </div>
+
+  {garden.requiresAttention?.length > 0 ? (
+    <div className={styles.issuesList}>
+      {garden.requiresAttention.map((issue) => (
+        <div
+          key={issue.id}
+          className={styles.issueCard}
+          style={{
+            textDecoration: issue.resolved ? "line-through" : "none",
+            opacity: issue.resolved ? 0.6 : 1,
+          }}
+        >
+          <div className={styles.issueContent}>
+            <div className={styles.issueText}>
+              <span>{issue.text}</span>
+              <small>
+                נוצר בתאריך: {formatDate(issue.createdAt?.toDate?.() || issue.createdAt)}
+              </small>
+            </div>
+
+            <div className={styles.issueActions}>
+              <button
+                className={styles.resolveButton}
+                onClick={() => toggleIssueResolved(issue.id)}
+              >
+                {issue.resolved ? "לא טופל" : "טופל"}
+              </button>
+
+              <button
+                className={styles.deleteButton}
+                onClick={() => handleDeleteIssue(issue.id)}
+              >
+                ✕
+              </button>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  ) : (
+    <p className={styles.noIssues}>אין תקלות פתוחות.</p>
+  )}
+
+  {addingIssue && (
+    <div className={styles.addIssueWrapper}>
+      <input
+        type="text"
+        className={styles.addIssueInput}
+        placeholder="לדוגמה: ממטרה שבורה"
+        value={newIssueText}
+        onChange={(e) => setNewIssueText(e.target.value)}
+      />
+      <button className={styles.addIssueButton} onClick={handleAddIssue}>
+        שמור
+      </button>
+    </div>
+  )}
+
+  <button
+    className={styles.toggleAddIssueButton}
+    onClick={() => setAddingIssue(!addingIssue)}
+  >
+    + הוסף תקלה
+  </button>
+</div>
+
 
       {/* Visit Logs Section */}
       <div className={styles.section}>

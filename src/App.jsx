@@ -21,11 +21,12 @@ function App() {
   const gardens = useGardens();
   const [view, setView] = useState("gardens");
   const [selectedDay, setSelectedDay] = useState("");
-    const [tasksCount, setTasksCount] = useState(0);
+    const [totalCount, setTotalCount] = useState(0);
 
-  const visibleGardens = selectedDay
-    ? gardens.filter((g) => g.day === selectedDay)
-    : gardens;
+
+  // const visibleGardens = selectedDay
+  //   ? gardens.filter((g) => g.day === selectedDay)
+  //   : gardens;
 
 
   function formatDate(dateString) {
@@ -37,14 +38,28 @@ function App() {
     return `${day}/${month}/${year}`;
   }
    useEffect(() => {
-    const colRef = collection(db, "tasks");
-    const unsub = onSnapshot(colRef, snapshot => {
-      const tasks = snapshot.docs.map(doc => doc.data());
-      const unfinishedCount = tasks.filter(t => !t.done).length;
-      setTasksCount(unfinishedCount);
-    });
-    return () => unsub();
-  }, []);
+  let unfinishedTasks = 0;
+  let unresolvedIssues = 0;
+
+  const unsubTasks = onSnapshot(collection(db, "tasks"), snapshot => {
+    unfinishedTasks = snapshot.docs.filter(d => !d.data().done).length;
+    setTotalCount(unfinishedTasks + unresolvedIssues);
+  });
+
+  const unsubGardens = onSnapshot(collection(db, "gardens"), snapshot => {
+    unresolvedIssues = snapshot.docs.reduce((sum, doc) => {
+      const issues = doc.data().requiresAttention || [];
+      return sum + issues.filter(issue => !issue.resolved).length;
+    }, 0);
+    setTotalCount(unfinishedTasks + unresolvedIssues);
+  });
+
+  return () => {
+    unsubTasks();
+    unsubGardens();
+  };
+}, []);
+
   return (
     <div className={styles.appContainer}>
       <div className={styles.topBox}>
@@ -65,9 +80,9 @@ function App() {
           onClick={() => setView("tasks")}
         >
           משימות
-          {tasksCount > 0 && (
+          {totalCount > 0 && (
   <span className={`${styles.taskBadge}`}>
-    {tasksCount}
+    {totalCount}
   </span>
 )}
         </button>
