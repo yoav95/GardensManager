@@ -1,0 +1,175 @@
+/* Container wrapping everything */
+.container {
+  padding: 16px; /* side padding */
+  max-width: 800px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* Global list resets */
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Swipe wrapper */
+.swipeWrapper {
+  position: relative;
+  width: 100%;
+}
+
+/* Each shopping item card */
+.itemContent {
+  width: 100%; /* take full container width */
+  padding: 16px 12px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  color: black;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  transition: transform 0.15s ease, background-color 0.2s ease;
+  box-sizing: border-box;
+}
+
+/* Hover effect for desktop */
+.itemContent:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+}
+
+/* Text inside card */
+.itemName {
+  font-size: 16px;
+  font-weight: 600;
+  color: #222;
+  margin-right: 8px;
+}
+
+.itemQuantity {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1e7f43;
+  margin-left: 6px;
+}
+
+.itemDate {
+  font-size: 13px;
+  color: #666;
+  white-space: nowrap;
+}
+
+/* Empty state */
+.empty {
+  text-align: center;
+  padding: 40px 20px;
+  font-size: 16px;
+  color: #555;
+  background: #f2f2f2;
+  border-radius: 12px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Add item form */
+.addForm {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.input {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #bbb;
+  font-size: 14px;
+  flex: 1 1 auto; /* flexible width */
+  min-width: 120px;
+  box-sizing: border-box;
+}
+
+.addButton {
+  padding: 10px 16px;
+  background: #45a049;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  flex: 0 0 auto; /* don't stretch */
+  transition: background 0.2s ease;
+}
+
+.addButton:hover {
+  background: #3b8b3b;
+}
+
+/* Swipe background (optional visual) */
+.swipeBackground {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 16px;
+  color: white;
+  font-weight: bold;
+  border-radius: 10px;
+  pointer-events: none;
+}
+
+/* MOBILE OPTIMIZATION */
+@media (max-width: 600px) {
+  .itemContent {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 14px;
+  }
+
+  .itemDate {
+    align-self: flex-end;
+    font-size: 12px;
+  }
+
+  .itemName {
+    font-size: 15px;
+  }
+
+  .itemQuantity {
+    font-size: 13px;
+  }
+
+  .addForm {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .addButton {
+    width: 100%;
+  }
+}
+.swipeHint {
+  margin-top: 12px;
+  padding: 10px 16px;
+  text-align: center;
+  font-size: 14px;
+  color: #555;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  background: #f8f8f896;
+  border-radius: 8px;
+  font-weight: 500;
+}
