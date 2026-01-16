@@ -88,7 +88,7 @@ const [newLevel, setNewLevel] = useState("a");
 }
 
 
-  async function deleteTask(task) {
+async function deleteTask(task) {
   await deleteDoc(doc(db, "tasks", task.id));
   setTasks(prev => prev.filter(t => t.id !== task.id));
 }
@@ -97,7 +97,7 @@ async function deleteIssue(issue) {
   const gardensRef = collection(db, "gardens");
   const snapshot = await getDocs(gardensRef);
 
-  snapshot.forEach(async g => {
+  for (const g of snapshot.docs) {
     const garden = g.data();
     const current = garden.requiresAttention || [];
 
@@ -107,22 +107,31 @@ async function deleteIssue(issue) {
       await updateDoc(doc(db, "gardens", g.id), {
         requiresAttention: updated,
       });
+      break; // stop once found
     }
-  });
+  }
 
   setIssues(prev => prev.filter(i => i.id !== issue.id));
 }
 
+
 /**
  * 🔁 Single delete handler
  */
-function handleDelete(item) {
+async function handleDelete(item) {
+  console.log(item)
+  const label =
+    item.type === "task"
+      ? `למחוק את "${item.title}"?`
+      : "למחוק את התקלה?";
+
+  const ok = window.confirm(label);
+  if (!ok) return;
+
   if (item.type === "task") {
-    // deleteTask(item);
-    alert("task  need to be removed")
+    await deleteTask(item);
   } else if (item.type === "issue") {
-    alert("issue need to be removed")
-    // deleteIssue(item);
+    await deleteIssue(item);
   }
 }
 

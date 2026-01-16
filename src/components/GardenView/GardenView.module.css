@@ -117,7 +117,7 @@ html, body {
   position: relative;
   background: #F8F9FA;
   border-radius: 12px;
-  padding: 25px 14px;
+  padding: 20px 10px;
   margin-bottom: 16px;
   display: flex;
   gap: 10px;
@@ -215,27 +215,24 @@ html, body {
 }
 
 .lastVisit {
-  margin-top: 4px;
+  margin-top: 1rem;
   font-size: 14px;
-  display: flex;
-  flex-direction: column;
+  display: inline;
   gap:.5rem;
 }
 .lastVisit .okVisit {
   margin-right: 0px;
-  display: flex;
   justify-content: center;
+  display: inline;
   align-items: center;
-  max-width: 120px;
   background-color: #45a049;
-  padding: 6px 10px;
+  padding: .4rem .8rem;
   font-size: 14px;
   border-radius: 5px;
   color:white;
 }
 .lastVisit .noVisit {
 margin-right: 5px;
-  width: auto;
   background-color: #ECECEC;
   display: inline;
   padding: 6px 10px;
@@ -250,22 +247,29 @@ margin-right: 5px;
 ====================== */
 
 .navButton {
-  margin-top: 8px;
-  align-self: flex-start;
-  padding: 6px 14px;
-  font-size: 13px;
-  border: none;
-  background: #5d56df;
+  align-self: flex-end;
+  padding: 15px 20px;       
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 10px;
+  background-color: rgb(141, 75, 141);
   color: white;
-  border-radius: 8px;
+  margin:.5rem 2rem;
+  border: none;
   cursor: pointer;
-  transition: 0.2s;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
+
 
 .navButton:hover {
-  background: #4338ca;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
+.navButton:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
 /* ======================
    FLOATING ADD BUTTON
 ====================== */
@@ -328,25 +332,24 @@ margin-right: 5px;
   .card {
     flex-direction: row;         /* image + info side by side */
     align-items: center;         /* vertically center content */
-    padding: 10px 12px;          /* smaller padding */
+    padding: 1.2rem;          /* smaller padding */
     gap: 1rem;                    /* smaller gap */
-    min-height: 90px;            /* smaller min-height */
+    min-height: 80px;            /* smaller min-height */
     border-radius: 10px;
   }
   .lastVisit {
-  display: flex;
+  /* display: flex; */
   flex-direction: column;
   gap:.5rem;
-  padding: 0;
-  margin:0;
+  margin:.5rem 0rem;
 }
 .okVisit {
   margin: 0!important;
+  font-size: .8rem!important;
   background-color: #45a049;
   max-width: 120px;
   display: inline-block;
   padding: 6px 10px;
-  font-size: 13px;
   border-radius: 5px;
   color:white;
 
@@ -361,10 +364,10 @@ margin-right: 5px;
 
   .info {
     /* padding-top: 1rem; */
-    flex: 1;                     /* take remaining space */
+    align-self: flex-start;
     display: flex;
     flex-direction: column;
-    gap: .5rem;                    /* smaller gap between lines */
+    gap: .3rem;                    /* smaller gap between lines */
   }
 
   .title {
@@ -378,10 +381,12 @@ margin-right: 5px;
   }
 
   .navButton {
-    padding: 6px 9px;
-    font-size: 12px;
+    position: absolute;
+    bottom: .2rem;
+    left:0;
+    padding: 9px 18px;
+    font-size: .8rem;
     margin:1rem;
-    align-self: flex-end;
   }
 
   /* Day indicator at bottom of card */
@@ -476,7 +481,7 @@ margin-right: 5px;
   padding: 12px 14px;
   border-radius: 14px;
   border: 1px solid #ddd;
-  font-size: 16px;
+  font-size: .8rem;
   outline: none;
 }
 

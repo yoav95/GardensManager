@@ -321,7 +321,7 @@ async function handleUpdateOutDays() {
       style={{ marginLeft: 8 }} 
       onClick={() => setEditingDay(false)}
     >
-      ביטול
+      X
     </button>
   </div>
 )}
@@ -363,7 +363,7 @@ async function handleUpdateOutDays() {
       style={{ marginLeft: 8 }}
       onClick={() => setEditingOutDays(false)}
     >
-      ביטול
+      X
     </button>
   </div>
 )}
@@ -391,12 +391,12 @@ async function handleUpdateOutDays() {
     <span>
       {typeof note === "string" ? note : note.text}
     </span>
-    <button
+    {/* <button
       className={styles.deleteButton}
       onClick={() => handleDeleteNote(idx)}
     >
       ✕
-    </button>
+    </button> */}
   </div>
 ))}
           </div>
@@ -454,12 +454,12 @@ async function handleUpdateOutDays() {
                 {issue.resolved ? "לא טופל" : "טופל"}
               </button>
 
-              <button
+              {/* <button
                 className={styles.deleteButton}
                 onClick={() => handleDeleteIssue(issue.id)}
               >
                 ✕
-              </button>
+              </button> */}
             </div>
           </div>
         </div>
@@ -503,12 +503,12 @@ async function handleUpdateOutDays() {
          onClick={() => setExpandedVisit(expandedVisit === idx ? null : idx)}
          style={{ display: "flex", justifyContent: "space-between", cursor: "pointer", alignItems: "center" }}>
       <div className={styles.logDate}>📅 {formatDate(visit.date)}</div>
-      <button
+      {/* <button
         className={styles.deleteButtonSmall}
         onClick={(e) => { e.stopPropagation(); handleDeleteVisit(idx); }}
       >
         ✕
-      </button>
+      </button> */}
     </div>
 
     {expandedVisit === idx && (
@@ -594,7 +594,7 @@ async function handleUpdateOutDays() {
         style={{ marginLeft: 8 }}
         onClick={() => setEditingImage(false)}
       >
-        ביטול
+        X
       </button>
     </div>
   )}

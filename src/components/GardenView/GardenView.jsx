@@ -133,8 +133,7 @@ const visibleGardens = gardens.filter((g) => {
         <p className={styles.noVisit}>אין ביקורים עדיין</p>
       )}
     </div>
-    <div className={styles.cardButtons}>
-      <button
+    <button
         className={styles.navButton}
         onClick={(e) => {
           e.stopPropagation();
@@ -143,7 +142,6 @@ const visibleGardens = gardens.filter((g) => {
       >
         ניווט
       </button>
-    </div>
   </div>
 </li>
   

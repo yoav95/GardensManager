@@ -175,6 +175,9 @@
 
 .unresolved {
   background-color: #fdecea;
+  font-size: .8rem;
+  padding: .2rem .4rem;
+  border-radius: .4rem;
   color: #c62828;
 }
 
