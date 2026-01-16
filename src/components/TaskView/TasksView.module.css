@@ -36,7 +36,7 @@
 
 .taskCard {
   border: 1px solid #ddd;
-  border-radius: 6px;
+  border-radius: 1rem;
   padding: 15px;
   margin-bottom: 12px;
   background-color: #fff;
@@ -196,4 +196,85 @@
 /* optional: resolved look */
 .completed {
   opacity: 0.65;
+}
+.swipeHint {
+  margin-top: 12px;
+  padding: 10px 16px;
+  text-align: center;
+  font-size: 14px;
+  color: #555;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  background: #f8f8f896;
+  border-radius: 8px;
+  font-weight: 500;
+}
+@media (max-width: 600px) {
+  .container {
+    padding: 10px;
+  }
+
+  .addTaskButton {
+    width: 100%;
+    font-size: 16px;
+    padding: 12px;
+  }
+
+  .taskCard {
+    padding: 12px;
+    border-radius: 14px;
+  }
+
+  .taskHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .taskTitle {
+    font-size: 16px;
+  }
+
+  .taskText {
+    font-size: 14px;
+  }
+
+  .taskMeta {
+    flex-direction: column;
+    gap: 4px;
+    font-size: 11px;
+  }
+
+  .issueTop {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .issueText {
+    font-size: 15px;
+  }
+
+  .issueMeta {
+    flex-direction: column;
+    gap: 4px;
+    font-size: 11px;
+  }
+
+  .modal {
+    width: 95%;
+    max-width: none;
+    padding: 16px;
+  }
+
+  .modalButtons {
+    flex-direction: column;
+  }
+
+  .modalButtons button {
+    width: 100%;
+    padding: 12px;
+  }
 }

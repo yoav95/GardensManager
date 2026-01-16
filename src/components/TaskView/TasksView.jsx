@@ -3,6 +3,7 @@ import { collection, onSnapshot, doc, deleteDoc, updateDoc, getDocs ,addDoc  } f
 import { db } from "../../firebase/config";
 import styles from "./TasksView.module.css";
 import TaskListItem from "./TaskListItem.jsx";
+import { FaArrowRight } from "react-icons/fa"; // using react-icons for swipe icon
 
 function formatFirestoreDate(date) {
   if (!date) return "";
@@ -183,6 +184,11 @@ function handleDelete(item) {
           />
         ))}
       </ul>
+      <div className={styles.swipeHint}>
+                <FaArrowRight style={{ marginRight: "6px" }} />
+                החלק ימינה למחיקה
+              </div>
+      
     </div>
   );
 }

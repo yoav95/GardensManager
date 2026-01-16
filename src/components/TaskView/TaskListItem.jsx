@@ -72,7 +72,7 @@ export default function TaskListItem({ task, onDelete }) {
           </div>
 
           <div className={styles.issueMeta}>
-            <span>🌱 {task.gardenName}</span>
+            <span>🌱 {task.gardenTitle}</span>
             {task.date && <span>נוצר: {task.date}</span>}
           </div>
         </>
