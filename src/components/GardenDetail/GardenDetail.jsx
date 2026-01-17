@@ -391,12 +391,12 @@ async function handleUpdateOutDays() {
     <span>
       {typeof note === "string" ? note : note.text}
     </span>
-    {/* <button
+    <button
       className={styles.deleteButton}
       onClick={() => handleDeleteNote(idx)}
     >
       ✕
-    </button> */}
+    </button>
   </div>
 ))}
           </div>
