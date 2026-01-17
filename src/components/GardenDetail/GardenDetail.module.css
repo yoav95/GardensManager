@@ -52,7 +52,10 @@
 }
 
 .value {
-  margin-left: 6px;
+  /* Use logical margin so spacing works in RTL and LTR layouts */
+  margin-inline-start: .5rem;
+  /* Fallback for older browsers */
+  margin-left: 8px;
   color: #555;
 }
 
