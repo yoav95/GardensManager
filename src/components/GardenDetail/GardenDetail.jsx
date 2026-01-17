@@ -1,16 +1,14 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { doc, getDoc,updateDoc, arrayUnion, serverTimestamp, Timestamp, deleteDoc } from "firebase/firestore";
+import { useState } from "react";
+import { updateDoc, arrayUnion, Timestamp, deleteDoc, doc } from "firebase/firestore";
 import { db } from "../../firebase/config.js";
+import { useGarden } from "../../hooks/useGarden.js";
 import styles from "./GardenDetail.module.css";
-function generateId() {
-  return crypto.randomUUID();
-}
 
 function GardenDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [garden, setGarden] = useState(null);
+  const { garden, loading, error } = useGarden(id);
 
   const [addingNote, setAddingNote] = useState(false);
   const [newNote, setNewNote] = useState("");
@@ -19,45 +17,24 @@ function GardenDetail() {
   const [visitDate, setVisitDate] = useState(() => new Date().toISOString().split("T")[0]);
   const [tasksDone, setTasksDone] = useState(""); 
   const [nextTasks, setNextTasks] = useState("");
-  const [expandedVisit, setExpandedVisit] = useState(null); // store index of expanded visit
+  const [expandedVisit, setExpandedVisit] = useState(null);
   const [editingDay, setEditingDay] = useState(false);
-const [newDay, setNewDay] = useState("");
-const [editingOutDays, setEditingOutDays] = useState(false);
-const [newOutDays, setNewOutDays] = useState("");
-const [editingImage, setEditingImage] = useState(false);
-const [newImageURL, setNewImageURL] = useState("");
-const [addingIssue, setAddingIssue] = useState(false);
-const [newIssueText, setNewIssueText] = useState("");
-
+  const [newDay, setNewDay] = useState("");
+  const [editingOutDays, setEditingOutDays] = useState(false);
+  const [newOutDays, setNewOutDays] = useState("");
+  const [editingImage, setEditingImage] = useState(false);
+  const [newImageURL, setNewImageURL] = useState("");
+  const [addingIssue, setAddingIssue] = useState(false);
+  const [newIssueText, setNewIssueText] = useState("");
 
   const daysHebrew = {
-  sunday: "ראשון",
-  monday: "שני",
-  tuesday: "שלישי",
-  wednesday: "רביעי",
-  thursday: "חמישי",
-};
+    sunday: "ראשון",
+    monday: "שני",
+    tuesday: "שלישי",
+    wednesday: "רביעי",
+    thursday: "חמישי",
+  };
 
-useEffect(() => {
-  async function fetchGarden() {
-    try {
-      const docRef = doc(db, "gardens", id);
-      const docSnap = await getDoc(docRef);
-
-      if (docSnap.exists()) {
-        setGarden(docSnap.data());
-      } else {
-        console.warn(`Garden with id "${id}" not found.`);
-        setGarden(null);
-      }
-    } catch (error) {
-      console.error("Error fetching garden:", error);
-      alert("שגיאה בטעינת הגן. בדוק את הקונסול לפרטים.");
-    }
-  }
-
-  fetchGarden();
-}, [id]);
 
 async function handleDeleteGarden() {
   const confirmed = window.confirm(
@@ -92,28 +69,30 @@ async function handleAddIssue() {
 
   const docRef = doc(db, "gardens", id);
 
-  await updateDoc(docRef, {
-    requiresAttention: arrayUnion(newIssue),
-  });
-
-  setGarden(prev => ({
-    ...prev,
-    requiresAttention: [...(prev.requiresAttention || []), newIssue],
-  }));
+  try {
+    await updateDoc(docRef, {
+      requiresAttention: arrayUnion(newIssue),
+    });
+    setNewIssueText("");
+  } catch (error) {
+    console.error("Error adding issue:", error);
+  }
 }
 
 
 
 
-async function handleDeleteIssue(issueId) {
+async function handleDeleteIssue(issueId) { // eslint-disable-line no-unused-vars
   const updatedIssues = (garden.requiresAttention || []).filter(
     issue => issue.id !== issueId
   );
 
   const docRef = doc(db, "gardens", id);
-  await updateDoc(docRef, { requiresAttention: updatedIssues });
-
-  setGarden(prev => ({ ...prev, requiresAttention: updatedIssues }));
+  try {
+    await updateDoc(docRef, { requiresAttention: updatedIssues });
+  } catch (error) {
+    console.error("Error deleting issue:", error);
+  }
 }
 
 
@@ -125,9 +104,11 @@ async function toggleIssueResolved(issueId) {
   );
 
   const docRef = doc(db, "gardens", id);
-  await updateDoc(docRef, { requiresAttention: updatedIssues });
-
-  setGarden(prev => ({ ...prev, requiresAttention: updatedIssues }));
+  try {
+    await updateDoc(docRef, { requiresAttention: updatedIssues });
+  } catch (error) {
+    console.error("Error updating issue:", error);
+  }
 }
 
 
@@ -148,11 +129,13 @@ async function handleAddNote() {
     ? [...garden.notes, newNote]
     : [newNote];
 
-  await updateDoc(docRef, { notes: updatedNotes });
-
-  setGarden(prev => ({ ...prev, notes: updatedNotes }));
-  setNewNote("");
-  setAddingNote(false);
+  try {
+    await updateDoc(docRef, { notes: updatedNotes });
+    setNewNote("");
+    setAddingNote(false);
+  } catch (error) {
+    console.error("Error adding note:", error);
+  }
 }
 
   function formatDate(dateString) {
@@ -168,10 +151,12 @@ async function handleUpdateImage() {
 
   const docRef = doc(db, "gardens", id);
 
-  await updateDoc(docRef, { imageURL: newImageURL });
-
-  setGarden(prev => ({ ...prev, imageURL: newImageURL }));
-  setEditingImage(false);
+  try {
+    await updateDoc(docRef, { imageURL: newImageURL });
+    setEditingImage(false);
+  } catch (error) {
+    console.error("Error updating image:", error);
+  }
 }
 
 
@@ -179,8 +164,11 @@ async function handleUpdateImage() {
   async function handleDeleteNote(index) {
     const docRef = doc(db, "gardens", id);
     const updatedNotes = garden.notes.filter((_, i) => i !== index);
-    await updateDoc(docRef, { notes: updatedNotes }, { merge: true });
-    setGarden(prev => ({ ...prev, notes: updatedNotes }));
+    try {
+      await updateDoc(docRef, { notes: updatedNotes });
+    } catch (error) {
+      console.error("Error deleting note:", error);
+    }
   }
 
 
@@ -190,60 +178,103 @@ async function handleAddVisit() {
   const docRef = doc(db, "gardens", id);
 
   const newLog = {
-    date: visitDate, // string / date you already use
+    date: visitDate,
     tasks: tasksDone.split("\n").filter(t => t.trim()),
     nextVisitTasks: nextTasks.split("\n").filter(t => t.trim()),
-    createdAt: Timestamp.now(), // ✅ allowed
+    createdAt: Timestamp.now(),
   };
 
-  await updateDoc(docRef, {
-    visitLogs: arrayUnion(newLog),
-    lastVisit: visitDate,
-  });
-
-  // optimistic UI update
-  setGarden(prev => ({
-    ...prev,
-    visitLogs: [...(prev.visitLogs || []), newLog],
-    lastVisit: visitDate,
-  }));
-
-  setTasksDone("");
-  setNextTasks("");
-  setAddingVisit(false);
+  try {
+    await updateDoc(docRef, {
+      visitLogs: arrayUnion(newLog),
+      lastVisit: visitDate,
+    });
+    setTasksDone("");
+    setNextTasks("");
+    setAddingVisit(false);
+  } catch (error) {
+    console.error("Error adding visit:", error);
+  }
 }
 async function handleUpdateDay() {
   if (!newDay) return;
 
   const docRef = doc(db, "gardens", id);
 
-  await updateDoc(docRef, { day: newDay }, { merge: true });
-
-  setGarden(prev => ({ ...prev, day: newDay }));
-  setEditingDay(false);
+  try {
+    await updateDoc(docRef, { day: newDay });
+    setEditingDay(false);
+  } catch (error) {
+    console.error("Error updating day:", error);
+  }
 }
 async function handleUpdateOutDays() {
   if (!newOutDays.trim()) return;
 
   const docRef = doc(db, "gardens", id);
 
-  await updateDoc(docRef, { outDays: newOutDays }, { merge: true });
-
-
-  setGarden(prev => ({ ...prev, outDays: newOutDays }));
-  setEditingOutDays(false);
+  try {
+    await updateDoc(docRef, { outDays: newOutDays });
+    setEditingOutDays(false);
+  } catch (error) {
+    console.error("Error updating out days:", error);
+  }
 }
 
 
 
-  async function handleDeleteVisit(index) {
+  async function handleDeleteVisit(index) { // eslint-disable-line no-unused-vars
     const docRef = doc(db, "gardens", id);
     const updatedLogs = garden.visitLogs.filter((_, i) => i !== index);
-    await updateDoc(docRef, { visitLogs: updatedLogs   },{ merge: true });
-    setGarden(prev => ({ ...prev, visitLogs: updatedLogs }));
+    try {
+      await updateDoc(docRef, { visitLogs: updatedLogs });
+    } catch (error) {
+      console.error("Error deleting visit:", error);
+    }
   }
 
-  if (!garden) return <p>Loading garden...</p>;
+  // Loading state
+  if (loading) {
+    return (
+      <div className={styles.container} style={{ direction: "rtl" }}>
+        <p className={styles.loadingMessage}>טוען פרטי הגן...</p>
+      </div>
+    );
+  }
+
+  // Error state
+  if (error) {
+    return (
+      <div className={styles.container} style={{ direction: "rtl" }}>
+        <p style={{ color: "red", textAlign: "center" }}>
+          שגיאה בטעינת הגן: {error}
+        </p>
+        <button
+          className={styles.backButton}
+          onClick={() => navigate("/")}
+          style={{ margin: "20px auto", display: "block" }}
+        >
+          חזור לעמוד הבית
+        </button>
+      </div>
+    );
+  }
+
+  // Not found state
+  if (!garden) {
+    return (
+      <div className={styles.container} style={{ direction: "rtl" }}>
+        <p style={{ textAlign: "center" }}>הגן לא נמצא</p>
+        <button
+          className={styles.backButton}
+          onClick={() => navigate("/")}
+          style={{ margin: "20px auto", display: "block" }}
+        >
+          חזור לעמוד הבית
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.container} style={{ direction: "rtl" }}>
