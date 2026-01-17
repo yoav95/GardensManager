@@ -3,6 +3,7 @@ import { addDoc, collection } from "firebase/firestore";
 import { db } from "../../firebase/config.js";
 import styles from "./NewGarden.module.css";
 import { getCoordinates } from "../../utils/getCoordinates.js"; // <-- import your function
+import { useAuth } from "../../hooks/useAuth.js";
 
 const days = ["sunday", "monday", "tuesday", "wednesday", "thursday"];
 
@@ -15,6 +16,7 @@ const daysHebrew = {
 };
 
 export default function NewGarden() {
+  const { user } = useAuth();
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [day, setDay] = useState("");
@@ -23,6 +25,11 @@ export default function NewGarden() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+
+    if (!user) {
+      alert("חייב להתחבר קודם");
+      return;
+    }
 
     // Fetch coordinates from address
     const coords = await getCoordinates(address);
@@ -45,6 +52,7 @@ export default function NewGarden() {
       lastVisit: null,
       notes: [],
       visitLogs: [],
+      userId: user.uid,
     };
 
     try {

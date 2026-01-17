@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { collection, onSnapshot, doc, deleteDoc, updateDoc, getDocs ,addDoc  } from "firebase/firestore";
+import { collection, onSnapshot, doc, deleteDoc, updateDoc, getDocs, addDoc, query, where } from "firebase/firestore";
 import { db } from "../../firebase/config";
 import styles from "./TasksView.module.css";
 import TaskListItem from "./TaskListItem.jsx";
 import { FaArrowRight } from "react-icons/fa"; // using react-icons for swipe icon
+import { useAuth } from "../../hooks/useAuth.js";
 
 function formatFirestoreDate(date) {
   if (!date) return "";
@@ -16,18 +17,27 @@ function formatFirestoreDate(date) {
 }
 
 function TasksView() {
+  const { user } = useAuth();
   const [tasks, setTasks] = useState([]);
   const [issues, setIssues] = useState([]);
   const [loading, setLoading] = useState(true);
-const [adding, setAdding] = useState(false);
-const [newTitle, setNewTitle] = useState("");
-const [newText, setNewText] = useState("");
-const [newLevel, setNewLevel] = useState("a");
+  const [adding, setAdding] = useState(false);
+  const [newTitle, setNewTitle] = useState("");
+  const [newText, setNewText] = useState("");
+  const [newLevel, setNewLevel] = useState("a");
 
   useEffect(() => {
-    const colRef = collection(db, "tasks");
+    if (!user) {
+      setTasks([]);
+      return;
+    }
 
-    const unsub = onSnapshot(colRef, snapshot => {
+    const tasksQuery = query(
+      collection(db, "tasks"),
+      where("userId", "==", user.uid)
+    );
+
+    const unsub = onSnapshot(tasksQuery, snapshot => {
       const data = snapshot.docs.map(doc => ({
         id: doc.id,
         type: "task",
@@ -39,12 +49,20 @@ const [newLevel, setNewLevel] = useState("a");
     });
 
     return () => unsub();
-  }, []);
+  }, [user]);
 
   useEffect(() => {
-    const colRef = collection(db, "gardens");
+    if (!user) {
+      setIssues([]);
+      return;
+    }
 
-    const unsub = onSnapshot(colRef, snapshot => {
+    const gardensQuery = query(
+      collection(db, "gardens"),
+      where("userId", "==", user.uid)
+    );
+
+    const unsub = onSnapshot(gardensQuery, snapshot => {
       const allIssues = [];
 
       snapshot.docs.forEach(doc => {
@@ -68,24 +86,29 @@ const [newLevel, setNewLevel] = useState("a");
       setIssues(allIssues);
     });
     return () => unsub();
-  }, []);
+  }, [user]);
   async function handleAddTask() {
-  if (!newTitle.trim()) return;
+    if (!newTitle.trim()) return;
+    if (!user) {
+      alert("חייב להתחבר קודם");
+      return;
+    }
 
-  await addDoc(collection(db, "tasks"), {
-    title: newTitle,
-    text: newText,
-    level: newLevel,
-    done: false,
-    date: new Date().toISOString().split("T")[0],
-  });
+    await addDoc(collection(db, "tasks"), {
+      title: newTitle,
+      text: newText,
+      level: newLevel,
+      done: false,
+      date: new Date().toISOString().split("T")[0],
+      userId: user.uid,
+    });
 
-  // reset UI only — snapshot will update tasks
-  setNewTitle("");
-  setNewText("");
-  setNewLevel("a");
-  setAdding(false);
-}
+    // reset UI only — snapshot will update tasks
+    setNewTitle("");
+    setNewText("");
+    setNewLevel("a");
+    setAdding(false);
+  }
 
 
 async function deleteTask(task) {

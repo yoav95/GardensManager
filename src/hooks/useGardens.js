@@ -1,30 +1,37 @@
-import { collection, onSnapshot, query, orderBy, limit } from "firebase/firestore";
+import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { db } from "../firebase/config";
 import { useEffect, useState } from "react";
+import { useAuth } from "./useAuth";
 
 export function useGardens() {
+  const { user } = useAuth();
   const [gardens, setGardens] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    if (!user) {
+      setGardens([]);
+      setLoading(false);
+      return;
+    }
+
     setError(null);
 
     try {
-      // Query gardens ordered by name for better performance with larger datasets
-      // Limit to 1000 initially - adjust if needed
+      // Query gardens filtered by userId only (no orderBy to avoid composite index requirement)
       const gardensQuery = query(
         collection(db, "gardens"),
-        orderBy("name", "asc"),
-        limit(1000)
+        where("userId", "==", user.uid)
       );
 
       const unsub = onSnapshot(
         gardensQuery,
         (snap) => {
-          setGardens(
-            snap.docs.map(doc => ({ id: doc.id, ...doc.data() }))
-          );
+          const docs = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+          // Sort by name client-side
+          docs.sort((a, b) => a.name.localeCompare(b.name));
+          setGardens(docs);
           setLoading(false);
           setError(null);
         },
@@ -41,7 +48,7 @@ export function useGardens() {
       setError(err.message);
       setLoading(false);
     }
-  }, []);
+  }, [user]);
 
   return { gardens, loading, error };
 }

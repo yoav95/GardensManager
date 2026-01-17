@@ -140,9 +140,13 @@ function GardenView() {
 
       {/* Error State */}
       {error && (
-        <p className={styles.emptyMessage} style={{ color: "red" }}>
-          שגיאה בטעינת הגנים. בדוק את הקונסול.
-        </p>
+        <div className={styles.errorContainer}>
+          <p className={styles.errorMessage}>
+            {error.includes("permission") || error.includes("Permission")
+              ? "❌ אין לך הרשאה לגישה לנתונים. בדוק שאתה מחובר עם חשבון מורשה."
+              : `❌ שגיאה: ${error}`}
+          </p>
+        </div>
       )}
 
       {/* Empty State */}

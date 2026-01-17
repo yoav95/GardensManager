@@ -1,0 +1,23 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // List of allowed emails
+    function isAllowedUser() {
+      return request.auth.token.email in [
+        'user1@gmail.com',
+        'user2@gmail.com',
+        'admin@example.com'
+      ];
+    }
+
+    match /gardens/{document=**} {
+      allow read, write: if request.auth != null && isAllowedUser() && resource.data.userId == request.auth.uid;
+      allow create: if request.auth != null && isAllowedUser() && request.resource.data.userId == request.auth.uid;
+    }
+    
+    match /tasks/{document=**} {
+      allow read, write: if request.auth != null && isAllowedUser() && resource.data.userId == request.auth.uid;
+      allow create: if request.auth != null && isAllowedUser() && request.resource.data.userId == request.auth.uid;
+    }
+  }
+}
