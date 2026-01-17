@@ -4,14 +4,6 @@ import styles from "./GardenView.module.css";
 import { useState } from "react";
 
 const days = ["sunday", "monday", "tuesday", "wednesday", "thursday"];
-const colorMap = {
-  sunday: "#E76F51",     // Muted terracotta red
-  monday: "#2A9D8F",     // Calm teal green
-  tuesday: "#E9C46A",    // Soft mustard
-  wednesday: "#577590",  // Slate blue
-  thursday: "#F4A261",   // Warm sand / orange
-};
-
 
 const daysHebrew = {
   sunday: "ראשון",
