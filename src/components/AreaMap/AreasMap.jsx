@@ -6,8 +6,10 @@ import styles from "./AreasMap.module.css"; // reuse the same styles
 
 import { areasGeoJson } from "../../data/areasGeoJson.js";
 import { gardensToGeoJson } from "../../utils/gardensToGeoJson.js";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../firebase/config.js";
+import { useAuth } from "../../hooks/useAuth.js";
+
 const israelCenterBounds = [
   [32.4, 34.7], // north-west corner (Netanya area)
   [32.0, 35.0], // south-east corner (Tel Aviv / Petah Tikva)
@@ -46,14 +48,22 @@ function getPolygonCenter(layer) {
 }
 
 export default function AreasMap() {
+  const { user } = useAuth();
   const [gardensGeoJson, setGardensGeoJson] = useState(null);
 
   async function fetchGardens() {
-    const snap = await getDocs(collection(db, "gardens"));
+    if (!user) return [];
+    const q = query(collection(db, "gardens"), where("userId", "==", user.uid));
+    const snap = await getDocs(q);
     return snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
   }
 
   useEffect(() => {
+    if (!user) {
+      setGardensGeoJson({ type: "FeatureCollection", features: [] });
+      return;
+    }
+
     fetchGardens().then(gardens => {
       if (gardens?.length) {
         setGardensGeoJson(gardensToGeoJson(gardens));
@@ -61,7 +71,7 @@ export default function AreasMap() {
         setGardensGeoJson({ type: "FeatureCollection", features: [] });
       }
     });
-  }, []);
+  }, [user]);
 
   function formatDate(dateString) {
     if (!dateString) return "";
