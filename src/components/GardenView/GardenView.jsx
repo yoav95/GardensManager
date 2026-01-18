@@ -1,4 +1,4 @@
-import { useGardens } from "../../hooks/useGardens";
+import { useGardensContext } from "../../context/GardensContext";
 import styles from "./GardenView.module.css";
 
 import { useState, useMemo, memo } from "react";
@@ -57,7 +57,7 @@ const GardenCard = memo(({ garden, formatDate }) => (
 GardenCard.displayName = "GardenCard";
 
 function GardenView() {
-  const { gardens, loading, error } = useGardens();
+  const { gardens, loading, error } = useGardensContext();
   const [selectedDay, setSelectedDay] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
 

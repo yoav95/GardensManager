@@ -2,13 +2,11 @@ import { MapContainer, TileLayer, GeoJSON, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { useEffect, useState } from "react";
 import L from "leaflet";
-import styles from "./AreasMap.module.css"; // reuse the same styles
+import styles from "./AreasMap.module.css";
 
 import { areasGeoJson } from "../../data/areasGeoJson.js";
 import { gardensToGeoJson } from "../../utils/gardensToGeoJson.js";
-import { collection, getDocs, query, where } from "firebase/firestore";
-import { db } from "../../firebase/config.js";
-import { useAuth } from "../../hooks/useAuth.js";
+import { useGardensContext } from "../../context/GardensContext.jsx";
 
 const israelCenterBounds = [
   [32.4, 34.7], // north-west corner (Netanya area)
@@ -48,30 +46,16 @@ function getPolygonCenter(layer) {
 }
 
 export default function AreasMap() {
-  const { user } = useAuth();
+  const { gardens } = useGardensContext();
   const [gardensGeoJson, setGardensGeoJson] = useState(null);
 
-  async function fetchGardens() {
-    if (!user) return [];
-    const q = query(collection(db, "gardens"), where("userId", "==", user.uid));
-    const snap = await getDocs(q);
-    return snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-  }
-
   useEffect(() => {
-    if (!user) {
+    if (gardens?.length) {
+      setGardensGeoJson(gardensToGeoJson(gardens));
+    } else {
       setGardensGeoJson({ type: "FeatureCollection", features: [] });
-      return;
     }
-
-    fetchGardens().then(gardens => {
-      if (gardens?.length) {
-        setGardensGeoJson(gardensToGeoJson(gardens));
-      } else {
-        setGardensGeoJson({ type: "FeatureCollection", features: [] });
-      }
-    });
-  }, [user]);
+  }, [gardens]);
 
   function formatDate(dateString) {
     if (!dateString) return "";

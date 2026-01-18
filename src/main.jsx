@@ -11,7 +11,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/garden/:id" element={<GardenDetail />} />
-         <Route path="/new-garden" element={<NewGarden />} />
+        <Route path="/new-garden" element={<NewGarden />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

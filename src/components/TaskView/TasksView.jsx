@@ -3,8 +3,9 @@ import { collection, onSnapshot, doc, deleteDoc, updateDoc, getDocs, addDoc, que
 import { db } from "../../firebase/config";
 import styles from "./TasksView.module.css";
 import TaskListItem from "./TaskListItem.jsx";
-import { FaArrowRight } from "react-icons/fa"; // using react-icons for swipe icon
+import { FaArrowRight } from "react-icons/fa";
 import { useAuth } from "../../hooks/useAuth.js";
+import { useGardensContext } from "../../context/GardensContext.jsx";
 
 function formatFirestoreDate(date) {
   if (!date) return "";
@@ -18,6 +19,7 @@ function formatFirestoreDate(date) {
 
 function TasksView() {
   const { user } = useAuth();
+  const { gardens } = useGardensContext();
   const [tasks, setTasks] = useState([]);
   const [issues, setIssues] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -52,41 +54,27 @@ function TasksView() {
   }, [user]);
 
   useEffect(() => {
-    if (!user) {
-      setIssues([]);
-      return;
-    }
+    // Use gardens from context instead of fetching again
+    const allIssues = [];
 
-    const gardensQuery = query(
-      collection(db, "gardens"),
-      where("userId", "==", user.uid)
-    );
-
-    const unsub = onSnapshot(gardensQuery, snapshot => {
-      const allIssues = [];
-
-      snapshot.docs.forEach(doc => {
-        const garden = doc.data();
-
-        (garden.requiresAttention || []).forEach(issue => {
-          if (!issue.resolved) {
-            allIssues.push({
-              id: issue.id,
-              type: "issue",
-              title: "דורש טיפול",
-              text: issue.text,
-              done: issue.resolved,
-              date: formatFirestoreDate(issue.createdAt),
-              gardenTitle: issue.gardenName,
-            });
-          }
-        });
+    gardens.forEach(garden => {
+      (garden.requiresAttention || []).forEach(issue => {
+        if (!issue.resolved) {
+          allIssues.push({
+            id: issue.id,
+            type: "issue",
+            title: "דורש טיפול",
+            text: issue.text,
+            done: issue.resolved,
+            date: formatFirestoreDate(issue.createdAt),
+            gardenTitle: issue.gardenName,
+          });
+        }
       });
-
-      setIssues(allIssues);
     });
-    return () => unsub();
-  }, [user]);
+
+    setIssues(allIssues);
+  }, [gardens]);
   async function handleAddTask() {
     if (!newTitle.trim()) return;
     if (!user) {

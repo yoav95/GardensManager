@@ -233,11 +233,14 @@ async function handleUpdateOutDays() {
     }
   }
 
-  // Loading state
+  // Loading state - prioritize this to avoid showing "not found" while loading
   if (loading) {
     return (
       <div className={styles.container} style={{ direction: "rtl" }}>
-        <p className={styles.loadingMessage}>טוען פרטי הגן...</p>
+        <div className={styles.spinnerContainer}>
+          <div className={styles.spinner}></div>
+          <p className={styles.loadingText}>טוען פרטי הגן...</p>
+        </div>
       </div>
     );
   }
@@ -260,18 +263,14 @@ async function handleUpdateOutDays() {
     );
   }
 
-  // Not found state
+  // Guard: ensure garden exists before rendering
   if (!garden) {
     return (
       <div className={styles.container} style={{ direction: "rtl" }}>
-        <p style={{ textAlign: "center" }}>הגן לא נמצא</p>
-        <button
-          className={styles.backButton}
-          onClick={() => navigate("/")}
-          style={{ margin: "20px auto", display: "block" }}
-        >
-          חזור לעמוד הבית
-        </button>
+        <div className={styles.spinnerContainer}>
+          <div className={styles.spinner}></div>
+          <p className={styles.loadingText}>טוען פרטי הגן...</p>
+        </div>
       </div>
     );
   }
@@ -586,52 +585,7 @@ async function handleUpdateOutDays() {
         )}
       </div>
       {/* TEMP IMAGE EDIT CARD */}
-<div className={styles.section} style={{ marginTop: 32 }}>
-  <h3 className={styles.label}>🖼️ תמונת גינה (זמני)</h3>
 
-  {!editingImage && (
-    <>
-      <p className={styles.value}>
-        {garden.imageURL ? garden.imageURL : "אין תמונה"}
-      </p>
-      <button
-        className={styles.buttonSmall}
-        onClick={() => {
-          setNewImageURL(garden.imageURL || "");
-          setEditingImage(true);
-        }}
-      >
-        ערוך תמונה
-      </button>
-    </>
-  )}
-
-  {editingImage && (
-    <div className={styles.editDayWrapper}>
-      <input
-        type="text"
-        className={styles.input}
-        placeholder="הדבק URL של תמונה"
-        value={newImageURL}
-        onChange={(e) => setNewImageURL(e.target.value)}
-      />
-
-      <button className={styles.saveNoteButton} onClick={handleUpdateImage}>
-        שמור
-      </button>
-
-      <button
-        className={styles.deleteButtonSmall}
-        style={{ marginLeft: 8 }}
-        onClick={() => setEditingImage(false)}
-      >
-        X
-      </button>
-    </div>
-  )}
-  
-
-</div>
 <div className={styles.section} style={{ marginTop: 40 }}>
   <button
     className={styles.deleteGardenButton}

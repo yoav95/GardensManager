@@ -9,24 +9,12 @@ import useTopBarCounts from "./hooks/useTopBarCounts.js";
 import ShoppingListView from "./components/ShoppingListView/ShoppingListView.jsx";
 import Login from "./components/Login/Login.jsx";
 import { useAuth } from "./hooks/useAuth.js";
+import { GardensProvider } from "./context/GardensContext.jsx";
 
-function App() {
-  const { user, loading } = useAuth();
+function AppContent() {
+  const { user } = useAuth();
   const { gardenCount, totalBadgeCount, shoppingCount } = useTopBarCounts();
-
   const [view, setView] = useState("gardens");
-
-  if (loading) {
-    return (
-      <div className={styles.appContainer}>
-        <p style={{ textAlign: "center", marginTop: "50px" }}>טוען...</p>
-      </div>
-    );
-  }
-
-  if (!user) {
-    return <Login user={user} />;
-  }
 
   return (
     <div className={styles.appContainer}>
@@ -44,6 +32,28 @@ function App() {
       {view === "map" && <AreasMap />}
       {view === "shopping" && <ShoppingListView />} 
     </div>
+  );
+}
+
+function App() {
+  const { user, loading } = useAuth();
+
+  if (loading) {
+    return (
+      <div className={styles.appContainer}>
+        <p style={{ textAlign: "center", marginTop: "50px" }}>טוען...</p>
+      </div>
+    );
+  }
+
+  if (!user) {
+    return <Login user={user} />;
+  }
+
+  return (
+    <GardensProvider>
+      <AppContent />
+    </GardensProvider>
   );
 }
 

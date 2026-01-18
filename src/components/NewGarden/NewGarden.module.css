@@ -120,6 +120,23 @@ select:focus {
 }
 
 /* ============================
+   IMAGE PREVIEW
+============================ */
+.imagePreviewContainer {
+  margin: 12px 0;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 2px solid #ddd;
+}
+
+.imagePreview {
+  width: 100%;
+  height: auto;
+  max-height: 300px;
+  object-fit: cover;
+}
+
+/* ============================
    RESPONSIVE
 ============================ */
 @media (max-width: 600px) {
