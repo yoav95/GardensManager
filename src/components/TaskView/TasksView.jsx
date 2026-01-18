@@ -6,6 +6,7 @@ import TaskListItem from "./TaskListItem.jsx";
 import { FaArrowRight } from "react-icons/fa";
 import { useAuth } from "../../hooks/useAuth.js";
 import { useGardensContext } from "../../context/GardensContext.jsx";
+import { useWorkspace } from "../../context/WorkspaceContext.jsx";
 
 function formatFirestoreDate(date) {
   if (!date) return "";
@@ -19,6 +20,7 @@ function formatFirestoreDate(date) {
 
 function TasksView() {
   const { user } = useAuth();
+  const { selectedWorkspace } = useWorkspace();
   const { gardens } = useGardensContext();
   const [tasks, setTasks] = useState([]);
   const [issues, setIssues] = useState([]);
@@ -29,14 +31,14 @@ function TasksView() {
   const [newLevel, setNewLevel] = useState("a");
 
   useEffect(() => {
-    if (!user) {
+    if (!user || !selectedWorkspace) {
       setTasks([]);
       return;
     }
 
     const tasksQuery = query(
       collection(db, "tasks"),
-      where("userId", "==", user.uid)
+      where("workspaceId", "==", selectedWorkspace)
     );
 
     const unsub = onSnapshot(tasksQuery, snapshot => {
@@ -51,7 +53,7 @@ function TasksView() {
     });
 
     return () => unsub();
-  }, [user]);
+  }, [user, selectedWorkspace]);
 
   useEffect(() => {
     // Use gardens from context instead of fetching again
@@ -77,7 +79,7 @@ function TasksView() {
   }, [gardens]);
   async function handleAddTask() {
     if (!newTitle.trim()) return;
-    if (!user) {
+    if (!user || !selectedWorkspace) {
       alert("חייב להתחבר קודם");
       return;
     }
@@ -89,6 +91,7 @@ function TasksView() {
       done: false,
       date: new Date().toISOString().split("T")[0],
       userId: user.uid,
+      workspaceId: selectedWorkspace,
     });
 
     // reset UI only — snapshot will update tasks

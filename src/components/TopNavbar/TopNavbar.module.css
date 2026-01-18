@@ -1,0 +1,60 @@
+.topNavbar {
+    margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background:#1f7a4d;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-radius: 1rem;
+}
+
+.workspaceName {
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logoutBtn {
+  padding: 8px 16px;
+  color: #1f7a4d;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: .5rem;
+  background-color: rgba(255, 255, 255, 0.823);
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.logoutBtn:hover {
+  background: white;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .topNavbar {
+    padding: 12px 15px;
+  }
+
+  .workspaceName {
+    font-size: 16px;
+  }
+
+  .logoutBtn {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+}

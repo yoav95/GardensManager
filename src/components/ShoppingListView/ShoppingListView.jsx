@@ -1,19 +1,31 @@
 import { useEffect, useState } from "react";
-import { collection, onSnapshot, addDoc, Timestamp, deleteDoc, doc } from "firebase/firestore";
+import { collection, onSnapshot, addDoc, Timestamp, deleteDoc, doc, query, where } from "firebase/firestore";
 import { db } from "../../firebase/config.js";
+import { useAuth } from "../../hooks/useAuth.js";
+import { useWorkspace } from "../../context/WorkspaceContext.jsx";
 import { useSwipeable } from "react-swipeable";
 import styles from "./ShoppingListView.module.css";
 import ShoppingListItem from "./ShoppingListItem.jsx";
-import { FaArrowRight } from "react-icons/fa"; // using react-icons for swipe icon
+import { FaArrowRight } from "react-icons/fa";
 
 export default function ShoppingListView() {
+  const { user } = useAuth();
+  const { selectedWorkspace } = useWorkspace();
   const [items, setItems] = useState([]);
   const [newTitle, setNewTitle] = useState("");
   const [newQty, setNewQty] = useState(1);
 
   useEffect(() => {
-    const colRef = collection(db, "shopping");
-    const unsub = onSnapshot(colRef, snapshot => {
+    if (!user || !selectedWorkspace) {
+      setItems([]);
+      return;
+    }
+
+    const shoppingQuery = query(
+      collection(db, "shopping"),
+      where("workspaceId", "==", selectedWorkspace)
+    );
+    const unsub = onSnapshot(shoppingQuery, snapshot => {
       const allItems = snapshot.docs.map(doc => ({
         id: doc.id,
         ...doc.data(),
@@ -22,14 +34,18 @@ export default function ShoppingListView() {
     });
 
     return () => unsub();
-  }, []);
+  }, [user, selectedWorkspace]);
 
   async function addShoppingItem(title, qty) {
+    if (!user || !selectedWorkspace) return;
+
     const colRef = collection(db, "shopping");
     await addDoc(colRef, {
       title,
       qty,
       date: Timestamp.now(),
+      userId: user.uid,
+      workspaceId: selectedWorkspace,
     });
   }
 

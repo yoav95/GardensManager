@@ -2,17 +2,19 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { db } from "../firebase/config";
 import { useAuth } from "../hooks/useAuth";
+import { useWorkspace } from "./WorkspaceContext";
 
 const GardensContext = createContext();
 
 export function GardensProvider({ children }) {
   const { user } = useAuth();
+  const { selectedWorkspace } = useWorkspace();
   const [gardens, setGardens] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (!user) {
+    if (!user || !selectedWorkspace) {
       setGardens([]);
       setLoading(false);
       return;
@@ -24,7 +26,7 @@ export function GardensProvider({ children }) {
     try {
       const gardensQuery = query(
         collection(db, "gardens"),
-        where("userId", "==", user.uid)
+        where("workspaceId", "==", selectedWorkspace)
       );
 
       const unsub = onSnapshot(
@@ -50,7 +52,7 @@ export function GardensProvider({ children }) {
       setError(err.message);
       setLoading(false);
     }
-  }, [user]);
+  }, [user, selectedWorkspace]);
 
   return (
     <GardensContext.Provider value={{ gardens, loading, error }}>

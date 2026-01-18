@@ -5,31 +5,54 @@ import {
   GoogleAuthProvider,
   signOut,
 } from "firebase/auth";
-import { ALLOWED_EMAILS } from "../../config/allowedEmails.js";
+import { collection, addDoc, Timestamp } from "firebase/firestore";
+import { db } from "../../firebase/config.js";
 import styles from "./Login.module.css";
 
 export default function Login({ user }) {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [mode, setMode] = useState("signin"); // "signin" or "register"
 
   const auth = getAuth();
   const googleProvider = new GoogleAuthProvider();
 
-  async function handleGoogleLogin() {
+  async function handleGoogleSignIn() {
+    setError("");
+    setLoading(true);
+
+    try {
+      const result = await signInWithPopup(auth, googleProvider);
+      // No email whitelist check - access is controlled by workspace membership
+    } catch (err) {
+      setError(err.message);
+      setLoading(false);
+    }
+  }
+
+  async function handleGoogleRegister() {
     setError("");
     setLoading(true);
 
     try {
       const result = await signInWithPopup(auth, googleProvider);
       const userEmail = result.user.email;
+      const userUID = result.user.uid;
+      const userName = result.user.displayName;
 
-      // Check if email is allowed
-      if (!ALLOWED_EMAILS.includes(userEmail)) {
-        await signOut(auth);
-        setError(`הגישה נדחתה. הדוא"ל ${userEmail} אינו מורשה.`);
-        setLoading(false);
-        return;
-      }
+      // Add to pending users collection
+      await addDoc(collection(db, "pendingUsers"), {
+        email: userEmail,
+        uid: userUID,
+        displayName: userName,
+        registeredAt: Timestamp.now(),
+        approved: false,
+      });
+
+      // Keep user signed in - they will see pending approval page
+      setError("");
+      setMode("signin");
+      setLoading(false);
     } catch (err) {
       setError(err.message);
       setLoading(false);
@@ -63,17 +86,53 @@ export default function Login({ user }) {
     <div className={styles.container}>
       <div className={styles.card}>
         <h1>🌿 גן שלי</h1>
-        <h2>התחברות</h2>
-
-        {error && <div className={styles.error}>{error}</div>}
-
-        <button
-          onClick={handleGoogleLogin}
-          disabled={loading}
-          className={styles.googleButton}
-        >
-          {loading ? "טוען..." : "🔐 התחבר עם Google"}
-        </button>
+        
+        {mode === "signin" ? (
+          <>
+            <h2>התחברות</h2>
+            {error && <div className={styles.error}>{error}</div>}
+            <button
+              onClick={handleGoogleSignIn}
+              disabled={loading}
+              className={styles.googleButton}
+            >
+              {loading ? "טוען..." : "🔐 התחבר עם Google"}
+            </button>
+            <p className={styles.toggleMode}>
+              משתמש חדש? 
+              <button 
+                onClick={() => setMode("register")}
+                className={styles.linkButton}
+              >
+                הירשם כאן
+              </button>
+            </p>
+          </>
+        ) : (
+          <>
+            <h2>הרשמה</h2>
+            {error && <div className={styles.error}>{error}</div>}
+            <p className={styles.subtitle}>
+              בחר בחשבון Google שלך ואנו נשלח בקשת אישור למנהל
+            </p>
+            <button
+              onClick={handleGoogleRegister}
+              disabled={loading}
+              className={styles.googleButton}
+            >
+              {loading ? "טוען..." : "📝 הירשם עם Google"}
+            </button>
+            <p className={styles.toggleMode}>
+              יש לך חשבון?
+              <button 
+                onClick={() => setMode("signin")}
+                className={styles.linkButton}
+              >
+                התחבר
+              </button>
+            </p>
+          </>
+        )}
       </div>
     </div>
   );

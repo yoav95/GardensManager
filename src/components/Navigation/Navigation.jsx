@@ -43,25 +43,6 @@ function Navigation({ view, setView, gardenCount, totalBadgeCount, shoppingCount
         badge={shoppingCount}
         badgeVariant="info"
       />
-
-      {user && (
-        <button
-          onClick={handleLogout}
-          style={{
-            padding: "8px 12px",
-            background: "#e74c3c",
-            color: "white",
-            border: "none",
-            borderRadius: "6px",
-            cursor: "pointer",
-            fontSize: "14px",
-            fontWeight: "600",
-            marginLeft: "10px",
-          }}
-        >
-          התנתק
-        </button>
-      )}
     </div>
   );
 }

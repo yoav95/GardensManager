@@ -5,6 +5,7 @@ import { db, storage } from "../../firebase/config.js";
 import styles from "./NewGarden.module.css";
 import { getCoordinates } from "../../utils/getCoordinates.js";
 import { useAuth } from "../../hooks/useAuth.js";
+import { useWorkspace } from "../../context/WorkspaceContext.jsx";
 
 const days = ["sunday", "monday", "tuesday", "wednesday", "thursday"];
 
@@ -18,6 +19,7 @@ const daysHebrew = {
 
 export default function NewGarden() {
   const { user } = useAuth();
+  const { selectedWorkspace } = useWorkspace();
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [day, setDay] = useState("");
@@ -138,6 +140,12 @@ export default function NewGarden() {
       return;
     }
 
+    if (!selectedWorkspace) {
+      alert("בחר workspace תחילה");
+      setLoading(false);
+      return;
+    }
+
     // Fetch coordinates from address
     const coords = await getCoordinates(address);
     if (!coords) {
@@ -161,6 +169,7 @@ export default function NewGarden() {
       notes: [],
       visitLogs: [],
       userId: user.uid,
+      workspaceId: selectedWorkspace,
       createdAt: new Date().toISOString(),
     };
 
