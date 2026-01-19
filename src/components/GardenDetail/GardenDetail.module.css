@@ -7,7 +7,7 @@
   max-width: 700px;
 
   margin: 0 auto;
-  color: #222;
+  color: #1f2933;
   min-height: 100vh;
 }
 
@@ -51,7 +51,7 @@
   font-size: 26px;
   font-weight: 700;
   margin: 16px 0;
-  color: #222;
+  color: #1f2933;
 }
 
 /* ============================
@@ -85,7 +85,7 @@
 ============================ */
 .label {
   font-weight: 600;
-  color: #333;
+  color: #1f2933;
 }
 
 .value {
@@ -93,7 +93,7 @@
   margin-inline-start: .5rem;
   /* Fallback for older browsers */
   margin-left: 8px;
-  color: #555;
+  color: #1f2933;
 }
 
 /* ============================
@@ -198,6 +198,7 @@
   margin-bottom: 0;
   text-align: right;
   cursor: pointer;
+  color: #1f2933;
   box-shadow: 0 1px 3px rgba(0,0,0,0.06);
 }
 
@@ -229,7 +230,7 @@
 
 .logTasksTitle {
   font-weight: 600;
-  color: #333;
+  color: #1f2933;
   margin-bottom: 8px;
   font-size: 14px;
 }
@@ -453,16 +454,25 @@
   background: #e53935;
   color: white;
   border: none;
-  padding: 12px 18px;
-  border-radius: 10px;
+  padding: 14px 20px;
+  border-radius: 12px;
   font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
   width: 100%;
-  transition: background 0.2s ease;
+  transition: all 0.3s ease;
+  margin-top: 24px;
+  box-shadow: 0 4px 12px rgba(229, 57, 53, 0.3);
 }
 
 .deleteGardenButton:hover {
   background: #c62828;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(229, 57, 53, 0.4);
+}
+
+.deleteGardenButton:active {
+  transform: translateY(0);
 }
 /* Requires Attention Section */
 .issuesSection {

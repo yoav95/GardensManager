@@ -23,7 +23,7 @@ html, body {
   max-width: 800px;
   margin: 0 auto;
   direction: rtl;
-  color:#222;
+  color:#1f2933;
   
 }
 
@@ -31,13 +31,13 @@ html, body {
   font-size: 28px;
   font-weight: 700;
   margin-bottom: 16px;
-  color:#222;
+  color:#1f2933;
   text-align: right;
 }
 .gardenDot {
   width: 28px;
   height: 28px;
-  background-color: #45a049;
+  background-color: #4caf50;
   border-radius: 50%;
   border: 2px solid white;
   box-shadow: 0 0 2px rgba(0,0,0,0.5);
@@ -55,51 +55,75 @@ html, body {
 }
 
 .dayButton {
-  padding: 10px 19px;
-  font-size: 15px;
+  padding: 10px 16px;
+  font-size: 14px;
   font-weight: 500;
-  border: 1px solid #ddd;
-  background: #f1f1f1;
-  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  border-bottom: 3px solid transparent;
+  background: #ffffff;
+  color: #666;
+  border-radius: 8px;
   cursor: pointer;
   white-space: nowrap;
-  transition: 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 .dayButton:hover {
-  filter: brightness(1.15);
+  border-color: #d1d5db;
+  border-bottom-color: #4caf50;
+  background: #f0f9ff;
 }
 
 /* Active effect */
 .active {
-  transform: scale(1.05);
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  background: #ffffff;
+  border-color: #4caf50;
+  border-bottom-color: #4caf50;
+  color: #4caf50;
+  font-weight: 600;
+  transform: none;
+  box-shadow: none;
 }
 
-/* Colors for each day */
+/* Colors for each day - bottom border indicator */
 .sunday {
-  color:white;
-  background-color: #D9776A;
+  border-bottom-color: #D9776A;
+}
+
+.sunday.active {
+  border-bottom-color: #D9776A;
 }
 
 .monday {
-  color:white;
-  background-color: #4F9D8A;
+  border-bottom-color: #4F9D8A;
+}
+
+.monday.active {
+  border-bottom-color: #4F9D8A;
 }
 
 .tuesday {
-  background-color: #E0B84F;
-  color:white;
+  border-bottom-color: #E0B84F;
+}
+
+.tuesday.active {
+  border-bottom-color: #E0B84F;
 }
 
 .wednesday {
-  color:white;
-  background-color: #6B7C93;
+  border-bottom-color: #6B7C93;
+}
+
+.wednesday.active {
+  border-bottom-color: #6B7C93;
 }
 
 .thursday {
-  color:white;
-  background-color: #D18B5C;
+  border-bottom-color: #D18B5C;
+}
+
+.thursday.active {
+  border-bottom-color: #D18B5C;
 }
 
 

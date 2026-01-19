@@ -23,7 +23,7 @@ html, body {
   max-width: 800px;
   margin: 0 auto;
   direction: rtl;
-  color:#222;
+  color:#1f2933;
   
 }
 
@@ -31,7 +31,7 @@ html, body {
   font-size: 28px;
   font-weight: 700;
   margin-bottom: 16px;
-  color:#222;
+  color:#1f2933;
   text-align: right;
 }
 
@@ -48,18 +48,21 @@ html, body {
 }
 
 .dayButton {
-  padding: 8px 14px;
+  padding: 10px 16px;
   font-size: 14px;
-  border: 1px solid #ddd;
-  background: #fafafa;
-  border-radius: 10px;
+  font-weight: 500;
+  border: 1px solid #d1d5db;
+  background: #ffffff;
+  color: #666;
+  border-radius: 8px;
   cursor: pointer;
   white-space: nowrap;
-  transition: 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 .dayButton:hover {
-  background: #f0f0f0;
+  border-color: #4caf50;
+  background: #f0f9ff;
 }
 .dayButton.isActive {
   background-color: #4caf50;
@@ -146,7 +149,7 @@ html, body {
 }
 .lastVisit .okVisit {
   margin-right: 5px;
-  background-color: #45a049;
+  background-color: #4caf50;
   width: auto;
   display: inline;
   padding: 6px 10px;
@@ -201,7 +204,7 @@ margin-right: 5px;
   font-size: 28px;
   font-weight: 600;
   color: white;
-  background:#45a049;
+  background:#4caf50;
   border: none;
   cursor: pointer;
   display: flex;
@@ -213,7 +216,7 @@ margin-right: 5px;
 }
 
 .fabAdd:hover {
-  background: #4d46c9;
+  background: #45a049;
 }
 
 .fabAdd:active {
@@ -267,6 +270,7 @@ margin-right: 5px;
 .button:active {
   transform: scale(0.97);
 }
+
 .control {
   display: flex;
   justify-content: space-between;
@@ -327,7 +331,7 @@ margin-right: 5px;
   padding: 10px;
   background: #e2e7e4; /* 🔥 FIX */
   border-bottom: 1px solid #eaeaea;
-  margin-bottom: 1rem;
+  /* margin-bottom: 1rem; */
 }
 .topNavButton.isActive .taskBadge {
   background: #ffffff;

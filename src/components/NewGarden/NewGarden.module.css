@@ -95,7 +95,7 @@ select:focus {
 }
 
 .button:hover {
-  background: #43a047;
+  background: #45a049;
 }
 
 .button:active {
@@ -134,6 +134,50 @@ select:focus {
   height: auto;
   max-height: 300px;
   object-fit: cover;
+}
+
+/* ============================
+   DAY PICKER
+============================ */
+.dayPickerContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 10px;
+  padding: 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  background: #fafbfc;
+}
+
+.dayPickerLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  background: #fff;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.dayPickerLabel:hover {
+  border-color: #4caf50;
+  background: #f0f9ff;
+}
+
+.dayPickerCheckbox {
+  cursor: pointer;
+  width: 18px;
+  height: 18px;
+  accent-color: #4caf50;
+}
+
+.dayPickerText {
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
 }
 
 /* ============================

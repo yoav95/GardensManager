@@ -3,70 +3,82 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #1f7a4d 0%, #4caf50 100%);
   padding: 20px;
+  direction: rtl;
 }
 
 .card {
   background: white;
-  border-radius: 12px;
+  border-radius: 20px;
   padding: 40px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-  max-width: 400px;
+  box-shadow: 0 20px 60px rgba(31, 122, 77, 0.3);
+  max-width: 420px;
   width: 100%;
   text-align: center;
   direction: rtl;
 }
 
 .card h1 {
-  font-size: 32px;
-  margin-bottom: 10px;
-  color: #333;
+  font-size: 36px;
+  margin-bottom: 8px;
+  color: #1f2933;
+  font-weight: 700;
 }
 
 .card h2 {
   font-size: 24px;
-  margin-bottom: 30px;
-  color: #666;
+  margin-bottom: 28px;
+  color: #4caf50;
+  font-weight: 600;
 }
 
 .subtitle {
   color: #666;
-  font-size: 14px;
-  margin-bottom: 20px;
-  line-height: 1.5;
+  font-size: 15px;
+  margin-bottom: 24px;
+  line-height: 1.6;
+  font-weight: 500;
 }
 
 .error {
   background-color: #fee;
   color: #c33;
-  padding: 10px;
-  border-radius: 6px;
+  padding: 12px 14px;
+  border-radius: 10px;
   margin-bottom: 20px;
   font-size: 14px;
+  border-left: 4px solid #c33;
 }
 
 .googleButton {
   width: 100%;
-  padding: 12px;
+  padding: 14px 16px;
   background-color: white;
-  border: 1px solid #ddd;
-  color: #333;
-  border-radius: 6px;
-  font-size: 16px;
+  border: 2px solid #4caf50;
+  color: #1f2933;
+  border-radius: 12px;
+  font-size: 15px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s;
+  transition: all 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 10px;
+  margin-bottom: 16px;
 }
 
 .googleButton:hover:not(:disabled) {
-  background-color: #f8f8f8;
-  border-color: #999;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background-color: #4caf50;
+  color: white;
+  border-color: #4caf50;
+  box-shadow: 0 8px 20px rgba(76, 175, 80, 0.3);
+  transform: translateY(-2px);
+}
+
+.googleButton:active:not(:disabled) {
+  transform: translateY(0);
 }
 
 .googleButton:disabled {
@@ -75,46 +87,99 @@
 }
 
 .email {
-  color: #666;
-  margin-bottom: 20px;
-  font-size: 14px;
+  color: #1f2933;
+  margin-bottom: 24px;
+  font-size: 15px;
+  font-weight: 500;
 }
 
 .logoutBtn {
   width: 100%;
-  padding: 12px;
-  background-color: #e74c3c;
+  padding: 14px;
+  background-color: #1f7a4d;
   color: white;
   border: none;
-  border-radius: 6px;
-  font-size: 16px;
+  border-radius: 12px;
+  font-size: 15px;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: all 0.3s ease;
 }
 
 .logoutBtn:hover {
-  background-color: #c0392b;
+  background-color: #4caf50;
+  box-shadow: 0 8px 20px rgba(76, 175, 80, 0.3);
+  transform: translateY(-2px);
+}
+
+.logoutBtn:active {
+  transform: translateY(0);
 }
 
 .toggleMode {
-  margin-top: 20px;
+  margin-top: 24px;
   font-size: 14px;
   color: #666;
+  line-height: 1.6;
 }
 
 .linkButton {
   background: none;
   border: none;
-  color: #667eea;
+  color: #4caf50;
   cursor: pointer;
   font-weight: 600;
-  text-decoration: underline;
+  text-decoration: none;
   padding: 0 4px;
   margin: 0 4px;
+  transition: all 0.2s ease;
 }
 
 .linkButton:hover {
-  color: #764ba2;
+  color: #1f7a4d;
+  text-decoration: underline;
+}
+
+/* Mobile Responsive */
+@media (max-width: 600px) {
+  .container {
+    padding: 16px;
+  }
+
+  .card {
+    padding: 28px 20px;
+    border-radius: 16px;
+  }
+
+  .card h1 {
+    font-size: 28px;
+    margin-bottom: 6px;
+  }
+
+  .card h2 {
+    font-size: 20px;
+    margin-bottom: 24px;
+  }
+
+  .subtitle {
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+
+  .googleButton {
+    padding: 12px 14px;
+    font-size: 14px;
+    margin-bottom: 14px;
+  }
+
+  .logoutBtn {
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  .toggleMode {
+    margin-top: 20px;
+    font-size: 13px;
+  }
 }
 

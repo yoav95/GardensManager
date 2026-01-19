@@ -71,7 +71,7 @@ export default function Login({ user }) {
     return (
       <div className={styles.container}>
         <div className={styles.card}>
-          <h2>🌿 גן שלי</h2>
+          <h2> מנהל גינות</h2>
           <p>כניסה בהצלחה!</p>
           <p className={styles.email}>{user.displayName || user.email}</p>
           <button onClick={handleLogout} className={styles.logoutBtn}>
@@ -85,7 +85,7 @@ export default function Login({ user }) {
   return (
     <div className={styles.container}>
       <div className={styles.card}>
-        <h1>🌿 גן שלי</h1>
+        <h1>מנהל גינות</h1>
         
         {mode === "signin" ? (
           <>

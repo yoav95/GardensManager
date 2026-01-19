@@ -10,6 +10,7 @@ import useTopBarCounts from "./hooks/useTopBarCounts.js";
 import ShoppingListView from "./components/ShoppingListView/ShoppingListView.jsx";
 import Login from "./components/Login/Login.jsx";
 import PendingApproval from "./components/PendingApproval/PendingApproval.jsx";
+import LoadingSpinner from "./components/LoadingSpinner/LoadingSpinner.jsx";
 import { useAuth } from "./hooks/useAuth.js";
 import { collection, query, getDocs } from "firebase/firestore";
 import { db } from "./firebase/config.js";
@@ -80,11 +81,7 @@ function App() {
   }, [user]);
 
   if (loading || checkingStatus) {
-    return (
-      <div className={styles.appContainer}>
-        <p style={{ textAlign: "center", marginTop: "50px" }}>טוען...</p>
-      </div>
-    );
+    return <LoadingSpinner message="טוען..." />;
   }
 
   if (!user) {

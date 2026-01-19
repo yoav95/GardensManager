@@ -4,6 +4,7 @@ import { updateDoc, arrayUnion, Timestamp, deleteDoc, doc } from "firebase/fires
 import { db } from "../../firebase/config.js";
 import { useGarden } from "../../hooks/useGarden.js";
 import styles from "./GardenDetail.module.css";
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner.jsx";
 
 function GardenDetail() {
   const { id } = useParams();
@@ -21,7 +22,17 @@ function GardenDetail() {
   const [editingDay, setEditingDay] = useState(false);
   const [newDay, setNewDay] = useState("");
   const [editingOutDays, setEditingOutDays] = useState(false);
-  const [newOutDays, setNewOutDays] = useState("");
+  const [newOutDays, setNewOutDays] = useState([]);
+
+  const days = ["sunday", "monday", "tuesday", "wednesday", "thursday"];
+
+  const handleOutDaysChange = (dayName) => {
+    setNewOutDays((prev) =>
+      prev.includes(dayName)
+        ? prev.filter((d) => d !== dayName)
+        : [...prev, dayName]
+    );
+  };
   const [editingImage, setEditingImage] = useState(false);
   const [newImageURL, setNewImageURL] = useState("");
   const [addingIssue, setAddingIssue] = useState(false);
@@ -209,8 +220,6 @@ async function handleUpdateDay() {
   }
 }
 async function handleUpdateOutDays() {
-  if (!newOutDays.trim()) return;
-
   const docRef = doc(db, "gardens", id);
 
   try {
@@ -237,10 +246,7 @@ async function handleUpdateOutDays() {
   if (loading) {
     return (
       <div className={styles.container} style={{ direction: "rtl" }}>
-        <div className={styles.spinnerContainer}>
-          <div className={styles.spinner}></div>
-          <p className={styles.loadingText}>טוען פרטי הגן...</p>
-        </div>
+        <LoadingSpinner message="טוען פרטי הגן..." />
       </div>
     );
   }
@@ -358,14 +364,14 @@ async function handleUpdateOutDays() {
 
        <div className={styles.sectionRow}>
   <p>
-    <strong>ימי הוצאה:</strong> {garden.outDays}
+    <strong>ימי הוצאה:</strong> {Array.isArray(garden.outDays) && garden.outDays.length > 0 ? garden.outDays.map(d => daysHebrew[d]).join(", ") : "לא צויין"}
   </p>
 
   {!editingOutDays && (
     <button
       className={styles.buttonSmall}
       onClick={() => {
-        setNewOutDays(garden.outDays || "");
+        setNewOutDays(Array.isArray(garden.outDays) ? garden.outDays : []);
         setEditingOutDays(true);
       }}
     >
@@ -376,13 +382,19 @@ async function handleUpdateOutDays() {
 
 {editingOutDays && (
   <div className={styles.editDayWrapper}>
-    <input
-      type="text"
-      className={styles.input}
-      placeholder="לדוגמה: ראשון ורביעי"
-      value={newOutDays}
-      onChange={(e) => setNewOutDays(e.target.value)}
-    />
+    <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(100px, 1fr))", gap: "8px", marginBottom: "12px" }}>
+      {days.map((d) => (
+        <label key={d} style={{ display: "flex", alignItems: "center", gap: "6px", padding: "8px", border: "1px solid #d1d5db", borderRadius: "8px", cursor: "pointer", backgroundColor: newOutDays.includes(d) ? "#e0f2f1" : "#fff" }}>
+          <input
+            type="checkbox"
+            checked={newOutDays.includes(d)}
+            onChange={() => handleOutDaysChange(d)}
+            style={{ cursor: "pointer", accentColor: "#4caf50" }}
+          />
+          <span style={{ fontSize: "14px", fontWeight: "500" }}>{daysHebrew[d]}</span>
+        </label>
+      ))}
+    </div>
 
     <button className={styles.saveNoteButton} onClick={handleUpdateOutDays}>
       שמור
@@ -586,7 +598,7 @@ async function handleUpdateOutDays() {
       </div>
       {/* TEMP IMAGE EDIT CARD */}
 
-<div className={styles.section} style={{ marginTop: 40 }}>
+<div style={{ marginTop: 40, marginBottom: 20 }}>
   <button
     className={styles.deleteGardenButton}
     onClick={handleDeleteGarden}

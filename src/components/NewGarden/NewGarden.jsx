@@ -26,8 +26,17 @@ export default function NewGarden() {
   const [imageFile, setImageFile] = useState(null);
   const [imagePreview, setImagePreview] = useState("");
   const [fileSizeInfo, setFileSizeInfo] = useState("");
-  const [outDays, setOutDays] = useState("");
+  const [outDays, setOutDays] = useState([]);
   const [loading, setLoading] = useState(false);
+
+  // Handle outDays selection
+  const handleOutDaysChange = (dayName) => {
+    setOutDays((prev) =>
+      prev.includes(dayName)
+        ? prev.filter((d) => d !== dayName)
+        : [...prev, dayName]
+    );
+  };
 
   // Compress image using Canvas API
   async function compressImage(file) {
@@ -160,7 +169,7 @@ export default function NewGarden() {
       name,
       address,
       day,
-      outDays,
+      outDays: outDays.length > 0 ? outDays : [],
       imageURL: "", // Will be updated after upload
       locationURL: `https://waze.com/ul?q=${encodedAddress}`,
       lat: coords.lat,
@@ -245,13 +254,20 @@ export default function NewGarden() {
           </select>
 
           <label>ימי הוצאה</label>
-          <input
-            className={styles.input}
-            value={outDays}
-            onChange={(e) => setOutDays(e.target.value)}
-            placeholder="לדוגמה: א, ג, ד"
-            disabled={loading}
-          />
+          <div className={styles.dayPickerContainer}>
+            {days.map((d) => (
+              <label key={d} className={styles.dayPickerLabel}>
+                <input
+                  type="checkbox"
+                  checked={outDays.includes(d)}
+                  onChange={() => handleOutDaysChange(d)}
+                  disabled={loading}
+                  className={styles.dayPickerCheckbox}
+                />
+                <span className={styles.dayPickerText}>{daysHebrew[d]}</span>
+              </label>
+            ))}
+          </div>
 
           <label>תמונת הגינה</label>
           <input

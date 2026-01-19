@@ -7,6 +7,7 @@ import { FaArrowRight } from "react-icons/fa";
 import { useAuth } from "../../hooks/useAuth.js";
 import { useGardensContext } from "../../context/GardensContext.jsx";
 import { useWorkspace } from "../../context/WorkspaceContext.jsx";
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner.jsx";
 
 function formatFirestoreDate(date) {
   if (!date) return "";
@@ -150,7 +151,7 @@ async function handleDelete(item) {
 }
 
   if (loading) {
-    return <p className={styles.loading}>טוען משימות...</p>;
+    return <LoadingSpinner message="טוען משימות..." />;
   }
 
   const combinedList = [...tasks, ...issues];

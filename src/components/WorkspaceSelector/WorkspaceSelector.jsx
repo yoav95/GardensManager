@@ -1,11 +1,12 @@
 import { useWorkspace } from "../../context/WorkspaceContext.jsx";
 import styles from "./WorkspaceSelector.module.css";
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner.jsx";
 
 function WorkspaceSelector() {
   const { workspaces, selectedWorkspace, setSelectedWorkspace, loading } = useWorkspace();
 
   if (loading) {
-    return <div className={styles.selector}>טוען workspaces...</div>;
+    return <LoadingSpinner message="טוען workspaces..." />;
   }
 
   if (!workspaces || workspaces.length === 0) {

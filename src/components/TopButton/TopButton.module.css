@@ -14,7 +14,7 @@
   border: none;
   border-radius: 8px;
   background-color: #f3f4f6;
-  color: #333;
+  color: #1f2933;
   cursor: pointer;
   transition: background 0.2s ease, color 0.2s ease, transform 0.1s ease;
 }
