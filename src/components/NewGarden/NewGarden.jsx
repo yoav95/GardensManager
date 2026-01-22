@@ -270,13 +270,47 @@ export default function NewGarden() {
           </div>
 
           <label>תמונת הגינה</label>
-          <input
-            className={styles.input}
-            type="file"
-            accept="image/*"
-            onChange={handleImageSelect}
-            disabled={loading}
-          />
+          <div style={{ display: "flex", gap: "8px", marginBottom: "12px" }}>
+            <label style={{ 
+              flex: 1, 
+              padding: "10px", 
+              textAlign: "center", 
+              backgroundColor: "#4caf50", 
+              color: "white", 
+              borderRadius: "8px",
+              cursor: loading ? "not-allowed" : "pointer",
+              opacity: loading ? 0.6 : 1
+            }}>
+              📷 צלם תמונה
+              <input
+                type="file"
+                accept="image/*"
+                capture="environment"
+                onChange={handleImageSelect}
+                disabled={loading}
+                style={{ display: "none" }}
+              />
+            </label>
+            <label style={{ 
+              flex: 1, 
+              padding: "10px", 
+              textAlign: "center", 
+              backgroundColor: "#2196F3", 
+              color: "white", 
+              borderRadius: "8px",
+              cursor: loading ? "not-allowed" : "pointer",
+              opacity: loading ? 0.6 : 1
+            }}>
+              📁 בחר קובץ
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleImageSelect}
+                disabled={loading}
+                style={{ display: "none" }}
+              />
+            </label>
+          </div>
           
           {fileSizeInfo && (
             <div style={{ fontSize: "12px", color: "#666", marginTop: "8px", marginBottom: "8px" }}>
