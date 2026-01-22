@@ -67,7 +67,12 @@ async function handleDeleteGarden() {
 }
 
 async function handleAddIssue() {
-  if (!newIssueText.trim()) return;
+  console.log("handleAddIssue called", { newIssueText });
+  
+  if (!newIssueText.trim()) {
+    console.log("Issue text is empty");
+    return;
+  }
 
   const newIssue = {
     id: crypto.randomUUID(),
@@ -78,15 +83,19 @@ async function handleAddIssue() {
     resolved: false,
   };
 
+  console.log("Attempting to add issue:", newIssue);
   const docRef = doc(db, "gardens", id);
 
   try {
     await updateDoc(docRef, {
       requiresAttention: arrayUnion(newIssue),
     });
+    console.log("Issue added successfully");
     setNewIssueText("");
+    setAddingIssue(false); // Close the form after saving
   } catch (error) {
     console.error("Error adding issue:", error);
+    alert("שגיאה בהוספת תקלה: " + error.message);
   }
 }
 
@@ -519,8 +528,24 @@ async function handleUpdateOutDays() {
         placeholder="לדוגמה: ממטרה שבורה"
         value={newIssueText}
         onChange={(e) => setNewIssueText(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            handleAddIssue();
+          }
+        }}
+        autoFocus
       />
-      <button className={styles.addIssueButton} onClick={handleAddIssue}>
+      <button 
+        className={styles.addIssueButton} 
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          console.log("Save button clicked");
+          handleAddIssue();
+        }}
+        type="button"
+      >
         שמור
       </button>
     </div>

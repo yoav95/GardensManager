@@ -26,11 +26,11 @@
 }
 
 .select:hover {
-  border-color: #4caf50;
+  border-color: #27a05f;
 }
 
 .select:focus {
   outline: none;
-  border-color: #4caf50;
-  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+  border-color: #27a05f;
+  box-shadow: 0 0 0 3px rgba(39, 160, 95, 0.15);
 }

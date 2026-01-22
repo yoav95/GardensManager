@@ -582,10 +582,19 @@
   color: #fff;
   border: none;
   cursor: pointer;
+  font-size: 14px;
+  min-width: 60px;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .addIssueButton:hover {
   background-color: #1565c0;
+}
+
+.addIssueButton:active {
+  background-color: #0d47a1;
+  transform: scale(0.98);
 }
 
 .toggleAddIssueButton {

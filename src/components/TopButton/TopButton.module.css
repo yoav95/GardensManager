@@ -20,12 +20,12 @@
 }
 
 .topButton:hover {
-  background-color: #1f7a4d;
+  background: linear-gradient(135deg, #1f7a4d 0%, #27a05f 100%);
   color: #ffffff;
 }
 
 .active {
-  background-color: #1f7a4d;
+  background: linear-gradient(135deg, #1f7a4d 0%, #27a05f 100%);
   color: #ffffff;
   font-weight: 600;
 }

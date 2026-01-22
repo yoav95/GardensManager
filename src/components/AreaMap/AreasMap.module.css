@@ -238,17 +238,26 @@
 }
 
 .popupNav {
-  font-size: 11px;
-  padding: 4px 6px;
-  border-radius: 6px;
+  font-size: 14px;
+  padding: 8px 16px;
+  border-radius: 8px;
   border: none;
   cursor: pointer;
   background: #5d56df;
   color: white;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(93, 86, 223, 0.3);
 }
 
 .popupNav:hover {
-  opacity: 0.85;
+  background: #4a44c4;
+  box-shadow: 0 4px 8px rgba(93, 86, 223, 0.4);
+  transform: translateY(-1px);
+}
+
+.popupNav:active {
+  transform: translateY(0);
 }
 .areaTooltip {
   font-size: 13px;
@@ -275,26 +284,46 @@
 }
 
 .hasIssue {
-  box-shadow: 0 0 0 2px #e63946;
+  box-shadow: 0 0 0 3px #ff4757, 0 0 12px rgba(255, 71, 87, 0.5);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 3px #ff4757, 0 0 12px rgba(255, 71, 87, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 0 3px #ff4757, 0 0 20px rgba(255, 71, 87, 0.8);
+  }
 }
 
 .issueBadge {
   position: absolute;
-  top: -6px;
-  right: -6px;
-  width: 18px;
-  height: 18px;
-  background: #e63946;
+  top: -8px;
+  right: -8px;
+  width: 22px;
+  height: 22px;
+  background: linear-gradient(135deg, #ff4757 0%, #ff3838 100%);
   color: white;
-  font-size: 13px;
-  padding: 5px;
+  font-size: 14px;
   font-weight: bold;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid white;
+  border: 3px solid white;
+  box-shadow: 0 2px 8px rgba(255, 71, 87, 0.6);
   pointer-events: none;
+  animation: bounce 0.6s ease-in-out;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
 }.popupIssues {
   margin-top: 8px;
   padding-top: 6px;
@@ -328,4 +357,81 @@
 .popupIssueDate {
   font-size: 11px;
   color: #777;
+}
+
+/* ============================
+   FULLSCREEN
+============================ */
+.mapWrapper {
+  position: relative;
+  width: 100%;
+  height: 70vh;
+}
+
+.mapWrapper:fullscreen {
+  height: 100vh !important;
+  width: 100vw !important;
+  background: white;
+}
+
+.mapWrapper:fullscreen > div {
+  height: 100vh !important;
+  width: 100vw !important;
+}
+
+.mapWrapper:-webkit-full-screen {
+  height: 100vh !important;
+  width: 100vw !important;
+  background: white;
+}
+
+.mapWrapper:-webkit-full-screen > div {
+  height: 100vh !important;
+  width: 100vw !important;
+}
+
+.mapWrapper:-moz-full-screen {
+  height: 100vh !important;
+  width: 100vw !important;
+  background: white;
+}
+
+.mapWrapper:-moz-full-screen > div {
+  height: 100vh !important;
+  width: 100vw !important;
+}
+
+.mapWrapper:-ms-fullscreen {
+  height: 100vh !important;
+  width: 100vw !important;
+  background: white;
+}
+
+.mapWrapper:-ms-fullscreen > div {
+  height: 100vh !important;
+  width: 100vw !important;
+}
+
+.fullscreenButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1000;
+  background: white;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s ease;
+}
+
+.fullscreenButton:hover {
+  background: #f0f0f0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.fullscreenButton:active {
+  transform: scale(0.95);
 }

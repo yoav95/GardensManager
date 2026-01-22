@@ -275,7 +275,7 @@ export default function NewGarden() {
               flex: 1, 
               padding: "10px", 
               textAlign: "center", 
-              backgroundColor: "#4caf50", 
+              backgroundColor: "linear-gradient(135deg, #1f7a4d 0%, #27a05f 100%)", 
               color: "white", 
               borderRadius: "8px",
               cursor: loading ? "not-allowed" : "pointer",

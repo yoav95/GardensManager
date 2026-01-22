@@ -1,6 +1,6 @@
 import { MapContainer, TileLayer, GeoJSON, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import L from "leaflet";
 import styles from "./AreasMap.module.css";
 
@@ -48,6 +48,9 @@ function getPolygonCenter(layer) {
 export default function AreasMap() {
   const { gardens } = useGardensContext();
   const [gardensGeoJson, setGardensGeoJson] = useState(null);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const mapContainerRef = useRef(null);
+  const lastClickedLayerRef = useRef(null);
 
   useEffect(() => {
     if (gardens?.length) {
@@ -66,14 +69,66 @@ export default function AreasMap() {
     return `${day}/${month}/${year}`;
   }
 
-  
+  const toggleFullscreen = () => {
+    const container = mapContainerRef.current;
+    if (!container) return;
+
+    if (!isFullscreen) {
+      // Enter fullscreen
+      if (container.requestFullscreen) {
+        container.requestFullscreen();
+      } else if (container.webkitRequestFullscreen) {
+        container.webkitRequestFullscreen();
+      } else if (container.msRequestFullscreen) {
+        container.msRequestFullscreen();
+      }
+      setIsFullscreen(true);
+    } else {
+      // Exit fullscreen
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+      } else if (document.msExitFullscreen) {
+        document.msExitFullscreen();
+      }
+      setIsFullscreen(false);
+    }
+  };
+
+  // Listen for fullscreen changes (e.g., ESC key)
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(!!document.fullscreenElement);
+    };
+
+    document.addEventListener("fullscreenchange", handleFullscreenChange);
+    document.addEventListener("webkitfullscreenchange", handleFullscreenChange);
+    document.addEventListener("msfullscreenchange", handleFullscreenChange);
+
+    return () => {
+      document.removeEventListener("fullscreenchange", handleFullscreenChange);
+      document.removeEventListener("webkitfullscreenchange", handleFullscreenChange);
+      document.removeEventListener("msfullscreenchange", handleFullscreenChange);
+    };
+  }, []);
 
   return (
-    <MapContainer
-  bounds={israelCenterBounds}
-  style={{ height: "70vh", width: "100%" }}
-  scrollWheelZoom={false}
->
+    <div ref={mapContainerRef} className={styles.mapWrapper}>
+      {/* Fullscreen button */}
+      <button 
+        className={styles.fullscreenButton}
+        onClick={toggleFullscreen}
+        title={isFullscreen ? "יציאה ממסך מלא" : "מסך מלא"}
+      >
+        {isFullscreen ? "✕" : "⛶"}
+      </button>
+
+      <MapContainer
+        bounds={israelCenterBounds}
+        style={{ height: "100%", width: "100%" }}
+        scrollWheelZoom={true}
+      >
       <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
       {/* Areas polygons */}
@@ -101,22 +156,42 @@ export default function AreasMap() {
 
   layer.on({
   mouseover: (e) => {
-    e.target.setStyle({
-      fillOpacity: 0.6, // make it darker on hover
-      weight: 3,
-    });
+    // Don't change style if this is the currently selected layer
+    if (lastClickedLayerRef.current !== e.target) {
+      e.target.setStyle({
+        fillOpacity: 0.6, // make it darker on hover
+        weight: 3,
+      });
+    }
   },
     mouseout: (e) => {
-    e.target.setStyle({
-      fillOpacity: 0.35, // back to normal
-      weight: 2,
-    });
+    // Don't change style if this is the currently selected layer
+    if (lastClickedLayerRef.current !== e.target) {
+      e.target.setStyle({
+        fillOpacity: 0.35, // back to normal
+        weight: 2,
+      });
+    }
   },click: (e) => {
+    // Reset previous clicked layer if it exists
+    if (lastClickedLayerRef.current) {
+      lastClickedLayerRef.current.setStyle({
+        fillOpacity: 0.35,
+        weight: 2,
+        color: areaColors[lastClickedLayerRef.current.feature.properties.area],
+      });
+    }
+    
+    // Highlight the clicked layer with nice styling
     e.target.setStyle({
-      fillOpacity: 0.8,       // darker on click
-      weight: 3,
-      color: "#333",          // optional: change border color
+      fillOpacity: 0.75,
+      weight: 5,
+      color: "#FFD700",  // Gold border
+      dashArray: "10, 5",  // Dashed border
     });
+    
+    // Store reference to this layer
+    lastClickedLayerRef.current = e.target;
   },
   });
 }}
@@ -242,5 +317,6 @@ const gardenDotIcon = new L.DivIcon({
         );
       })}
     </MapContainer>
+    </div>
   );
 }
