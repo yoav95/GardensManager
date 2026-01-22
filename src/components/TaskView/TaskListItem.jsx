@@ -54,11 +54,10 @@ export default function TaskListItem({ task, onDelete }) {
             {task.done && <span className={styles.doneMark}>✔</span>}
           </div>
 
-          <p className={styles.taskText}>{task.text}</p>
+          {task.text && <p className={styles.taskText}>{task.text}</p>}
 
           <div className={styles.taskMeta}>
-            {task.date && <span>תאריך: {task.date}</span>}
-            {task.level && <span>רמה: {task.level.toUpperCase()}</span>}
+            {task.date && <span>{task.date}</span>}
           </div>
         </>
       )}

@@ -29,7 +29,6 @@ function TasksView() {
   const [adding, setAdding] = useState(false);
   const [newTitle, setNewTitle] = useState("");
   const [newText, setNewText] = useState("");
-  const [newLevel, setNewLevel] = useState("a");
 
   useEffect(() => {
     if (!user || !selectedWorkspace) {
@@ -88,7 +87,6 @@ function TasksView() {
     await addDoc(collection(db, "tasks"), {
       title: newTitle,
       text: newText,
-      level: newLevel,
       done: false,
       date: new Date().toISOString().split("T")[0],
       userId: user.uid,
@@ -98,7 +96,6 @@ function TasksView() {
     // reset UI only — snapshot will update tasks
     setNewTitle("");
     setNewText("");
-    setNewLevel("a");
     setAdding(false);
   }
 
@@ -180,16 +177,6 @@ async function handleDelete(item) {
         value={newText}
         onChange={e => setNewText(e.target.value)}
       />
-
-      <label>רמה</label>
-      <select
-        value={newLevel}
-        onChange={e => setNewLevel(e.target.value)}
-      >
-        <option value="a">A - נמוכה</option>
-        <option value="b">B - בינונית</option>
-        <option value="c">C - גבוהה</option>
-      </select>
 
       <div className={styles.modalButtons}>
         <button onClick={handleAddTask}>הוסף</button>
