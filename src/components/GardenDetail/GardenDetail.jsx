@@ -292,26 +292,47 @@ async function handleUpdateOutDays() {
 
   return (
     <div className={styles.container} style={{ direction: "rtl" }}>
-      <div className={styles.top}>
-        <h1 className={styles.title}>{garden.name}</h1>
+      {/* Hero Image Section with Title Overlay (Mobile Only) */}
+      <div className={styles.heroSection}>
+        {garden.imageURL ? (
+          <img src={garden.imageURL} alt={garden.name} className={styles.heroImage} />
+        ) : (
+          <div className={styles.heroPlaceholder}>
+            <span>🌿</span>
+          </div>
+        )}
+        <div className={styles.heroOverlay}>
+          <h1 className={styles.heroTitle}>{garden.name}</h1>
+        </div>
         <button
-        className={styles.backButton}
-        onClick={() => navigate("/")}
-      >
-        ← חזור
-      </button>
-
-      
+          className={styles.backButton}
+          onClick={() => navigate("/")}
+        >
+          ← חזור
+        </button>
       </div>
 
-      <div className={styles.section}>
-        <div className={styles.gardenImageWrapper}>
-          {garden.imageURL ? (
-            <img src={garden.imageURL} alt={garden.name} className={styles.gardenImage} />
-          ) : (
-            <div className={styles.gardenImagePlaceholder}>No Image</div>
-          )}
+      <div className={styles.contentWrapper}>
+        {/* Desktop Title */}
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <h1 className={styles.title}>{garden.name}</h1>
+          <button
+            className={styles.backButton}
+            onClick={() => navigate("/")}
+            style={{ position: "static" }}
+          >
+            ← חזור
+          </button>
         </div>
+
+        <div className={styles.section}>
+          <div className={styles.gardenImageWrapper}>
+            {garden.imageURL ? (
+              <img src={garden.imageURL} alt={garden.name} className={styles.gardenImage} />
+            ) : (
+              <div className={styles.gardenImagePlaceholder}>No Image</div>
+            )}
+          </div>
 
         <p>
           <span className={styles.label}>כתובת:</span>
@@ -631,6 +652,7 @@ async function handleUpdateOutDays() {
     🗑️ מחק גינה
   </button>
 </div>
+      </div>
     </div>
   );
 }
