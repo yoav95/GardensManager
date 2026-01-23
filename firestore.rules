@@ -7,12 +7,19 @@ service cloud.firestore {
       allow read, update: if request.auth != null;
     }
 
+    // Workspace join requests - authenticated users can create and read their own
+    match /workspaceJoinRequests/{requestId} {
+      allow create: if request.auth != null && request.resource.data.userId == request.auth.uid;
+      allow read: if request.auth != null;
+      allow update: if request.auth != null;
+      allow delete: if request.auth != null;
+    }
+
     // Workspaces collection - authenticated users can read all workspaces
     match /workspaces/{workspaceId} {
       allow read: if request.auth != null;
-      allow create: if request.auth != null && request.resource.data.owner == request.auth.uid;
-      allow update, delete: if request.auth != null && 
-        resource.data.members[request.auth.uid] != null;
+      allow create: if request.auth != null;
+      allow update, delete: if request.auth != null;
     }
 
     // Gardens - authenticated users can read/write any garden

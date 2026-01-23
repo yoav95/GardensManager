@@ -1,0 +1,362 @@
+.container {
+  position: relative;
+  margin: 0 0.5rem;
+  z-index: 9999;
+}
+
+.toggleButton {
+  padding: 0.5rem 1rem;
+  background: #f0f0f0;
+  color: #333;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.toggleButton:hover {
+  background: #e0e0e0;
+  border-color: #ccc;
+}
+
+.membersPanel {
+  position: fixed;
+  top: 80px;
+  right: 150px;
+  background: white;
+  border: 2px solid #667eea;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-top: 8px;
+  min-width: 400px;
+  max-height: 600px;
+  overflow-y: auto;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  z-index: 999999;
+}
+
+.header {
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid #667eea;
+  padding-bottom: 1rem;
+}
+
+.header h3 {
+  margin: 0 0 0.5rem 0;
+  color: #1f2933;
+  font-size: 1.25rem;
+}
+
+.workspaceName {
+  margin: 0;
+  color: #666;
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+.superAdminBadge {
+  color: #ff6348;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.shareSection {
+  background: #f8f9fa;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+}
+
+.shareLabel {
+  margin: 0 0 0.5rem 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #555;
+}
+
+.idBox {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  background: white;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+}
+
+.workspaceId {
+  flex: 1;
+  font-family: 'Courier New', monospace;
+  font-size: 0.85rem;
+  color: #667eea;
+  word-break: break-all;
+  background: #f5f5f5;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+}
+
+.copyButton {
+  padding: 0.4rem 0.8rem;
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.copyButton:hover {
+  background: #5568d3;
+}
+
+.shareHint {
+  margin: 0.5rem 0 0 0;
+  font-size: 0.8rem;
+  color: #888;
+  font-style: italic;
+}
+
+.membersList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.memberItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border-right: 4px solid #667eea;
+}
+
+.memberInfo {
+  flex: 1;
+}
+
+.memberName {
+  margin: 0 0 0.25rem 0;
+  font-weight: 600;
+  color: #1f2933;
+  font-size: 1rem;
+}
+
+.youBadge {
+  margin-right: 0.5rem;
+  color: #667eea;
+  font-size: 0.85rem;
+  font-weight: normal;
+}
+
+.memberEmail {
+  margin: 0 0 0.25rem 0;
+  color: #666;
+  font-size: 0.85rem;
+}
+
+.memberDate {
+  margin: 0;
+  color: #999;
+  font-size: 0.75rem;
+  font-style: italic;
+}
+
+.memberActions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.roleSelect {
+  padding: 0.4rem 0.6rem;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  background: white;
+  transition: border-color 0.2s ease;
+}
+
+.roleSelect:hover {
+  border-color: #667eea;
+}
+
+.roleSelect:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.roleBadge {
+  padding: 0.4rem 0.8rem;
+  background: #e0e0e0;
+  color: #555;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.removeButton {
+  padding: 0.4rem 0.6rem;
+  background: #ff6348;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.removeButton:hover {
+  background: #e55039;
+  transform: scale(1.05);
+}
+
+.addUserSection {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: #f0f4ff;
+  border-radius: 8px;
+  border: 2px solid #667eea;
+}
+
+.addUserButton {
+  width: 100%;
+  padding: 0.75rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.addUserButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+}
+
+.addUserForm {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.addUserForm h4 {
+  margin: 0 0 0.5rem 0;
+  color: #667eea;
+  font-size: 1rem;
+}
+
+.formField {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.formField label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #555;
+}
+
+.formField input {
+  padding: 0.6rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  transition: border-color 0.2s ease;
+}
+
+.formField input:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.formField input:disabled {
+  background: #f5f5f5;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.formActions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.submitButton {
+  flex: 1;
+  padding: 0.6rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.submitButton:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+}
+
+.submitButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.cancelButton {
+  flex: 1;
+  padding: 0.6rem;
+  background: white;
+  color: #666;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cancelButton:hover:not(:disabled) {
+  border-color: #999;
+  color: #333;
+}
+
+.cancelButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .membersPanel {
+    min-width: 90vw;
+    max-width: 90vw;
+    right: -45vw;
+    left: -45vw;
+    margin-left: 50%;
+  }
+
+  .memberItem {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .memberActions {
+    width: 100%;
+    margin-top: 0.75rem;
+    justify-content: flex-end;
+  }
+}

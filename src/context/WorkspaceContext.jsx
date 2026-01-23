@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { collection, query, onSnapshot } from "firebase/firestore";
 import { db } from "../firebase/config.js";
 import { useAuth } from "../hooks/useAuth.js";
+import { SUPER_ADMIN_EMAILS } from "../config/allowedEmails.js";
 
 const WorkspaceContext = createContext();
 
@@ -10,16 +11,22 @@ export function WorkspaceProvider({ children }) {
   const [workspaces, setWorkspaces] = useState([]);
   const [selectedWorkspace, setSelectedWorkspace] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isSuperAdmin, setIsSuperAdmin] = useState(false);
 
   useEffect(() => {
     if (!user) {
       setWorkspaces([]);
       setSelectedWorkspace(null);
+      setIsSuperAdmin(false);
       setLoading(false);
       return;
     }
 
-    // Query all workspaces and filter client-side for membership
+    // Check if user is super admin
+    const isSuper = SUPER_ADMIN_EMAILS.includes(user.email);
+    setIsSuperAdmin(isSuper);
+
+    // Query all workspaces
     const q = query(collection(db, "workspaces"));
 
     const unsubscribe = onSnapshot(
@@ -30,8 +37,9 @@ export function WorkspaceProvider({ children }) {
             id: doc.id,
             ...doc.data()
           }))
-          // Filter for workspaces where user is a member
+          // Super admins see ALL workspaces, regular users only see their memberships
           .filter(ws => {
+            if (isSuper) return true; // Super admin sees everything
             const members = ws.members || {};
             return members[user.uid] !== undefined;
           });
@@ -67,7 +75,8 @@ export function WorkspaceProvider({ children }) {
         workspaces,
         selectedWorkspace,
         setSelectedWorkspace: handleWorkspaceChange,
-        loading
+        loading,
+        isSuperAdmin
       }}
     >
       {children}

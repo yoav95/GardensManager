@@ -6,23 +6,27 @@ import TasksView from "./components/TaskView/TasksView";
 import AreasMap from "./components/AreaMap/AreasMap";
 import Navigation from "./components/Navigation/Navigation.jsx";
 import TopNavbar from "./components/TopNavbar/TopNavbar.jsx";
+import WorkspaceSelector from "./components/WorkspaceSelector/WorkspaceSelector.jsx";
 import useTopBarCounts from "./hooks/useTopBarCounts.js";
 import ShoppingListView from "./components/ShoppingListView/ShoppingListView.jsx";
 import Login from "./components/Login/Login.jsx";
 import PendingApproval from "./components/PendingApproval/PendingApproval.jsx";
 import LoadingSpinner from "./components/LoadingSpinner/LoadingSpinner.jsx";
 import { useAuth } from "./hooks/useAuth.js";
+import { useWorkspace } from "./context/WorkspaceContext.jsx";
 import { collection, query, getDocs } from "firebase/firestore";
 import { db } from "./firebase/config.js";
 
 function AppContent() {
   const { user } = useAuth();
+  const { isSuperAdmin } = useWorkspace();
   const { gardenCount, totalBadgeCount, shoppingCount } = useTopBarCounts();
   const [view, setView] = useState("gardens");
 
   return (
     <div className={styles.appContainer}>
       <TopNavbar />
+      {isSuperAdmin && <WorkspaceSelector />}
       <Navigation
         view={view}
         setView={setView}
