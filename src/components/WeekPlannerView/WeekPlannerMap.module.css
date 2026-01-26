@@ -1,0 +1,70 @@
+.mapContainer {
+  width: 100%;
+  height: 300px;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.gardenMarker {
+  background: none !important;
+  border: none !important;
+  padding: 0 !important;
+}
+
+.gardenDotWrapper {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gardenDot {
+  width: 16px;
+  height: 16px;
+  background-color: #4caf50;
+  border: 3px solid white;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.gardenDot.selected {
+  width: 24px;
+  height: 24px;
+  background-color: #2196f3;
+  border-width: 4px;
+  box-shadow: 0 0 0 3px #2196f3, 0 2px 8px rgba(33, 150, 243, 0.5);
+}
+
+.gardenDot:hover {
+  background-color: #45a049;
+  width: 20px;
+  height: 20px;
+}
+
+.popup {
+  padding: 0.5rem;
+}
+
+.popupTitle {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  color: #333;
+}
+
+.popupInfo {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.popupAction {
+  font-size: 0.8rem;
+  color: #2196f3;
+  font-weight: 600;
+  margin-top: 0.5rem;
+}

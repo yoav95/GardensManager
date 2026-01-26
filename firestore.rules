@@ -40,5 +40,11 @@ service cloud.firestore {
       allow read: if request.auth != null;
       allow write: if request.auth != null;
     }
+
+    // Weeks - authenticated users can create and read/write their own weeks
+    match /weeks/{weekId} {
+      allow create: if request.auth != null && request.resource.data.userId == request.auth.uid;
+      allow read, update, delete: if request.auth != null && resource.data.userId == request.auth.uid;
+    }
   }
 }

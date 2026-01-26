@@ -1,0 +1,224 @@
+.weekContainer {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 0;
+  background-color: #f9f9f9;
+  margin-bottom: 1rem;
+}
+
+.weekHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background-color: #f0f0f0;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.2s ease;
+}
+
+.weekHeader:hover {
+  background-color: #e8e8e8;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.expandIcon {
+  font-size: 1rem;
+  color: #666;
+  transition: transform 0.2s ease;
+  display: inline-block;
+}
+
+.weekHeaderTitle {
+  margin: 0;
+  color: #333;
+  font-size: 1.1rem;
+}
+
+.gardenCount {
+  background-color: #4caf50;
+  color: white;
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.weekContent {
+  padding: 1.5rem;
+}
+
+.weekTitle {
+  margin: 0 0 1rem 0;
+  color: #333;
+  font-size: 1.25rem;
+  text-align: center;
+}
+
+.selectedGardenInfo {
+  background-color: #e3f2fd;
+  border-left: 4px solid #2196f3;
+  color: #1976d2;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+  font-size: 0.95rem;
+}
+
+.weekTable {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dayHeader {
+  background-color: #4caf50;
+  color: white;
+  padding: 1rem 0.5rem;
+  text-align: center;
+  font-weight: 600;
+  border-right: 1px solid #45a049;
+}
+
+.dayHeader:last-child {
+  border-right: none;
+}
+
+.dayName {
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.dayDate {
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+.dayCell {
+  border-right: 1px solid #ddd;
+  padding: 1.5rem 0.5rem;
+  min-height: 150px;
+  vertical-align: top;
+  background-color: #fafafa;
+}
+
+.dayCell.todayCell {
+  background-color: #e8d5f2;
+}
+
+.dayCell:last-child {
+  border-right: none;
+}
+
+.dayCell:hover {
+  background-color: #f0f0f0;
+}
+
+.dayGardens {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.gardenTag {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #4caf50;
+  color: white;
+  padding: 0.5rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  gap: 0.5rem;
+}
+
+.removeButton {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+}
+
+.removeButton:hover {
+  opacity: 1;
+}
+
+.emptyDayPlaceholder {
+  text-align: center;
+  color: #999;
+  font-size: 0.85rem;
+  padding-top: 2rem;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+  .weekContainer {
+    padding: 1rem;
+  }
+
+  .weekTitle {
+    font-size: 1rem;
+  }
+
+  .dayHeader {
+    padding: 0.75rem 0.25rem;
+  }
+
+  .dayName {
+    font-size: 0.85rem;
+  }
+
+  .dayDate {
+    font-size: 0.75rem;
+  }
+
+  .dayCell {
+    min-height: 100px;
+    padding: 0.75rem 0.25rem;
+  }
+}
+
+.saveButton {
+  display: block;
+  margin: 1.5rem auto 0;
+  padding: 0.75rem 2rem;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.saveButton:hover:not(:disabled) {
+  background-color: #45a049;
+}
+
+.saveButton:active:not(:disabled) {
+  background-color: #3d8b40;
+}
+
+.saveButton:disabled {
+  background-color: #999;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
