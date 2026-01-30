@@ -9,7 +9,6 @@ import TopNavbar from "./components/TopNavbar/TopNavbar.jsx";
 import WorkspaceSelector from "./components/WorkspaceSelector/WorkspaceSelector.jsx";
 import useTopBarCounts from "./hooks/useTopBarCounts.js";
 import ShoppingListView from "./components/ShoppingListView/ShoppingListView.jsx";
-import WeekPlannerView from "./components/WeekPlannerView/WeekPlannerView.jsx";
 import Login from "./components/Login/Login.jsx";
 import PendingApproval from "./components/PendingApproval/PendingApproval.jsx";
 import LoadingSpinner from "./components/LoadingSpinner/LoadingSpinner.jsx";
@@ -41,7 +40,6 @@ function AppContent() {
       {view === "tasks" && <TasksView />}
       {view === "map" && <AreasMap />}
       {view === "shopping" && <ShoppingListView />}
-      {view === "weekPlanner" && <WeekPlannerView />} 
     </div>
   );
 }

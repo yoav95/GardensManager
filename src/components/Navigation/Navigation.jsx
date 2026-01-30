@@ -43,12 +43,6 @@ function Navigation({ view, setView, gardenCount, totalBadgeCount, shoppingCount
         badge={shoppingCount}
         badgeVariant="info"
       />
-
-      <TopButton
-        label="תכנון שבועי"
-        active={view === "weekPlanner"}
-        onClick={() => setView("weekPlanner")}
-      />
     </div>
   );
 }
