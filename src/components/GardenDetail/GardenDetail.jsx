@@ -397,40 +397,53 @@ async function handleUpdateOutDays() {
         </div>
 
         <div className={styles.section}>
-          <div 
-            className={styles.gardenImageWrapper}
-            onClick={() => fileInputRef.current?.click()}
-            style={{ cursor: "pointer", position: "relative" }}
-            title="לחץ להעלאת תמונה"
-          >
-            {garden.imageURL ? (
-              <img src={garden.imageURL} alt={garden.name} className={styles.gardenImage} />
-            ) : (
-              <div className={styles.gardenImagePlaceholder}>No Image</div>
-            )}
-            {uploadingImage && (
-              <div style={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                backgroundColor: "rgba(0, 0, 0, 0.5)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                borderRadius: "8px",
-              }}>
-                <span style={{ color: "white", fontSize: "16px" }}>מעלה...</span>
-              </div>
-            )}
+          <div style={{ position: "relative", display: "inline-block", width: "100%" }}>
+            <div 
+              className={styles.gardenImageWrapper}
+            >
+              {garden.imageURL ? (
+                <img src={garden.imageURL} alt={garden.name} className={styles.gardenImage} />
+              ) : (
+                <div className={styles.gardenImagePlaceholder}>No Image</div>
+              )}
+              {uploadingImage && (
+                <div style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  backgroundColor: "rgba(0, 0, 0, 0.5)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  borderRadius: "8px",
+                }}>
+                  <span style={{ color: "white", fontSize: "16px" }}>מעלה...</span>
+                </div>
+              )}
+            </div>
+            <button
+              className={styles.uploadImageButton}
+              onClick={() => {
+                const input = fileInputRef.current;
+                if (input) input.click();
+              }}
+              title="העלה תמונה"
+              disabled={uploadingImage}
+            >
+              +
+            </button>
           </div>
+
           <input
             ref={fileInputRef}
             type="file"
             accept="image/*"
+            capture
             onChange={handleImageUpload}
             style={{ display: "none" }}
+            aria-label="Upload image"
           />
 
         <div className={styles.sectionRow}>
@@ -727,37 +740,36 @@ async function handleUpdateOutDays() {
         {garden.visitLogs && garden.visitLogs.length > 0 ? (
           garden.visitLogs.map((visit, idx) => (
             <div key={idx} className={styles.logItem}>
-    <div className={styles.logHeader} 
-         onClick={() => setExpandedVisit(expandedVisit === idx ? null : idx)}
-         style={{ display: "flex", justifyContent: "space-between", cursor: "pointer", alignItems: "center" }}>
-      <div className={styles.logDate}>📅 {formatDate(visit.date)}</div>
-      {/* <button
-        className={styles.deleteButtonSmall}
-        onClick={(e) => { e.stopPropagation(); handleDeleteVisit(idx); }}
-      >
-        ✕
-      </button> */}
-    </div>
+              <div className={styles.logHeader} 
+                   onClick={() => setExpandedVisit(expandedVisit === idx ? null : idx)}>
+                <span>{expandedVisit === idx ? "▼" : "▶"} {formatDate(visit.date)}</span>
+                <span style={{ fontSize: "12px", color: "#666" }}>
+                  {visit.tasks.length} משימות
+                </span>
+              </div>
 
-    {expandedVisit === idx && (
-  <div className={styles.logContent}>
-    <div className={styles.section}>
-      <div className={styles.logTasksTitle}>משימות שבוצעו</div>
-      <ul className={styles.taskList}>
-        {visit.tasks.map((task, tIdx) => <li key={tIdx}>{task}</li>)}
-      </ul>
-    </div>
+              {expandedVisit === idx && (
+                <div className={styles.logContent}>
+                  <div className={styles.section}>
+                    <div className={styles.logTasksTitle}>✓ משימות שבוצעו</div>
+                    <ul className={styles.taskList}>
+                      {visit.tasks.map((task, tIdx) => <li key={tIdx}>{task}</li>)}
+                    </ul>
+                  </div>
 
-    <div className={styles.section}>
-      <div className={styles.logTasksTitle}>משימות לביקור הבא</div>
-      <ul className={styles.taskList}>
-        {visit.nextVisitTasks.map((task, nIdx) => <li key={nIdx}>{task}</li>)}
-      </ul>
-    </div>
-  </div>
-)}
-  </div>
-
+                  <div className={styles.section}>
+                    <div className={styles.logTasksTitle}>→ משימות לביקור הבא</div>
+                    <ul className={styles.taskList}>
+                      {visit.nextVisitTasks && visit.nextVisitTasks.length > 0 ? (
+                        visit.nextVisitTasks.map((task, nIdx) => <li key={nIdx}>{task}</li>)
+                      ) : (
+                        <li style={{ color: "#999" }}>אין משימות</li>
+                      )}
+                    </ul>
+                  </div>
+                </div>
+              )}
+            </div>
           ))
         ) : (
           <p className={styles.noLogs}>אין יומני ביקור עדיין.</p>
