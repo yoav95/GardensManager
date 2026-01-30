@@ -1,0 +1,1512 @@
+{
+  "gardens": [
+    {
+      "id": "29BTkqlrQbWVreicq67i",
+      "name": "הכובשים",
+      "address": "הכובשים 40, תל אביב",
+      "day": "sunday",
+      "outDays": "לכדכן",
+      "locationURL": "https://waze.com/ul?q=%D7%94%D7%9B%D7%95%D7%91%D7%A9%D7%99%D7%9D%2040%2C%20%D7%AA%D7%9C%20%D7%90%D7%91%D7%99%D7%91",
+      "lat": 32.0693987,
+      "lng": 34.7659046,
+      "notes": [],
+      "lastVisit": "2026-01-06",
+      "visitLogs": [
+        {
+          "date": "2026-01-06",
+          "tasks": [
+            "גיזום",
+            "ניקיון"
+          ],
+          "nextVisitTasks": [],
+          "createdAt": {
+            "_seconds": 1767700199,
+            "_nanoseconds": 192000000
+          }
+        }
+      ],
+      "imageURL": "\\gardens-images\\g1.jpg",
+      "requiresAttention": []
+    },
+    {
+      "id": "5TXX6OK1wXk9ZdzbWMLU",
+      "name": "דונש",
+      "address": "דונש 7, רמת גן",
+      "day": "wednesday",
+      "outDays": "לעדכן",
+      "locationURL": "https://waze.com/ul?q=%D7%93%D7%95%D7%A0%D7%A9%207%2C%20%D7%A8%D7%9E%D7%AA%20%D7%92%D7%9F",
+      "imageURL": "\\gardens-images\\g3.jpg",
+      "notes": [],
+      "lat": "32.068001167635515",
+      "lng": "34.832163545402565",
+      "requiresAttention": [],
+      "lastVisit": "2026-01-28",
+      "visitLogs": [
+        {
+          "date": "2026-01-14",
+          "tasks": [
+            "חרמש מדשאות",
+            "ניקיון ארוגות",
+            "עקירת עץ"
+          ],
+          "nextVisitTasks": [],
+          "createdAt": {
+            "_seconds": 1768387997,
+            "_nanoseconds": 809000000
+          }
+        },
+        {
+          "date": "2026-01-28",
+          "tasks": [
+            "ניקיון "
+          ],
+          "nextVisitTasks": [],
+          "createdAt": {
+            "_seconds": 1769594369,
+            "_nanoseconds": 90000000
+          }
+        }
+      ]
+    },
+    {
+      "id": "78CKS2mLVMBF4lnvR3sP",
+      "name": "פאגלין 7",
+      "address": "פאגלין 7, תל אביב",
+      "locationURL": "%D7%A2%D7%9E%D7%99%D7%97%D7%99%20%D7%A4%D7%90%D7%92%D7%9C%D7%99%D7%9F%209%2C%20%D7%AA%D7%9C%20%D7%90%D7%91%D7%99%D7%91",
+      "imageURL": "\\gardens-images\\IMG20251124115316.jpg",
+      "notes": [
+        "קוד לובי: #4597",
+        "מחסום: 0508503932"
+      ],
+      "lat": "32.12541812392335",
+      "lng": "34.79379937423596",
+      "day": "monday",
+      "outDays": "ב,ד ",
+      "lastVisit": "2026-01-28",
+      "visitLogs": [
+        {
+          "nextVisitTasks": [
+            "."
+          ],
+          "tasks": [
+            " קנייה לובי",
+            "מילוי דישון",
+            "ניקיון ארוגות"
+          ],
+          "date": "2025-11-26"
+        },
+        {
+          "date": "2025-12-08",
+          "tasks": [
+            "השקייה לובי",
+            "חרמש בוסתן"
+          ],
+          "nextVisitTasks": []
+        },
+        {
+          "date": "2025-12-31",
+          "tasks": [
+            "ביקורת"
+          ],
+          "nextVisitTasks": [],
+          "createdAt": {
+            "_seconds": 1767167068,
+            "_nanoseconds": 61000000
+          }
+        },
+        {
+          "date": "2026-01-06",
+          "tasks": [
+            "השקייה לובי",
+            "ניקיון חניון",
+            "ריסוס"
+          ],
+          "nextVisitTasks": [],
+          "createdAt": {
+            "_seconds": 1767685035,
+            "_nanoseconds": 539000000
+          }
+        },
+        {
+          "date": "2026-01-14",
+          "tasks": [
+            "ניקיון חזית",
+            "ניקיון חניון",
+            "לובי"
+          ],
+          "nextVisitTasks": [],
+          "createdAt": {
+            "_seconds": 1768404510,
+            "_nanoseconds": 532000000
+          }
+        },
+        {
+          "date": "2026-01-21",
+          "tasks": [
+            "חרמש בוסתן",
+            "לובי"
+          ],
+          "nextVisitTasks": [],
+          "createdAt": {
+            "_seconds": 1769010358,
+            "_nanoseconds": 832000000
+          }
+        },
+        {
+          "date": "2026-01-28",
+          "tasks": [
+            "לובי",
+            "ניקיון מעבר",
+            "ניקיון גינה מאחורה"
+          ],
+          "nextVisitTasks": [],
+          "createdAt": {
+            "_seconds": 1769614673,
+            "_nanoseconds": 533000000
+          }
+        }
+      ]
+    },
+    {
+      "id": "8nvdOwooK17Rp2hutOUi",
+      "name": "הרא\"ה 93",
+      "address": "הרא\"ה 93, רמת גן",
+      "outDays": "ב",
+      "notes": [],
+      "imageURL": "\\gardens-images\\IMG20251124115308.jpg",
+      "day": "monday",
+      "locationURL": "%D7%94%D7%A8%D7%90%22%D7%94%2093%2C%20%D7%A8%D7%9E%D7%AA%20%D7%92%D7%9F",
+      "lat": "32.08208758242263",
+      "lng": "34.825676031907435",
+      "lastVisit": "2026-01-19",
+      "visitLogs": [
+        {
+          "tasks": [
+            "גיזום",
+            "ניקיון כללי",
+            "תיקון פיצוץ השקייה",
+            "הוצאת יבשים",
+            "ריסוס"
+          ],
+          "date": "2025-11-24",
+          "nextVisitTasks": []
+        },
+        {
+          "date": "2025-12-08",
+          "tasks": [
+            "ניקיון כללי",
+            "השקייה"
+          ],
+          "nextVisitTasks": []
+        },
+        {
+          "date": "2026-01-19",
+          "tasks": [
+            "גיזום ",
+            "ניקיון ",
+            "עישוב"
+          ],
+          "nextVisitTasks": [
+            "ריסוס "
+          ],
+          "createdAt": {
+            "_seconds": 1768824947,
+            "_nanoseconds": 589000000
+          }
+        }
+      ]
+    },
+    {
+      "id": "HZQQlYE0E60zWNcMTYnE",
+      "name": "הורקנוס 17",
+      "address": "יוחנן הורקנוס 17, תל אביב",
+      "locationURL": "https://waze.com/ul?q=%D7%99%D7%95%D7%97%D7%A0%D7%9F%20%D7%94%D7%95%D7%A8%D7%A7%D7%A0%D7%95%D7%A1%2017%2C%20%D7%AA%D7%9C%20%D7%90%D7%91%D7%99%D7%91",
+      "lat": 32.0940873,
+      "lng": 34.7810982,
+      "notes": [],
+      "outDays": "א, ג",
+      "lastVisit": "2026-01-06",
+      "visitLogs": [
+        {
+          "date": "2026-01-06",
+          "tasks": [
+            "ניקיון",
+            "גיזום"
+          ],
+          "nextVisitTasks": [],
+          "createdAt": {
+            "_seconds": 1767694395,
+            "_nanoseconds": 595000000
+          }
+        }
+      ],
+      "day": "tuesday",
+      "imageURL": "\\gardens-images\\WhatsApp Image 2026-01-09 at 11.44.135.jpeg",
+      "requiresAttention": []
+    },
+    {
+      "id": "ILRznuKTbApkSPz83S7Z",
+      "name": "גמלא",
+      "address": "יהושע בן גמלא 41, הוד השרון",
+      "day": "monday",
+      "outDays": "ב",
+      "locationURL": "https://waze.com/ul?q=%D7%99%D7%94%D7%95%D7%A9%D7%A2%20%D7%91%D7%9F%20%D7%92%D7%9E%D7%9C%D7%90%2041%2C%20%D7%94%D7%95%D7%93%20%D7%94%D7%A9%D7%A8%D7%95%D7%9F",
+      "imageURL": "\\gardens-images\\IMG20251208111556.jpg",
+      "lat": "32.16144342436425",
+      "lng": "34.89584243190507",
+      "lastVisit": "2026-01-19",
+      "visitLogs": [
+        {
+          "nextVisitTasks": [],
+          "tasks": [
+            "מדשאות",
+            "ניקיון ארוגה אחורית ליד המדרגות",
+            "השקייה לובי"
+          ],
+          "date": "2025-12-08"
+        },
+        {
+          "date": "2025-12-22",
+          "tasks": [
+            "גיזום דילול חזית",
+            "לובי"
+          ],
+          "nextVisitTasks": [],
+          "createdAt": {
+            "_seconds": 1766407253,
+            "_nanoseconds": 558000000
+          }
+        },
+        {
+          "date": "2026-01-19",
+          "tasks": [
+            "חרמש מדשאות",
+            "לובי"
+          ],
+          "nextVisitTasks": [],
+          "createdAt": {
+            "_seconds": 1768833088,
+            "_nanoseconds": 664000000
+          }
+        }
+      ],
+      "requiresAttention": [
+        {
+          "resolved": true,
+          "text": "עץ נשבר בארוגה",
+          "gardenName": "גמלא",
+          "id": "1b30a3c7-bbd5-4153-896b-9250558e2d0b",
+          "gardenId": "ILRznuKTbApkSPz83S7Z",
+          "createdAt": {
+            "_seconds": 1769268340,
+            "_nanoseconds": 833000000
+          }
+        }
+      ],
+      "notes": [
+        "וללא קשר הקוד החדש לכניסה לבניין 2584 קוד חדש לחדר דיירים 9191#"
+      ]
+    },
+    {
+      "id": "JPJkHFBn3MEWWhxY78eL",
+      "name": "משורר 23",
+      "address": "ישעיהו המשורר 23, פתח תקווה",
+      "day": "tuesday",
+      "outDays": "ג",
+      "locationURL": "https://waze.com/ul?q=%D7%99%D7%A9%D7%A2%D7%99%D7%94%D7%95%20%D7%94%D7%9E%D7%A9%D7%95%D7%A8%D7%A8%2023%2C%20%D7%A4%D7%AA%D7%97%20%D7%AA%D7%A7%D7%95%D7%95%D7%94",
+      "notes": [],
+      "lastVisit": "2025-12-02",
+      "visitLogs": [
+        {
+          "date": "2025-12-02",
+          "tasks": [
+            "2 מדשאות",
+            "ניקיון "
+          ],
+          "nextVisitTasks": [
+            "."
+          ]
+        }
+      ],
+      "lng": "34.90619509085249",
+      "lat": "32.06895028362422",
+      "imageURL": "\\gardens-images\\WhatsApp Image 2025-12-08 at 06.22.26_1cc6e417.jpg"
+    },
+    {
+      "id": "KutrhbAh2vnyZRVfxBJK",
+      "name": "כנפי נשרים",
+      "address": "כנפי נשרים 25, רמת גן",
+      "day": "wednesday",
+      "notes": [],
+      "outDays": "אין הוצאה לבדוק ולעדכן",
+      "imageURL": "\\gardens-images\\g1.jpg",
+      "lng": "34.820751116567294",
+      "lat": "32.07076759649906",
+      "lastVisit": "2026-01-12",
+      "visitLogs": [
+        {
+          "date": "2025-12-03",
+          "tasks": [
+            "גיזום",
+            "ניקיון ארוגה",
+            "השקייה"
+          ],
+          "nextVisitTasks": []
+        },
+        {
+          "date": "2026-01-11",
+          "tasks": [
+            "גיזום",
+            " נקיון"
+          ],
+          "nextVisitTasks": [],
+          "createdAt": {
+            "_seconds": 1768128396,
+            "_nanoseconds": 14000000
+          }
+        },
+        {
+          "date": "2026-01-12",
+          "tasks": [
+            "גיזום",
+            "ניקיון"
+          ],
+          "nextVisitTasks": [],
+          "createdAt": {
+            "_seconds": 1768294781,
+            "_nanoseconds": 825000000
+          }
+        }
+      ],
+      "locationURL": "https://waze.com/ul?q=כנפי%20נשרים%2025%2C%20רמת%20גן\n"
+    },
+    {
+      "id": "MCFjHVOCbX3orRaIoxIb",
+      "name": "קפלן",
+      "address": "קפלן 47, פתח תקווה",
+      "day": "sunday",
+      "outDays": "א",
+      "locationURL": "https://waze.com/ul?q=%D7%A7%D7%A4%D7%9C%D7%9F%2047%2C%20%D7%A4%D7%AA%D7%97%20%D7%AA%D7%A7%D7%95%D7%95%D7%94",
+      "notes": [],
+      "imageURL": "\\gardens-images\\WhatsApp Image 2025-12-08 at 06.22.26_1cc6e417.jpg",
+      "lng": "34.86809283190745",
+      "lat": "32.08280600991523",
+      "lastVisit": "2026-01-25",
+      "visitLogs": [
+        {
+          "date": "2026-01-25",
+          "tasks": [
+            "גיזום",
+            "עישוב",
+            "ניקיון"
+          ],
+          "nextVisitTasks": [],
+          "createdAt": {
+            "_seconds": 1769338049,
+            "_nanoseconds": 777000000
+          }
+        }
+      ]
+    },
+    {
+      "id": "Mm62OkWoaKvBl5tw3ZMD",
+      "name": "תע\"ש",
+      "address": "תע\"ש, הוד השרון",
+      "day": "tuesday",
+      "outDays": "אין",
+      "locationURL": "https://waze.com/ul?q=%D7%AA%D7%A2%22%D7%A9%2C%20%D7%94%D7%95%D7%93%20%D7%94%D7%A9%D7%A8%D7%95%D7%9F",
+      "lat": 32.131528,
+      "lng": 34.871168,
+      "notes": [
+        "7172* קוד שער פנימי"
+      ],
+      "lastVisit": "2026-01-07",
+      "visitLogs": [
+        {
+          "date": "2026-01-07",
+          "tasks": [
+            "ריסוס",
+            "שתילה ",
+            "ניקיון",
+            "השקייה"
+          ],
+          "nextVisitTasks": [],
+          "createdAt": {
+            "_seconds": 1767791845,
+            "_nanoseconds": 747000000
+          }
+        }
+      ],
+      "imageURL": "\\gardens-images\\WhatsApp Image 2026-01-09 at 11.44.08.jpeg"
+    },
+    {
+      "id": "NM8CXW0tKjBx5FFPbqQx",
+      "name": "קטוביץ",
+      "address": "קטוביץ 50, תל אביב",
+      "day": "monday",
+      "outDays": "ב",
+      "location": {
+        "lat": 213,
+        "lng": 123
+      },
+      "notes": [],
+      "locationURL": "%D7%A7%D7%98%D7%95%D7%91%D7%99%D7%A5%2050%2C%20%D7%AA%D7%9C%20%D7%90%D7%91%D7%99%D7%91",
+      "lat": "32.095990372302126",
+      "lng": "34.79228297237533",
+      "lastVisit": "2025-12-31",
+      "visitLogs": [
+        {
+          "date": "2025-11-24",
+          "tasks": [
+            "גיזום",
+            "ניקיון כללי"
+          ],
+          "nextVisitTasks": []
+        },
+        {
+          "date": "2025-12-31",
+          "tasks": [
+            "גיזום",
+            "ניקיון כללי ",
+            "ריסוס",
+            "גיזום יבשים חזית"
+          ],
+          "nextVisitTasks": [],
+          "createdAt": {
+            "_seconds": 1767173578,
+            "_nanoseconds": 513000000
+          }
+        }
+      ],
+      "imageURL": "\\gardens-images\\asdad3333as.jpeg"
+    },
+    {
+      "id": "RGL2Gum23AhW2BbTSqBv",
+      "name": "הרב לוין 5",
+      "address": "הרב לוין 5, רמת גן",
+      "day": "tuesday",
+      "outDays": "לעדכן",
+      "location": {
+        "lat": 234234,
+        "lng": 234324
+      },
+      "notes": [],
+      "locationURL": "%D7%94%D7%A8%D7%91%20%D7%9C%D7%95%D7%99%D7%9F%205%2C%20%D7%A8%D7%9E%D7%AA%20%D7%92%D7%9F",
+      "imageURL": "\\gardens-images\\IMG20251124115316.jpg",
+      "lat": "32.07081260485145",
+      "lng": "34.833466045402545",
+      "lastVisit": "2026-01-19",
+      "visitLogs": [
+        {
+          "date": "2025-12-08",
+          "tasks": [
+            "ניקיון כללי"
+          ],
+          "nextVisitTasks": []
+        },
+        {
+          "date": "2026-01-19",
+          "tasks": [
+            "עישוב",
+            "הוצאת יבשים",
+            "השקייה -> פעם ביום 8 דקות"
+          ],
+          "nextVisitTasks": [],
+          "createdAt": {
+            "_seconds": 1768811604,
+            "_nanoseconds": 917000000
+          }
+        }
+      ]
+    },
+    {
+      "id": "RkLgQegmvR91EDtOF3ru",
+      "name": "משורר 25",
+      "address": "ישעיהו המשורר 25, פתח תקווה",
+      "day": "tuesday",
+      "outDays": "ג",
+      "locationURL": "https://waze.com/ul?q=%D7%99%D7%A9%D7%A2%D7%99%D7%94%D7%95%20%D7%94%D7%9E%D7%A9%D7%95%D7%A8%D7%A8%2025%2C%20%D7%A4%D7%AA%D7%97%20%D7%AA%D7%A7%D7%95%D7%95%D7%94",
+      "notes": [],
+      "lastVisit": "2025-12-02",
+      "visitLogs": [
+        {
+          "date": "2025-12-03",
+          "tasks": [
+            "מדשאה"
+          ],
+          "nextVisitTasks": [
+            "."
+          ]
+        },
+        {
+          "date": "2025-12-02",
+          "tasks": [
+            "גיזום ידני",
+            "מדשאות",
+            "ועוד"
+          ],
+          "nextVisitTasks": [
+            "."
+          ]
+        }
+      ],
+      "lat": "32.06889910851621",
+      "lng": "34.90616909269825",
+      "imageURL": "\\gardens-images\\WhatsApp Image 2025-12-08 at 06.22.26_7b45c085.jpg"
+    },
+    {
+      "id": "RxskLKM2qmiJTk69i0b5",
+      "name": "בית אל",
+      "address": "בית אל 13, רמת גן",
+      "day": "monday",
+      "outDays": "ב",
+      "imageURL": "",
+      "locationURL": "https://waze.com/ul?q=%D7%91%D7%99%D7%AA%20%D7%90%D7%9C%2013%2C%20%D7%A8%D7%9E%D7%AA%20%D7%92%D7%9F",
+      "lat": 32.0820041,
+      "lng": 34.8088254,
+      "notes": [],
+      "lastVisit": "2026-01-19",
+      "visitLogs": [
+        {
+          "date": "2026-01-19",
+          "tasks": [
+            "גיזום",
+            "ניקיון"
+          ],
+          "nextVisitTasks": [
+            "סולם לגיזום עץ"
+          ],
+          "createdAt": {
+            "_seconds": 1768825087,
+            "_nanoseconds": 183000000
+          }
+        }
+      ]
+    },
+    {
+      "id": "SX4jQVeJirjLl3xiKLxT",
+      "name": "דן שומרון",
+      "address": "דן שומרון, פתח תקווה",
+      "locationURL": "https://waze.com/ul?q=%D7%93%D7%9F%20%D7%A9%D7%95%D7%9E%D7%A8%D7%95%D7%9F%2C%20%D7%A4%D7%AA%D7%97%20%D7%AA%D7%A7%D7%95%D7%95%D7%94",
+      "day": "sunday",
+      "outDays": "א",
+      "imageURL": "\\gardens-images\\WhatsApp Image 2025-12-08 at 06.22.25_5acfb505.jpg",
+      "lat": "32.05420094524905",
+      "lng": "34.846174564428445",
+      "requiresAttention": [],
+      "notes": [],
+      "lastVisit": "2026-01-25",
+      "visitLogs": [
+        {
+          "nextVisitTasks": [],
+          "tasks": [
+            "ניקיון",
+            "עישוב",
+            "גיזום קל"
+          ],
+          "date": "2025-12-07"
+        },
+        {
+          "date": "2026-01-25",
+          "tasks": [
+            "עישוב",
+            "ניקיון",
+            "חרמש חניון",
+            "גיזום קל"
+          ],
+          "nextVisitTasks": [],
+          "createdAt": {
+            "_seconds": 1769322362,
+            "_nanoseconds": 792000000
+          }
+        }
+      ]
+    },
+    {
+      "id": "UGDSdMFkcilUoazSrtiT",
+      "name": "אורלוב 31",
+      "address": "אורלוב 31, פתח תקווה",
+      "day": "monday",
+      "outDays": "ב",
+      "locationURL": "https://waze.com/ul?q=%D7%90%D7%95%D7%A8%D7%9C%D7%95%D7%91%2031%2C%20%D7%A4%D7%AA%D7%97%20%D7%AA%D7%A7%D7%95%D7%95%D7%94",
+      "notes": [],
+      "lat": "32.09392425886887",
+      "lng": "34.88157645889636",
+      "imageURL": "\\gardens-images\\WhatsApp Image 2025-12-08 at 06.22.26_7b45c085.jpg",
+      "requiresAttention": [],
+      "lastVisit": "2026-01-26",
+      "visitLogs": [
+        {
+          "date": "2025-12-01",
+          "tasks": [
+            "מדשאה",
+            "עישוב"
+          ],
+          "nextVisitTasks": [
+            "להוציא יבשים מהחזית פילדנדרום"
+          ]
+        },
+        {
+          "date": "2025-12-22",
+          "tasks": [
+            "ניקיון גינה צמודה לבניין",
+            "ניקיון מסביב לבניין"
+          ],
+          "nextVisitTasks": []
+        },
+        {
+          "date": "2026-01-13",
+          "tasks": [
+            "ניקיון",
+            "חרמש מדשאה"
+          ],
+          "nextVisitTasks": [],
+          "createdAt": {
+            "_seconds": 1768294984,
+            "_nanoseconds": 321000000
+          }
+        },
+        {
+          "date": "2026-01-26",
+          "tasks": [
+            "ריסוס",
+            "נקיון קל",
+            "עישוב"
+          ],
+          "nextVisitTasks": [],
+          "createdAt": {
+            "_seconds": 1769421527,
+            "_nanoseconds": 919000000
+          }
+        }
+      ]
+    },
+    {
+      "id": "UQs8ctL87hIkk0O12UAD",
+      "name": "צירלסון 5",
+      "address": "צירלסון 5, תל אביב",
+      "day": "monday",
+      "outDays": "ב,ד",
+      "imageURL": "",
+      "locationURL": "https://waze.com/ul?q=%D7%A6%D7%99%D7%A8%D7%9C%D7%A1%D7%95%D7%9F%205%2C%20%D7%AA%D7%9C%20%D7%90%D7%91%D7%99%D7%91",
+      "lat": 32.0908304,
+      "lng": 34.8407165,
+      "notes": [],
+      "lastVisit": "2026-01-21",
+      "visitLogs": [
+        {
+          "date": "2026-01-21",
+          "tasks": [
+            "ניקיון ",
+            "גיזום"
+          ],
+          "nextVisitTasks": [],
+          "createdAt": {
+            "_seconds": 1769010468,
+            "_nanoseconds": 793000000
+          }
+        }
+      ]
+    },
+    {
+      "id": "V73kvjsBjSHsaqQ3CPbE",
+      "name": "נווה יהושוע",
+      "address": "נווה יהושע 31, רמת גן",
+      "day": "tuesday",
+      "outDays": "ג",
+      "locationURL": "https://waze.com/ul?q=%D7%A0%D7%95%D7%95%D7%94%20%D7%99%D7%94%D7%95%D7%A9%D7%A2%2031%2C%20%D7%A8%D7%9E%D7%AA%20%D7%92%D7%9F",
+      "lat": 32.0602597,
+      "lng": 34.8322006,
+      "notes": [],
+      "imageURL": "\\gardens-images\\WhatsApp Image 2025-12-08 at 06.22.26_7b45c085.jpg",
+      "lastVisit": "2026-01-14",
+      "visitLogs": [
+        {
+          "date": "2026-01-14",
+          "tasks": [
+            "גיזום",
+            "ניקיון"
+          ],
+          "nextVisitTasks": [],
+          "createdAt": {
+            "_seconds": 1768397867,
+            "_nanoseconds": 460000000
+          }
+        }
+      ]
+    },
+    {
+      "id": "Vw8YbdRDfH7ahdVjUA9u",
+      "name": "צירלסון 25",
+      "address": "צירלסון 25, תל אביב-יפו",
+      "day": "monday",
+      "outDays": "ב,ד",
+      "locationURL": "https://waze.com/ul?q=%D7%A6%D7%99%D7%A8%D7%9C%D7%A1%D7%95%D7%9F%2025%2C%20%D7%AA%D7%9C%20%D7%90%D7%91%D7%99%D7%91-%D7%99%D7%A4%D7%95",
+      "lat": 32.095076,
+      "lng": 34.793203,
+      "notes": [],
+      "imageURL": "\\gardens-images\\wqdeqwdad.jpeg",
+      "requiresAttention": [
+        {
+          "id": "3f42b9d2-e62b-4312-859e-08ad35f68b03",
+          "gardenId": "Vw8YbdRDfH7ahdVjUA9u",
+          "gardenName": "צירלסון 25",
+          "text": "חסר מגוף וחיבור למערכת ההשקיה",
+          "createdAt": {
+            "_seconds": 1768202707,
+            "_nanoseconds": 846000000
+          },
+          "resolved": false
+        }
+      ],
+      "lastVisit": "2026-01-21",
+      "visitLogs": [
+        {
+          "date": "2026-01-21",
+          "tasks": [
+            "ניקיון",
+            "חרמש ",
+            "גיזום "
+          ],
+          "nextVisitTasks": [],
+          "createdAt": {
+            "_seconds": 1769010388,
+            "_nanoseconds": 702000000
+          }
+        }
+      ]
+    },
+    {
+      "id": "Xi4xw3hun3zx3Vffz3v1",
+      "name": "גרשום",
+      "address": "גרשום 6, רמת גן",
+      "day": "wednesday",
+      "outDays": "לעדכן",
+      "location": {
+        "lat": 2342,
+        "lng": 23423
+      },
+      "locationURL": "%D7%92%D7%A8%D7%A9%D7%95%D7%9D%206%2C%20%D7%A8%D7%9E%D7%AA%20%D7%92%D7%9F",
+      "imageURL": "\\gardens-images\\IMG20251124115316.jpg",
+      "notes": [],
+      "lat": "32.069208065785716",
+      "lng": "34.82934841784184",
+      "lastVisit": "2026-01-28",
+      "visitLogs": [
+        {
+          "date": "2025-11-26",
+          "tasks": [
+            "ניקיון"
+          ],
+          "nextVisitTasks": []
+        },
+        {
+          "date": "2026-01-28",
+          "tasks": [
+            "ניקיון"
+          ],
+          "nextVisitTasks": [],
+          "createdAt": {
+            "_seconds": 1769594388,
+            "_nanoseconds": 586000000
+          }
+        }
+      ]
+    },
+    {
+      "id": "YIFtXzDl6262PJ6R9qrx",
+      "name": "הפלמח 21",
+      "address": "הפלמ\"ח 21, תל אביב",
+      "day": "monday",
+      "outDays": "לעדכן",
+      "locationURL": "https://waze.com/ul?q=%D7%94%D7%A4%D7%9C%D7%9E%22%D7%97%2021%2C%20%D7%AA%D7%9C%20%D7%90%D7%91%D7%99%D7%91",
+      "lat": 32.06323,
+      "lng": 34.79535,
+      "notes": [],
+      "lastVisit": "2026-01-07",
+      "visitLogs": [
+        {
+          "date": "2026-01-07",
+          "tasks": [
+            "עישוב ידני",
+            "גיזום",
+            "ריסוס עשב מוניטור",
+            "ניקיון"
+          ],
+          "nextVisitTasks": [],
+          "createdAt": {
+            "_seconds": 1767783602,
+            "_nanoseconds": 907000000
+          }
+        }
+      ],
+      "imageURL": "\\gardens-images\\WhatsApp Image 2025-12-08 at 06.22.26_7b45c085.jpg"
+    },
+    {
+      "id": "bCDN51YnjsRmm4mxrqSx",
+      "name": "גלגל",
+      "address": "גלגל 1, רמת גן",
+      "day": "wednesday",
+      "outDays": "לעדכן",
+      "locationURL": "https://waze.com/ul?q=%D7%92%D7%9C%D7%92%D7%9C%201%2C%20%D7%A8%D7%9E%D7%AA%20%D7%92%D7%9F",
+      "notes": [],
+      "lastVisit": "2025-12-03",
+      "visitLogs": [
+        {
+          "date": "2025-12-03",
+          "tasks": [
+            "ניקיון כללי",
+            "השקייה"
+          ],
+          "nextVisitTasks": []
+        }
+      ],
+      "lat": "32.08350467643493",
+      "lng": "34.82161191126579",
+      "imageURL": "\\gardens-images\\WhatsApp Image 2026-01-09 at 11.44.13.jpeg"
+    },
+    {
+      "id": "cEzky3IjZb1anU9wQ2uJ",
+      "name": "העצמאות",
+      "address": "העצמאות 91, פתח תקווה",
+      "day": "sunday",
+      "outDays": "א",
+      "locationURL": "https://waze.com/ul?q=%D7%94%D7%A2%D7%A6%D7%9E%D7%90%D7%95%D7%AA%2091%2C%20%D7%A4%D7%AA%D7%97%20%D7%AA%D7%A7%D7%95%D7%95%D7%94",
+      "notes": [],
+      "imageURL": "\\gardens-images\\WhatsApp Image 2025-12-08 at 06.22.26_7b45c085.jpg",
+      "lat": "32.07332661724606",
+      "lng": "34.86273736074285",
+      "lastVisit": "2026-01-25",
+      "visitLogs": [
+        {
+          "date": "2025-12-07",
+          "tasks": [
+            "כיסוח דשא",
+            "חרמש",
+            "גיזום",
+            "ניקיון"
+          ],
+          "nextVisitTasks": [
+            "מחשב השקייה לטפל בממטרות"
+          ]
+        },
+        {
+          "date": "2026-01-25",
+          "tasks": [
+            "מדשאות",
+            "גיזום",
+            "ריסוס",
+            "חרמש",
+            "חרמש בכניסה לחניון וריסוס"
+          ],
+          "nextVisitTasks": [],
+          "createdAt": {
+            "_seconds": 1769331078,
+            "_nanoseconds": 440000000
+          }
+        }
+      ]
+    },
+    {
+      "id": "e53EZTkWzTP7Yg1HdTA0",
+      "name": "קארו",
+      "address": "יוסף קארו 14, רמת גן",
+      "day": "wednesday",
+      "outDays": "ד",
+      "locationURL": "https://waze.com/ul?q=%D7%99%D7%95%D7%A1%D7%A3%20%D7%A7%D7%90%D7%A8%D7%95%2014%2C%20%D7%A8%D7%9E%D7%AA%20%D7%92%D7%9F",
+      "notes": [],
+      "lat": "32.06785451888773",
+      "lng": "34.82910115889732",
+      "imageURL": "\\gardens-images\\WhatsApp Image 2026-01-09 at 11.44.13.jpeg",
+      "lastVisit": "2026-01-14",
+      "visitLogs": [
+        {
+          "date": "2025-12-03",
+          "tasks": [
+            "שתילה עונתית",
+            "החלפת צנרת",
+            "החלפת תערובות",
+            "השקייה"
+          ],
+          "nextVisitTasks": [
+            "."
+          ]
+        },
+        {
+          "date": "2026-01-14",
+          "tasks": [
+            "גיזום חזית",
+            "ניקיון",
+            "ריסוס",
+            "גיזום וורדים"
+          ],
+          "nextVisitTasks": [],
+          "createdAt": {
+            "_seconds": 1768381619,
+            "_nanoseconds": 224000000
+          }
+        }
+      ]
+    },
+    {
+      "id": "etPTBBaM8g2qyJF4bDiQ",
+      "name": "צהל",
+      "address": "צה\"ל 62, פתח תקווה",
+      "day": "sunday",
+      "outDays": "א",
+      "imageURL": "",
+      "locationURL": "https://waze.com/ul?q=%D7%A6%D7%94%22%D7%9C%2062%2C%20%D7%A4%D7%AA%D7%97%20%D7%AA%D7%A7%D7%95%D7%95%D7%94",
+      "lat": 32.0834294,
+      "lng": 34.8697565,
+      "notes": [],
+      "lastVisit": "2026-01-25",
+      "visitLogs": [
+        {
+          "date": "2026-01-25",
+          "tasks": [
+            "ניקיון",
+            "גיזום"
+          ],
+          "nextVisitTasks": [],
+          "createdAt": {
+            "_seconds": 1769340515,
+            "_nanoseconds": 583000000
+          }
+        }
+      ]
+    },
+    {
+      "id": "hBNSJzFLmRhS7ZUDkiNO",
+      "name": "משה סנה",
+      "address": "משה סנה 54",
+      "day": "monday",
+      "outDays": "ב,ד",
+      "locationURL": "https://waze.com/ul?q=%D7%9E%D7%A9%D7%94%20%D7%A1%D7%A0%D7%94%2054",
+      "lat": 32.1208982,
+      "lng": 34.8251184,
+      "lastVisit": null,
+      "notes": [],
+      "visitLogs": [],
+      "imageURL": "\\gardens-images\\IMG20251124123456.jpg"
+    },
+    {
+      "id": "hEOoBk83QplwAEKFRP6C",
+      "name": "כצנלסון אהרון",
+      "day": "monday",
+      "outDays": "ג",
+      "locationURL": "https://waze.com/ul?q=21",
+      "notes": [],
+      "address": "אהרון כצנלסון 21, פתח תקווה",
+      "lat": "32.095605653861774",
+      "lng": "34.875660606187154",
+      "imageURL": "\\gardens-images\\WhatsApp Image 2026-01-09 at 11.44.136.jpeg",
+      "lastVisit": "2026-01-26",
+      "visitLogs": [
+        {
+          "date": "2025-12-01",
+          "tasks": [
+            "גיזום\nניקיון"
+          ],
+          "nextVisitTasks": []
+        },
+        {
+          "date": "2025-12-22",
+          "tasks": [
+            "שתילה חזית",
+            "ניקיון חזית",
+            "גיזום חזית"
+          ],
+          "nextVisitTasks": [],
+          "createdAt": {
+            "_seconds": 1766407672,
+            "_nanoseconds": 443000000
+          }
+        },
+        {
+          "date": "2026-01-12",
+          "tasks": [
+            "גיזום חזית מאחורה",
+            "חרמש",
+            "ניקיון"
+          ],
+          "nextVisitTasks": [],
+          "createdAt": {
+            "_seconds": 1768212361,
+            "_nanoseconds": 922000000
+          }
+        },
+        {
+          "date": "2026-01-26",
+          "tasks": [
+            "גיזום חניון מאחורה",
+            "גיזום חזית צד",
+            "ריסוס"
+          ],
+          "nextVisitTasks": [],
+          "createdAt": {
+            "_seconds": 1769419570,
+            "_nanoseconds": 644000000
+          }
+        }
+      ],
+      "requiresAttention": [
+        {
+          "gardenName": "כצנלסון אהרון",
+          "resolved": true,
+          "id": "536990de-ef92-40c1-a34e-5cd9383d7739",
+          "text": "יש צינור שנקרע מתחת לעץ הענק שגזמנו. אחד הדיירים קשר את הקצוות ",
+          "createdAt": {
+            "_seconds": 1768829009,
+            "_nanoseconds": 91000000
+          },
+          "gardenId": "hEOoBk83QplwAEKFRP6C"
+        }
+      ]
+    },
+    {
+      "id": "iuiLwuCozrRwBJYu5E8N",
+      "name": "שלמה המלך 87",
+      "address": "שלמה המלך 87, תל אביב",
+      "day": "tuesday",
+      "outDays": "א, ג",
+      "locationURL": "https://waze.com/ul?q=%D7%A9%D7%9C%D7%9E%D7%94%20%D7%94%D7%9E%D7%9C%D7%9A%2087%2C%20%D7%AA%D7%9C%20%D7%90%D7%91%D7%99%D7%91",
+      "lat": 32.083837,
+      "lng": 34.778343,
+      "notes": [],
+      "lastVisit": "2026-01-06",
+      "visitLogs": [
+        {
+          "date": "2026-01-06",
+          "tasks": [
+            "ניקיון",
+            "שתילת ורד"
+          ],
+          "nextVisitTasks": [],
+          "createdAt": {
+            "_seconds": 1767694447,
+            "_nanoseconds": 890000000
+          }
+        }
+      ],
+      "imageURL": "\\gardens-images\\WhatsApp Image 2026-01-09 at 11.44.13.jpeg"
+    },
+    {
+      "id": "jK8n3bA7N5QHBZ28KiyP",
+      "name": "משורר 18",
+      "address": "ישעיהו המשורר 18, פתח תקווה",
+      "day": "tuesday",
+      "outDays": "ג",
+      "locationURL": "https://waze.com/ul?q=%D7%99%D7%A9%D7%A2%D7%99%D7%94%D7%95%20%D7%94%D7%9E%D7%A9%D7%95%D7%A8%D7%A8%2018%2C%20%D7%A4%D7%AA%D7%97%20%D7%AA%D7%A7%D7%95%D7%95%D7%94",
+      "notes": [],
+      "lastVisit": "2025-12-02",
+      "lat": "32.06909308344808",
+      "lng": "34.9068292049187",
+      "visitLogs": [
+        {
+          "nextVisitTasks": [
+            "."
+          ],
+          "date": "2025-12-03",
+          "tasks": [
+            "עישוב",
+            "ריסוס "
+          ]
+        }
+      ],
+      "imageURL": "\\gardens-images\\IMG20251124123456.jpg"
+    },
+    {
+      "id": "krtpGEfkpXGEmiFqoO2k",
+      "name": "סירקין",
+      "address": "סירקין, גבעתיים",
+      "day": "sunday",
+      "outDays": "א",
+      "locationURL": "https://waze.com/ul?q=%D7%A1%D7%99%D7%A8%D7%A7%D7%99%D7%9F%2C%20%D7%92%D7%91%D7%A2%D7%AA%D7%99%D7%99%D7%9D",
+      "notes": [],
+      "imageURL": "\\gardens-images\\WhatsApp Image 2025-12-08 at 06.22.26_b5c56f12.jpg",
+      "lat": "32.078671316907695",
+      "lng": "34.81667927608333",
+      "lastVisit": "2026-01-11",
+      "visitLogs": [
+        {
+          "date": "2025-12-07",
+          "tasks": [
+            "גיזום פיקוס ",
+            "ניקיון כללי",
+            "גיזום",
+            "השקייה"
+          ],
+          "nextVisitTasks": []
+        },
+        {
+          "date": "2026-01-11",
+          "tasks": [
+            "גיזום",
+            "ניקיון כללי"
+          ],
+          "nextVisitTasks": [],
+          "createdAt": {
+            "_seconds": 1768116937,
+            "_nanoseconds": 894000000
+          }
+        }
+      ],
+      "requiresAttention": []
+    },
+    {
+      "id": "lsFtSjfzwmqVrziWQYTX",
+      "name": "בראון",
+      "day": "sunday",
+      "outDays": "לעדכן",
+      "imageURL": "\\gardens-images\\IMG-20251027-WA0012.jpeg",
+      "address": "אריה בראון 6, פתח תקווה",
+      "location": {
+        "lat": 32.101528,
+        "lng": 34.878194
+      },
+      "locationURL": "%D7%90%D7%A8%D7%99%D7%94%20%D7%91%D7%A8%D7%90%D7%95%D7%9F%206%2C%20%D7%A4%D7%AA%D7%97%20%D7%AA%D7%A7%D7%95%D7%95%D7%94",
+      "lat": "32.10168676474121",
+      "lng": "34.87818929084553",
+      "notes": [
+        "בדיקה"
+      ],
+      "lastVisit": "2026-01-26",
+      "visitLogs": [
+        {
+          "date": "2025-12-01",
+          "nextVisitTasks": [
+            "עיצוב חניון",
+            "יבשים חניון",
+            "ריסוס חזיתות"
+          ],
+          "tasks": [
+            "עישון, ידני חזיתות",
+            "עישוב ידני ערוגות חניון",
+            "כיוון השקיה ",
+            "הוספת דשן למערכת"
+          ]
+        },
+        {
+          "date": "2025-12-22",
+          "tasks": [
+            "הוצאת יבשים בחניון",
+            "עישוב מאחורה "
+          ],
+          "nextVisitTasks": []
+        },
+        {
+          "date": "2026-01-12",
+          "tasks": [
+            "ניקיון",
+            "חרמש",
+            "גיזום קל"
+          ],
+          "nextVisitTasks": [
+            "להביא מוטות לייצוב העצים "
+          ],
+          "createdAt": {
+            "_seconds": 1768219315,
+            "_nanoseconds": 404000000
+          }
+        },
+        {
+          "date": "2026-01-26",
+          "tasks": [
+            "ייצוב עצים",
+            "ריסוס",
+            "חרמש חניון"
+          ],
+          "nextVisitTasks": [],
+          "createdAt": {
+            "_seconds": 1769425768,
+            "_nanoseconds": 344000000
+          }
+        }
+      ],
+      "requiresAttention": [
+        {
+          "gardenName": "בראון",
+          "id": "a2965355-915e-4cd4-851c-9099d2c7ec10",
+          "createdAt": {
+            "_seconds": 1768219339,
+            "_nanoseconds": 967000000
+          },
+          "text": "להביא מוטות לייצוב את העצים",
+          "gardenId": "lsFtSjfzwmqVrziWQYTX",
+          "resolved": true
+        },
+        {
+          "gardenId": "lsFtSjfzwmqVrziWQYTX",
+          "createdAt": {
+            "_seconds": 1768398990,
+            "_nanoseconds": 659000000
+          },
+          "id": "634ed730-ccde-4f56-82df-3eb845deacad",
+          "resolved": true,
+          "gardenName": "בראון",
+          "text": "ריסוס עשביה בחניון"
+        }
+      ]
+    },
+    {
+      "id": "mKaRXptKExlFaQ5SUSzj",
+      "name": "עין גנים 52",
+      "address": "עין גנים 52, פתח תקווה",
+      "day": "sunday",
+      "outDays": "לעדכן",
+      "locationURL": "https://waze.com/ul?q=%D7%A2%D7%99%D7%9F%20%D7%92%D7%A0%D7%99%D7%9D%2052%2C%20%D7%A4%D7%AA%D7%97%20%D7%AA%D7%A7%D7%95%D7%95%D7%94",
+      "lat": 32.0878696,
+      "lng": 34.8945415,
+      "lastVisit": null,
+      "notes": [],
+      "visitLogs": [],
+      "imageURL": " \\gardens-images\\qr3qrq3r3.jpeg"
+    },
+    {
+      "id": "mhOZyvothNL6gBPUvekF",
+      "name": "סנהדרין ",
+      "address": "סנהדרין 14, רמת גן",
+      "day": "monday",
+      "outDays": "לעדכן",
+      "locationURL": "https://waze.com/ul?q=%D7%A1%D7%A0%D7%94%D7%93%D7%A8%D7%99%D7%9F%2014%2C%20%D7%A8%D7%9E%D7%AA%20%D7%92%D7%9F",
+      "notes": [],
+      "imageURL": "\\gardens-images\\IMG20251124123456.jpg",
+      "lat": "32.077615400443285",
+      "lng": "34.82654026074291",
+      "lastVisit": "2026-01-19",
+      "visitLogs": [
+        {
+          "nextVisitTasks": [],
+          "tasks": [
+            "גיזום"
+          ],
+          "date": "2025-11-24"
+        },
+        {
+          "date": "2025-12-08",
+          "tasks": [
+            "ניקיון"
+          ],
+          "nextVisitTasks": []
+        },
+        {
+          "date": "2026-01-19",
+          "tasks": [
+            "ניקיון",
+            "עישוב",
+            "ריסוס"
+          ],
+          "nextVisitTasks": [],
+          "createdAt": {
+            "_seconds": 1768813886,
+            "_nanoseconds": 153000000
+          }
+        }
+      ]
+    },
+    {
+      "id": "mmjDN5gzVcGmzA9kBIKZ",
+      "name": "דגל ראובן",
+      "address": "דגל ראובן 65, פתח תקווה",
+      "day": "sunday",
+      "locationURL": "https://waze.com/ul?q=%D7%93%D7%92%D7%9C%20%D7%A8%D7%90%D7%95%D7%91%D7%9F%2065%2C%20%D7%A4%D7%AA%D7%97%20%D7%AA%D7%A7%D7%95%D7%95%D7%94",
+      "imageURL": "\\gardens-images\\IMG20251124115316.jpg",
+      "notes": [],
+      "lat": "32.081961782672735",
+      "lng": "34.87013354540219",
+      "outDays": "שלישי",
+      "requiresAttention": [
+        {
+          "gardenId": "mmjDN5gzVcGmzA9kBIKZ",
+          "text": "לקחת צ'ק מעמי+  972503018135",
+          "id": "0a20f896-b4fd-486e-817f-a022061b1daf",
+          "resolved": true,
+          "createdAt": {
+            "_seconds": 1768895703,
+            "_nanoseconds": 525000000
+          },
+          "gardenName": "דגל ראובן"
+        },
+        {
+          "id": "89e4bbbc-2cf2-4f97-934c-bb97eaac596d",
+          "gardenName": "דגל ראובן",
+          "resolved": true,
+          "createdAt": {
+            "_seconds": 1768895705,
+            "_nanoseconds": 349000000
+          },
+          "gardenId": "mmjDN5gzVcGmzA9kBIKZ",
+          "text": "לקחת צ'ק מעמי+  972503018135"
+        }
+      ],
+      "lastVisit": "2026-01-25",
+      "visitLogs": [
+        {
+          "date": "2026-01-25",
+          "tasks": [
+            "עישוב",
+            "ריסוס ",
+            "ניקיון"
+          ],
+          "nextVisitTasks": [],
+          "createdAt": {
+            "_seconds": 1769333516,
+            "_nanoseconds": 150000000
+          }
+        }
+      ]
+    },
+    {
+      "id": "oim8ArSWsx5wYrUeQhE0",
+      "name": "הרא\"ה 95",
+      "address": "הרא\"ה 95, רמת גן",
+      "day": "monday",
+      "outDays": "ב",
+      "location": {
+        "lat": 324,
+        "lng": 234
+      },
+      "notes": [],
+      "imageURL": "\\gardens-images\\IMG20251124115316.jpg",
+      "locationURL": "%D7%94%D7%A8%D7%90%22%D7%94%2093%2C%20%D7%A8%D7%9E%D7%AA%20%D7%92%D7%9F",
+      "lat": "32.08182463524817",
+      "lng": "34.82578594540225",
+      "lastVisit": "2026-01-19",
+      "visitLogs": [
+        {
+          "date": "2025-12-08",
+          "tasks": [
+            "ניקיון"
+          ],
+          "nextVisitTasks": []
+        },
+        {
+          "date": "2026-01-19",
+          "tasks": [
+            "גיזום ",
+            "ניקיון ",
+            "עישוב"
+          ],
+          "nextVisitTasks": [
+            "ריסוס"
+          ],
+          "createdAt": {
+            "_seconds": 1768824927,
+            "_nanoseconds": 975000000
+          }
+        }
+      ]
+    },
+    {
+      "id": "p0R87cClGhzwOM7dWgMF",
+      "name": "אורלוב 6",
+      "address": "אורלוב 6, פתח תקווה",
+      "day": "monday",
+      "outDays": "ב",
+      "locationURL": "https://waze.com/ul?q=%D7%90%D7%95%D7%A8%D7%9C%D7%95%D7%91%206%2C%20%D7%A4%D7%AA%D7%97%20%D7%AA%D7%A7%D7%95%D7%95%D7%94",
+      "notes": [],
+      "lat": "32.09159768452877",
+      "lng": "34.87715730307207",
+      "imageURL": "\\gardens-images\\IMG20251124123456.jpg",
+      "lastVisit": "2026-01-13",
+      "visitLogs": [
+        {
+          "date": "2025-12-01",
+          "tasks": [
+            "גיזום",
+            "ניקיון"
+          ],
+          "nextVisitTasks": [
+            "."
+          ]
+        },
+        {
+          "date": "2026-01-13",
+          "tasks": [
+            "גיזום",
+            "ניקיון"
+          ],
+          "nextVisitTasks": [],
+          "createdAt": {
+            "_seconds": 1768294959,
+            "_nanoseconds": 54000000
+          }
+        }
+      ]
+    },
+    {
+      "id": "pvwDZZIiE87BxeP0dYey",
+      "name": "פאגלין 9",
+      "address": "פאגלין 9, תל אביב",
+      "day": "wednesday",
+      "outDays": "א, ד",
+      "location": {
+        "lat": 32.1253047,
+        "lng": 34.7966324
+      },
+      "locationURL": "%D7%A2%D7%9E%D7%99%D7%97%D7%99%20%D7%A4%D7%90%D7%92%D7%9C%D7%99%D7%9F%209%2C%20%D7%AA%D7%9C%20%D7%90%D7%91%D7%99%D7%91",
+      "imageURL": "\\gardens-images\\IMG20251124115316.jpg",
+      "lastVisit": "2025-12-15",
+      "lat": "32.125418226157244",
+      "lng": "34.7940735485108",
+      "notes": [],
+      "visitLogs": [],
+      "requiresAttention": []
+    },
+    {
+      "id": "vPfE3c7dAahnWnHq72Vr",
+      "name": "משורר 20/22",
+      "address": "ישעיהו המשורר 20, פתח תקווה",
+      "day": "tuesday",
+      "outDays": "ג",
+      "locationURL": "https://waze.com/ul?q=%D7%99%D7%A9%D7%A2%D7%99%D7%94%D7%95%20%D7%94%D7%9E%D7%A9%D7%95%D7%A8%D7%A8%2020%2C%20%D7%A4%D7%AA%D7%97%20%D7%AA%D7%A7%D7%95%D7%95%D7%94",
+      "notes": [],
+      "lastVisit": "2025-12-02",
+      "visitLogs": [
+        {
+          "date": "2025-12-02",
+          "tasks": [
+            "גיזום",
+            "עישוב ידני",
+            "ריסוס נוסף",
+            "טיפול בארוגה המוכחשת"
+          ],
+          "nextVisitTasks": [
+            "שתילות"
+          ]
+        }
+      ],
+      "lat": "32.06987723991088",
+      "lng": "34.907558976083514",
+      "imageURL": "\\gardens-images\\IMG20251124123456.jpg"
+    },
+    {
+      "id": "vcHshBZUKbz6lMnvHxIy",
+      "name": "צירלסון 24",
+      "address": "צירלסון 24, תל אביב-יפו",
+      "day": "monday",
+      "outDays": "ב,ד",
+      "locationURL": "https://waze.com/ul?q=%D7%A6%D7%99%D7%A8%D7%9C%D7%A1%D7%95%D7%9F%2024%2C%20%D7%AA%D7%9C%20%D7%90%D7%91%D7%99%D7%91-%D7%99%D7%A4%D7%95",
+      "lat": 32.095048,
+      "lng": 34.793512,
+      "notes": [],
+      "imageURL": "\\gardens-images\\awsfdrqwf334.jpeg",
+      "lastVisit": "2026-01-21",
+      "visitLogs": [
+        {
+          "date": "2026-01-21",
+          "tasks": [
+            "גיזום",
+            "חרמש",
+            "ניקיון"
+          ],
+          "nextVisitTasks": [],
+          "createdAt": {
+            "_seconds": 1769010426,
+            "_nanoseconds": 709000000
+          }
+        }
+      ]
+    }
+  ]
+}

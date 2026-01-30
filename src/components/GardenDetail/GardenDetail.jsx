@@ -1,18 +1,24 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { updateDoc, arrayUnion, Timestamp, deleteDoc, doc } from "firebase/firestore";
-import { db } from "../../firebase/config.js";
+import { ref, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage";
+import { db, storage } from "../../firebase/config.js";
 import { useGarden } from "../../hooks/useGarden.js";
+import { useAuth } from "../../hooks/useAuth.js";
+import { getCoordinates } from "../../utils/getCoordinates.js";
 import styles from "./GardenDetail.module.css";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner.jsx";
 
 function GardenDetail() {
+  const { user } = useAuth();
   const { id } = useParams();
   const navigate = useNavigate();
   const { garden, loading, error } = useGarden(id);
+  const fileInputRef = useRef(null);
 
   const [addingNote, setAddingNote] = useState(false);
   const [newNote, setNewNote] = useState("");
+  const [uploadingImage, setUploadingImage] = useState(false);
 
   const [addingVisit, setAddingVisit] = useState(false);
   const [visitDate, setVisitDate] = useState(() => new Date().toISOString().split("T")[0]);
@@ -21,6 +27,8 @@ function GardenDetail() {
   const [expandedVisit, setExpandedVisit] = useState(null);
   const [editingDay, setEditingDay] = useState(false);
   const [newDay, setNewDay] = useState("");
+  const [editingAddress, setEditingAddress] = useState(false);
+  const [newAddress, setNewAddress] = useState("");
   const [editingOutDays, setEditingOutDays] = useState(false);
   const [newOutDays, setNewOutDays] = useState([]);
 
@@ -81,6 +89,8 @@ async function handleAddIssue() {
     text: newIssueText,
     createdAt: Timestamp.now(),
     resolved: false,
+    creatorId: user?.uid,
+    creatorName: user?.displayName || user?.email || "Unknown",
   };
 
   console.log("Attempting to add issue:", newIssue);
@@ -131,6 +141,35 @@ async function toggleIssueResolved(issueId) {
   }
 }
 
+async function handleUpdateAddress() {
+  if (!newAddress.trim()) return;
+
+  try {
+    // Fetch coordinates from new address
+    const coords = await getCoordinates(newAddress);
+    if (!coords) {
+      alert("לא ניתן למצוא את המיקום של הכתובת שהזנת");
+      return;
+    }
+
+    const encodedAddress = encodeURIComponent(newAddress);
+    const docRef = doc(db, "gardens", id);
+
+    await updateDoc(docRef, {
+      address: newAddress,
+      locationURL: `https://waze.com/ul?q=${encodedAddress}`,
+      lat: coords.lat,
+      lng: coords.lng,
+    });
+
+    setEditingAddress(false);
+    setNewAddress("");
+  } catch (error) {
+    console.error("Error updating address:", error);
+    alert("שגיאה בעדכון הכתובת");
+  }
+}
+
 
 
 
@@ -176,6 +215,38 @@ async function handleUpdateImage() {
     setEditingImage(false);
   } catch (error) {
     console.error("Error updating image:", error);
+  }
+}
+
+async function handleImageUpload(event) {
+  const file = event.target.files?.[0];
+  if (!file) return;
+
+  // Validate file is an image
+  if (!file.type.startsWith("image/")) {
+    alert("אנא בחר קובץ תמונה");
+    return;
+  }
+
+  setUploadingImage(true);
+  try {
+    const storageRef = ref(storage, `gardens/${id}/${Date.now()}-${file.name}`);
+    await uploadBytes(storageRef, file);
+    const downloadURL = await getDownloadURL(storageRef);
+
+    const docRef = doc(db, "gardens", id);
+    await updateDoc(docRef, { imageURL: downloadURL });
+    
+    // Reset file input
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
+    setEditingImage(false);
+  } catch (error) {
+    console.error("Error uploading image:", error);
+    alert("שגיאה בהעלאת התמונה: " + error.message);
+  } finally {
+    setUploadingImage(false);
   }
 }
 
@@ -326,18 +397,86 @@ async function handleUpdateOutDays() {
         </div>
 
         <div className={styles.section}>
-          <div className={styles.gardenImageWrapper}>
+          <div 
+            className={styles.gardenImageWrapper}
+            onClick={() => fileInputRef.current?.click()}
+            style={{ cursor: "pointer", position: "relative" }}
+            title="לחץ להעלאת תמונה"
+          >
             {garden.imageURL ? (
               <img src={garden.imageURL} alt={garden.name} className={styles.gardenImage} />
             ) : (
               <div className={styles.gardenImagePlaceholder}>No Image</div>
             )}
+            {uploadingImage && (
+              <div style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                backgroundColor: "rgba(0, 0, 0, 0.5)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                borderRadius: "8px",
+              }}>
+                <span style={{ color: "white", fontSize: "16px" }}>מעלה...</span>
+              </div>
+            )}
           </div>
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/*"
+            onChange={handleImageUpload}
+            style={{ display: "none" }}
+          />
 
-        <p>
-          <span className={styles.label}>כתובת:</span>
-          <span className={styles.value}>{garden.address}</span>
-        </p>
+        <div className={styles.sectionRow}>
+          <p>
+            <span className={styles.label}>כתובת:</span>
+            <span className={styles.value}>{garden.address}</span>
+          </p>
+
+          {!editingAddress && (
+            <button 
+              className={styles.buttonSmall} 
+              onClick={() => {
+                setNewAddress(garden.address);
+                setEditingAddress(true);
+              }}
+            >
+              ערוך כתובת
+            </button>
+          )}
+        </div>
+
+        {editingAddress && (
+          <div className={styles.editDayWrapper}>
+            <input 
+              className={styles.input}
+              type="text"
+              value={newAddress} 
+              onChange={(e) => setNewAddress(e.target.value)}
+              placeholder="הזן כתובת חדשה"
+            />
+
+            <button className={styles.saveNoteButton} onClick={handleUpdateAddress}>
+              שמור
+            </button>
+
+            <button 
+              className={styles.cancelButton} 
+              onClick={() => {
+                setEditingAddress(false);
+                setNewAddress("");
+              }}
+            >
+              ביטול
+            </button>
+          </div>
+        )}
 
        <p>
   <span className={styles.label}>ביקור אחרון:</span>
@@ -489,7 +628,7 @@ async function handleUpdateOutDays() {
           </div>
         )}
         <button className={styles.button} onClick={() => setAddingNote(!addingNote)}>
-          + הוסף הערה
+          {addingNote ? "בטל" : "+ הוסף הערה"}
         </button>
       </div>
       {/* Requires Attention Section */}
@@ -515,6 +654,7 @@ async function handleUpdateOutDays() {
               <span>{issue.text}</span>
               <small>
                 נוצר בתאריך: {formatDate(issue.createdAt?.toDate?.() || issue.createdAt)}
+                {issue.creatorName && ` | על ידי: ${issue.creatorName}`}
               </small>
             </div>
 
@@ -526,12 +666,12 @@ async function handleUpdateOutDays() {
                 {issue.resolved ? "לא טופל" : "טופל"}
               </button>
 
-              {/* <button
+              <button
                 className={styles.deleteButton}
                 onClick={() => handleDeleteIssue(issue.id)}
               >
                 ✕
-              </button> */}
+              </button>
             </div>
           </div>
         </div>
@@ -576,7 +716,7 @@ async function handleUpdateOutDays() {
     className={styles.toggleAddIssueButton}
     onClick={() => setAddingIssue(!addingIssue)}
   >
-    + הוסף תקלה
+    {addingIssue ? "בטל" : "+ הוסף תקלה"}
   </button>
 </div>
 

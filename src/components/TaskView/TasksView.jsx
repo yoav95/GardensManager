@@ -70,6 +70,7 @@ function TasksView() {
             done: issue.resolved,
             date: formatFirestoreDate(issue.createdAt),
             gardenTitle: issue.gardenName,
+            creatorName: issue.creatorName,
           });
         }
       });
@@ -91,6 +92,8 @@ function TasksView() {
       date: new Date().toISOString().split("T")[0],
       userId: user.uid,
       workspaceId: selectedWorkspace,
+      creatorId: user.uid,
+      creatorName: user.displayName || user.email || "Unknown",
     });
 
     // reset UI only — snapshot will update tasks
