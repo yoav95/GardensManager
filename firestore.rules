@@ -1,6 +1,12 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
+    // New users collection - first-time Google sign-ins
+    match /newUsers/{userId} {
+      allow create: if request.auth != null && request.resource.data.uid == request.auth.uid;
+      allow read, update: if request.auth != null;
+    }
+
     // Pending users - allow anyone to create their registration request
     match /pendingUsers/{userId} {
       allow create: if request.auth != null && request.resource.data.uid == request.auth.uid;

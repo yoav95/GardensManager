@@ -5,7 +5,7 @@ import {
   GoogleAuthProvider,
   signOut,
 } from "firebase/auth";
-import { collection, addDoc, Timestamp } from "firebase/firestore";
+import { collection, addDoc, Timestamp, query, where, getDocs } from "firebase/firestore";
 import { db } from "../../firebase/config.js";
 import styles from "./Login.module.css";
 
@@ -23,7 +23,42 @@ export default function Login({ user }) {
 
     try {
       const result = await signInWithPopup(auth, googleProvider);
-      // No email whitelist check - access is controlled by workspace membership
+      
+      // Check if this is a first-time sign-in (not in any workspace and not in pendingUsers)
+      const userUID = result.user.uid;
+      const userEmail = result.user.email;
+      
+      // Check if user exists in any workspace
+      const workspacesQuery = query(collection(db, "workspaces"));
+      const workspacesSnapshot = await getDocs(workspacesQuery);
+      
+      let userExistsInWorkspace = false;
+      workspacesSnapshot.forEach(doc => {
+        const members = doc.data().members || {};
+        if (members[userUID]) {
+          userExistsInWorkspace = true;
+        }
+      });
+      
+      // Check if already in pendingUsers
+      const pendingQuery = query(
+        collection(db, "pendingUsers"),
+        where("uid", "==", userUID)
+      );
+      const pendingSnapshot = await getDocs(pendingQuery);
+      const alreadyPending = pendingSnapshot.size > 0;
+      
+      // If first-time user (not in workspace and not pending), add to newUsers
+      if (!userExistsInWorkspace && !alreadyPending) {
+        await addDoc(collection(db, "newUsers"), {
+          email: userEmail,
+          uid: userUID,
+          displayName: result.user.displayName,
+          signedInAt: Timestamp.now(),
+          provider: "google",
+          processed: false
+        });
+      }
     } catch (err) {
       setError(err.message);
       setLoading(false);
