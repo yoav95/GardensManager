@@ -106,8 +106,8 @@ export default function Login({ user }) {
     return (
       <div className={styles.container}>
         <div className={styles.card}>
-          <h2> מנהל גינות</h2>
-          <p>כניסה בהצלחה!</p>
+          <img src="/appcon.svg" alt="Garden Manager" className={styles.icon} />
+          <p className={styles.message}>כניסה בהצלחה!</p>
           <p className={styles.email}>{user.displayName || user.email}</p>
           <button onClick={handleLogout} className={styles.logoutBtn}>
             התנתק
@@ -120,12 +120,15 @@ export default function Login({ user }) {
   return (
     <div className={styles.container}>
       <div className={styles.card}>
-        <h1>מנהל גינות</h1>
+        <img src="/appcon.svg" alt="Garden Manager" className={styles.icon} />
         
         {mode === "signin" ? (
           <>
             <h2>התחברות</h2>
             {error && <div className={styles.error}>{error}</div>}
+            <p className={styles.subtitle}>
+              כנס לחשבונך עם Google כדי להתחיל
+            </p>
             <button
               onClick={handleGoogleSignIn}
               disabled={loading}
@@ -148,7 +151,7 @@ export default function Login({ user }) {
             <h2>הרשמה</h2>
             {error && <div className={styles.error}>{error}</div>}
             <p className={styles.subtitle}>
-              בחר בחשבון Google שלך ואנו נשלח בקשת אישור למנהל
+              בחר בחשבון Google שלך ובקש אישור מהמנהל
             </p>
             <button
               onClick={handleGoogleRegister}

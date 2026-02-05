@@ -49,7 +49,11 @@ export default function AreasMap() {
   const { gardens } = useGardensContext();
   const [gardensGeoJson, setGardensGeoJson] = useState(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [userLocation, setUserLocation] = useState(null);
+  const [locationLoading, setLocationLoading] = useState(false);
+  const [locationError, setLocationError] = useState(null);
   const mapContainerRef = useRef(null);
+  const mapRef = useRef(null);
   const lastClickedLayerRef = useRef(null);
 
   useEffect(() => {
@@ -96,6 +100,53 @@ export default function AreasMap() {
     }
   };
 
+  const handleGetUserLocation = () => {
+    setLocationLoading(true);
+    setLocationError(null);
+
+    if (!navigator.geolocation) {
+      setLocationError("GPS לא זמין בדפדפן זה");
+      setLocationLoading(false);
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude, accuracy } = position.coords;
+        setUserLocation({
+          lat: latitude,
+          lng: longitude,
+          accuracy
+        });
+        
+        // Center map on user location
+        if (mapRef.current) {
+          mapRef.current.setView([latitude, longitude], 15);
+        }
+        
+        setLocationLoading(false);
+        setLocationError(null);
+      },
+      (error) => {
+        let errorMessage = "שגיאה בקבלת המיקום";
+        if (error.code === error.PERMISSION_DENIED) {
+          errorMessage = "אנא הרשה גישה ל-GPS";
+        } else if (error.code === error.POSITION_UNAVAILABLE) {
+          errorMessage = "GPS לא זמין כרגע";
+        } else if (error.code === error.TIMEOUT) {
+          errorMessage = "זמן המתנה לGPS חלף";
+        }
+        setLocationError(errorMessage);
+        setLocationLoading(false);
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 10000,
+        maximumAge: 0
+      }
+    );
+  };
+
   // Listen for fullscreen changes (e.g., ESC key)
   useEffect(() => {
     const handleFullscreenChange = () => {
@@ -124,7 +175,25 @@ export default function AreasMap() {
         {isFullscreen ? "✕" : "⛶"}
       </button>
 
+      {/* GPS Location button */}
+      <button 
+        className={styles.gpsButton}
+        onClick={handleGetUserLocation}
+        disabled={locationLoading}
+        title={locationLoading ? "טוען..." : "גישור ממיקומי"}
+      >
+        {locationLoading ? "⟳" : "⌖"}
+      </button>
+
+      {/* Location error message */}
+      {locationError && (
+        <div className={styles.locationError}>
+          {locationError}
+        </div>
+      )}
+
       <MapContainer
+        ref={mapRef}
         bounds={israelCenterBounds}
         style={{ height: "100%", width: "100%" }}
         scrollWheelZoom={true}
@@ -316,6 +385,30 @@ const gardenDotIcon = new L.DivIcon({
 
         );
       })}
+
+      {/* User Location Marker */}
+      {userLocation && (
+        <Marker 
+          position={[userLocation.lat, userLocation.lng]}
+          icon={L.icon({
+            iconUrl: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='8' fill='%233b82f6'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%2360a5fa'/%3E%3Ccircle cx='16' cy='16' r='3' fill='white'/%3E%3Ccircle cx='16' cy='16' r='14' fill='none' stroke='%233b82f6' stroke-width='1' opacity='0.3'/%3E%3C/svg%3E",
+            iconSize: [32, 32],
+            iconAnchor: [16, 16],
+            popupAnchor: [0, -16],
+          })}
+        >
+          <Popup>
+            <div className={styles.userLocationPopup}>
+              <div className={styles.userLocationTitle}>📍 המיקום שלך</div>
+              <div>קו רוחב: {userLocation.lat.toFixed(6)}</div>
+              <div>קו אורך: {userLocation.lng.toFixed(6)}</div>
+              {userLocation.accuracy && (
+                <div>דיוק: ±{Math.round(userLocation.accuracy)} מטרים</div>
+              )}
+            </div>
+          </Popup>
+        </Marker>
+      )}
     </MapContainer>
     </div>
   );

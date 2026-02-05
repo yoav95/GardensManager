@@ -40,27 +40,31 @@ function PendingApproval({ onApproved }) {
   return (
     <div className={styles.container}>
       <div className={styles.card}>
-        <div className={styles.icon}>⏳</div>
-        <h1>בחזקה עיתידית</h1>
+        <img src="/appcon.svg" alt="Garden Manager" className={styles.appIcon} />
+        <h1>בהמתנה לאישור</h1>
         <p className={styles.message}>
-          בקשת ההרשמה שלך התקבלה בהצלחה!
+          בקשת ההרשמה שלך התקבלה בהצלחה! 🎉
         </p>
         <p className={styles.submessage}>
-          המנהל יבדוק את בקשתך בקרוב ותקבל הודעה כאשר הוא אישר את ההרשמה שלך.
+          המנהל של המערכת יבדוק את בקשתך בקרוב. 
+          <br />
+          נעדכן אותך מיד לאחר האישור.
         </p>
         
         <div className={styles.details}>
           <p>
-            <strong>דוא"ל:</strong> {user?.email}
+            <strong>📧 דוא"ל:</strong> 
+            <span>{user?.email}</span>
           </p>
           <p>
-            <strong>שם:</strong> {user?.displayName}
+            <strong>👤 שם:</strong> 
+            <span>{user?.displayName || "משתמש"}</span>
           </p>
         </div>
 
         <div className={styles.status}>
           <div className={styles.spinner}></div>
-          <p>בודק אישור...</p>
+          <p>🔄 בודק אישור...</p>
         </div>
 
         <button onClick={handleLogout} className={styles.logoutBtn}>

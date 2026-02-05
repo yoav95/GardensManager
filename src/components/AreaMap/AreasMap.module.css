@@ -8,34 +8,115 @@
   pointer-events: auto;
 }
 
+.gardenDotWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .gardenDot {
-  width: 19px;
-  height: 19px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
   border: 3px solid white;
-  box-shadow: 0 0 2px rgba(0,0,0,0.5);
+  box-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.4),
+    0 0 0 2px rgba(255, 255, 255, 0.3),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease;
+  position: relative;
 }
+
+.gardenDot::after {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  right: -8px;
+  bottom: -8px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  pointer-events: none;
+}
+
+.gardenDotWrapper:hover .gardenDot {
+  transform: scale(1.2);
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.5),
+    0 0 0 3px rgba(255, 255, 255, 0.5);
+}
+
+.gardenDot.hasIssue {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 
+      0 2px 8px rgba(0, 0, 0, 0.4),
+      0 0 0 2px rgba(255, 255, 255, 0.3),
+      inset 0 -1px 2px rgba(0, 0, 0, 0.2);
+  }
+  50% {
+    box-shadow: 
+      0 2px 8px rgba(0, 0, 0, 0.4),
+      0 0 0 6px rgba(255, 255, 255, 0.2),
+      inset 0 -1px 2px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.issueBadge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 18px;
+  height: 18px;
+  background: #ff4757;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 11px;
+  border: 2px solid white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
 .gardenLabel {
-  font-size: 10px;              /* smaller */
-  max-width: 100px;             /* cap width */
-  white-space: nowrap;           /* single line */
+  font-size: 11px;
+  font-weight: 500;
+  max-width: 110px;
+  white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;      /* truncate if too long */
-  background: rgba(255, 255, 255, 0.737);
-  padding: 1px 3px;
-  border-radius: 3px;
-  color: #111;
+  text-overflow: ellipsis;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 4px 6px;
+  border-radius: 4px;
+  color: #222;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
  path:focus {
   outline: none/* subtle gray outline */
 }
 
-/* Optional colors for days */
-.daySunday { background-color: #FF6B6B; }
-.dayMonday { background-color: #4ECDC4; }
-.dayTuesday { background-color: #dcb611; }
-.dayWednesday { background-color: #6A4C93; }
-.dayThursday { background-color: #FFA500; }
+/* Optional colors for days - improved vibrant colors */
+.daySunday { 
+  background: linear-gradient(135deg, #FF6B6B 0%, #FF8787 100%);
+}
+.dayMonday { 
+  background: linear-gradient(135deg, #4ECDC4 0%, #45B7AA 100%);
+}
+.dayTuesday { 
+  background: linear-gradient(135deg, #FFD93D 0%, #FFC300 100%);
+}
+.dayWednesday { 
+  background: linear-gradient(135deg, #6A4C93 0%, #9370DB 100%);
+}
+.dayThursday { 
+  background: linear-gradient(135deg, #FFA500 0%, #FF8C00 100%);
+}
 
 /* ============================
    POPUP CARD
@@ -461,4 +542,72 @@
 
 .fullscreenButton:active {
   transform: scale(0.95);
+}
+.gpsButton {
+  position: absolute;
+  top: 60px;
+  right: 10px;
+  z-index: 1000;
+  background: white;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s ease;
+}
+
+.gpsButton:hover:not(:disabled) {
+  background: #f0f0f0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.gpsButton:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+.gpsButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.locationError {
+  position: absolute;
+  top: 120px;
+  right: 10px;
+  z-index: 1000;
+  background: #ff4757;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-size: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  max-width: 200px;
+  text-align: right;
+  direction: rtl;
+}
+
+.userLocationPopup {
+  font-size: 12px;
+  text-align: right;
+  direction: rtl;
+  padding: 5px 0;
+}
+
+.userLocationTitle {
+  font-weight: bold;
+  margin-bottom: 5px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #ddd;
 }
