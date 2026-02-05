@@ -1,28 +1,42 @@
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import L from "leaflet";
 import styles from "./WeekPlannerMap.module.css";
 
 import { gardensToGeoJson } from "../../utils/gardensToGeoJson.js";
+import { calculateGardensCenterBounds } from "../../utils/calculateGardensCenterBounds.js";
 import { useGardensContext } from "../../context/GardensContext.jsx";
 
-const israelCenterBounds = [
-  [32.4, 34.7], // north-west corner
-  [32.0, 35.0], // south-east corner
+const DEFAULT_BOUNDS = [
+  [32.4, 34.7],   // north-west corner
+  [32.0, 35.0],   // south-east corner
 ];
 
 function WeekPlannerMap({ selectedGarden, onSelectGarden }) {
   const { gardens } = useGardensContext();
   const [gardensGeoJson, setGardensGeoJson] = useState(null);
+  const [mapBounds, setMapBounds] = useState(DEFAULT_BOUNDS);
+  const mapRef = useRef(null);
 
   useEffect(() => {
     if (gardens?.length) {
       setGardensGeoJson(gardensToGeoJson(gardens));
+      const { bounds } = calculateGardensCenterBounds(gardens);
+      setMapBounds(bounds);
     } else {
       setGardensGeoJson({ type: "FeatureCollection", features: [] });
+      const { bounds } = calculateGardensCenterBounds([]);
+      setMapBounds(bounds);
     }
   }, [gardens]);
+
+  // Fit map to bounds when they change
+  useEffect(() => {
+    if (mapRef.current && mapBounds) {
+      mapRef.current.fitBounds(mapBounds, { padding: [50, 50] });
+    }
+  }, [mapBounds]);
 
   function formatDate(dateString) {
     if (!dateString) return "";
@@ -36,7 +50,8 @@ function WeekPlannerMap({ selectedGarden, onSelectGarden }) {
   return (
     <div className={styles.mapContainer}>
       <MapContainer
-        bounds={israelCenterBounds}
+        ref={mapRef}
+        bounds={mapBounds}
         style={{ height: "100%", width: "100%" }}
         scrollWheelZoom={false}
         zoomControl={false}
