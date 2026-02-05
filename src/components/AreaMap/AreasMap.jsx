@@ -199,6 +199,15 @@ export default function AreasMap() {
         {locationLoading ? "⟳" : "⌖"}
       </button>
 
+      {/* Add Garden button */}
+      <button 
+        className={styles.addButton}
+        onClick={() => (window.location.href = "/new-garden")}
+        title="הוסף גן חדש"
+      >
+        + הוסף גן
+      </button>
+
       {/* Location error message */}
       {locationError && (
         <div className={styles.locationError}>
