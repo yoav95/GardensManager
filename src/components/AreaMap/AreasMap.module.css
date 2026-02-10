@@ -588,6 +588,7 @@
   cursor: pointer;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
   transition: all 0.2s ease;
+  white-space: nowrap;
 }
 
 .addButton:hover {
@@ -611,7 +612,7 @@
 
 .locationError {
   position: absolute;
-  top: 120px;
+  top: 160px;
   right: 10px;
   z-index: 1000;
   background: #ff4757;

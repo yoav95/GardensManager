@@ -326,7 +326,7 @@ async function handleUpdateOutDays() {
   if (loading) {
     return (
       <div className={styles.container} style={{ direction: "rtl" }}>
-        <LoadingSpinner message="טוען פרטי הגן..." />
+        <LoadingSpinner message="טוען פרטי הגינה..." />
       </div>
     );
   }
@@ -336,7 +336,7 @@ async function handleUpdateOutDays() {
     return (
       <div className={styles.container} style={{ direction: "rtl" }}>
         <p style={{ color: "red", textAlign: "center" }}>
-          שגיאה בטעינת הגן: {error}
+          שגיאה בטעינת הגינה: {error}
         </p>
         <button
           className={styles.backButton}
@@ -355,7 +355,7 @@ async function handleUpdateOutDays() {
       <div className={styles.container} style={{ direction: "rtl" }}>
         <div className={styles.spinnerContainer}>
           <div className={styles.spinner}></div>
-          <p className={styles.loadingText}>טוען פרטי הגן...</p>
+          <p className={styles.loadingText}>טוען פרטי הגינה...</p>
         </div>
       </div>
     );
@@ -602,50 +602,7 @@ async function handleUpdateOutDays() {
         
       </div>
 
-      {/* Notes Section */}
-      <div className={styles.section}>
-        <div className={styles.notesHeader}>
-          <div className={styles.label}>הערות:</div>
-        </div>
-
-        {garden.notes?.length > 0 ? (
-          <div className={styles.notesList}>
-          {garden.notes.map((note, idx) => (
-  <div key={idx} className={styles.noteItem}>
-    <span>
-      {typeof note === "string" ? note : note.text}
-    </span>
-    <button
-      className={styles.deleteButton}
-      onClick={() => handleDeleteNote(idx)}
-    >
-      ✕
-    </button>
-  </div>
-))}
-          </div>
-        ) : (
-          <p className={styles.noNotes}>אין הערות עדיין.</p>
-        )}
-
-        {addingNote && (
-          <div className={styles.noteInputWrapper}>
-            <input
-              type="text"
-              placeholder="כתוב הערה..."
-              className={styles.noteInput}
-              value={newNote}
-              onChange={(e) => setNewNote(e.target.value)}
-            />
-            <button className={styles.saveNoteButton} onClick={handleAddNote}>שמור</button>
-          </div>
-        )}
-        <button className={styles.button} onClick={() => setAddingNote(!addingNote)}>
-          {addingNote ? "בטל" : "+ הוסף הערה"}
-        </button>
-      </div>
       {/* Requires Attention Section */}
-{/* Requires Attention Section */}
 <div className={styles.issuesSection}>
   <div className={styles.issuesHeader}>
     ⚠️ דורש טיפול
@@ -732,6 +689,49 @@ async function handleUpdateOutDays() {
     {addingIssue ? "בטל" : "+ הוסף תקלה"}
   </button>
 </div>
+
+      {/* Notes Section */}
+      <div className={styles.section}>
+        <div className={styles.notesHeader}>
+          <div className={styles.label}>הערות:</div>
+        </div>
+
+        {garden.notes?.length > 0 ? (
+          <div className={styles.notesList}>
+          {garden.notes.map((note, idx) => (
+  <div key={idx} className={styles.noteItem}>
+    <span>
+      {typeof note === "string" ? note : note.text}
+    </span>
+    <button
+      className={styles.deleteButton}
+      onClick={() => handleDeleteNote(idx)}
+    >
+      ✕
+    </button>
+  </div>
+))}
+          </div>
+        ) : (
+          <p className={styles.noNotes}>אין הערות עדיין.</p>
+        )}
+
+        {addingNote && (
+          <div className={styles.noteInputWrapper}>
+            <input
+              type="text"
+              placeholder="כתוב הערה..."
+              className={styles.noteInput}
+              value={newNote}
+              onChange={(e) => setNewNote(e.target.value)}
+            />
+            <button className={styles.saveNoteButton} onClick={handleAddNote}>שמור</button>
+          </div>
+        )}
+        <button className={styles.button} onClick={() => setAddingNote(!addingNote)}>
+          {addingNote ? "בטל" : "+ הוסף הערה"}
+        </button>
+      </div>
 
 
       {/* Visit Logs Section */}

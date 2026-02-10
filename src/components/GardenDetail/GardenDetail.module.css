@@ -820,16 +820,24 @@
 
 .toggleAddIssueButton {
   margin-top: 12px;
-  padding: 8px 12px;
+  padding: 10px 16px;
   border-radius: 8px;
   background-color: #ffa726;
   color: #fff;
   border: none;
   cursor: pointer;
+  font-size: 15px;
+  font-weight: 500;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  width: 100%;
 }
 
 .toggleAddIssueButton:hover {
   background-color: #fb8c00;
+}
+
+.toggleAddIssueButton:active {
+  transform: scale(0.97);
 }
 
 .noIssues {

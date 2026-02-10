@@ -203,9 +203,9 @@ export default function AreasMap() {
       <button 
         className={styles.addButton}
         onClick={() => (window.location.href = "/new-garden")}
-        title="הוסף גן חדש"
+        title="הוסף גינה חדשה"
       >
-        + הוסף גן
+        + הוסף גינה
       </button>
 
       {/* Location error message */}

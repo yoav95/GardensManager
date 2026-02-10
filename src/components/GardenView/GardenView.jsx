@@ -135,7 +135,7 @@ function GardenView() {
 
       {/* Loading State */}
       {loading && (
-        <p className={styles.emptyMessage}>טוען גנים...</p>
+        <p className={styles.emptyMessage}>טוען גינות...</p>
       )}
 
       {/* Error State */}
@@ -151,7 +151,7 @@ function GardenView() {
 
       {/* Empty State */}
       {!loading && !error && gardens.length === 0 && (
-        <p className={styles.emptyMessage}>אין גנים עדיין.</p>
+        <p className={styles.emptyMessage}>אין גינות עדיין.</p>
       )}
 
       {/* Gardens List */}

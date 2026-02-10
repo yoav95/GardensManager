@@ -197,11 +197,11 @@ export default function NewGarden() {
         });
       }
 
-      alert("הגן נוסף בהצלחה!");
+      alert("הגינה נוספה בהצלחה!");
       window.location.href = "/";
     } catch (error) {
       console.error("Error adding garden:", error);
-      alert("שגיאה בהוספת הגן. בדוק את הקונסול לפרטים.");
+      alert("שגיאה בהוספת הגינה. בדוק את הקונסול לפרטים.");
       setLoading(false);
     }
   }
@@ -333,7 +333,7 @@ export default function NewGarden() {
             type="submit"
             disabled={loading}
           >
-            {loading ? "שומר..." : "שמור גן"}
+            {loading ? "שומר..." : "שמור גינה"}
           </button>
         </form>
       </div>
