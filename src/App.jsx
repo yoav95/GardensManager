@@ -9,6 +9,7 @@ import TopNavbar from "./components/TopNavbar/TopNavbar.jsx";
 import WorkspaceSelector from "./components/WorkspaceSelector/WorkspaceSelector.jsx";
 import useTopBarCounts from "./hooks/useTopBarCounts.js";
 import ShoppingListView from "./components/ShoppingListView/ShoppingListView.jsx";
+import ChargesView from "./components/ChargesView/ChargesView.jsx";
 import Login from "./components/Login/Login.jsx";
 import PendingApproval from "./components/PendingApproval/PendingApproval.jsx";
 import LoadingSpinner from "./components/LoadingSpinner/LoadingSpinner.jsx";
@@ -20,7 +21,7 @@ import { db } from "./firebase/config.js";
 function AppContent() {
   const { user } = useAuth();
   const { isSuperAdmin } = useWorkspace();
-  const { gardenCount, totalBadgeCount, shoppingCount } = useTopBarCounts();
+  const { gardenCount, totalBadgeCount, shoppingCount, chargesCount } = useTopBarCounts();
   const [view, setView] = useState("gardens");
 
   return (
@@ -33,6 +34,7 @@ function AppContent() {
         gardenCount={gardenCount}
         totalBadgeCount={totalBadgeCount}
         shoppingCount={shoppingCount}
+        chargesCount={chargesCount}
         user={user}
       />
       
@@ -40,6 +42,7 @@ function AppContent() {
       {view === "tasks" && <TasksView />}
       {view === "map" && <AreasMap />}
       {view === "shopping" && <ShoppingListView />}
+      {view === "charges" && <ChargesView />}
     </div>
   );
 }

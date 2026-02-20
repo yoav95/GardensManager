@@ -11,7 +11,8 @@ export default function useTopBarCounts() {
   const [gardenCount, setGardenCount] = useState(0);
   const [unfinishedTasks, setUnfinishedTasks] = useState(0);
   const [unresolvedIssues, setUnresolvedIssues] = useState(0);
-  const [shoppingCount, setShoppingCount] = useState(0); 
+  const [shoppingCount, setShoppingCount] = useState(0);
+  const [chargesCount, setChargesCount] = useState(0); 
 
   useEffect(() => {
     if (!user || !selectedWorkspace) {
@@ -19,6 +20,7 @@ export default function useTopBarCounts() {
       setUnfinishedTasks(0);
       setUnresolvedIssues(0);
       setShoppingCount(0);
+      setChargesCount(0);
       return;
     }
 
@@ -46,6 +48,14 @@ export default function useTopBarCounts() {
       }, 0);
 
       setUnresolvedIssues(issuesCount);
+
+      // Count charges from all gardens
+      const chargesTotal = snapshot.docs.reduce((sum, doc) => {
+        const charges = doc.data().charges || [];
+        return sum + charges.length;
+      }, 0);
+
+      setChargesCount(chargesTotal);
     });
 
     // 🛒 Shopping listener - filter by workspaceId
@@ -69,6 +79,7 @@ export default function useTopBarCounts() {
     unfinishedTasks,
     unresolvedIssues,
     totalBadgeCount: unfinishedTasks + unresolvedIssues,
-    shoppingCount
+    shoppingCount,
+    chargesCount
   };
 }

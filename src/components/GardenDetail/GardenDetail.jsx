@@ -46,6 +46,10 @@ function GardenDetail() {
   const [addingIssue, setAddingIssue] = useState(false);
   const [newIssueText, setNewIssueText] = useState("");
 
+  const [addingCharge, setAddingCharge] = useState(false);
+  const [newChargeName, setNewChargeName] = useState("");
+  const [newChargeDate, setNewChargeDate] = useState(() => new Date().toISOString().split("T")[0]);
+
   const daysHebrew = {
     sunday: "ראשון",
     monday: "שני",
@@ -262,6 +266,41 @@ async function handleImageUpload(event) {
     }
   }
 
+  async function handleAddCharge() {
+    if (!newChargeName.trim()) return;
+
+    const docRef = doc(db, "gardens", id);
+
+    const newCharge = {
+      id: crypto.randomUUID(),
+      name: newChargeName,
+      date: newChargeDate,
+      createdAt: Timestamp.now(),
+    };
+
+    const updatedCharges = garden.charges
+      ? [...garden.charges, newCharge]
+      : [newCharge];
+
+    try {
+      await updateDoc(docRef, { charges: updatedCharges });
+      setNewChargeName("");
+      setNewChargeDate(new Date().toISOString().split("T")[0]);
+      setAddingCharge(false);
+    } catch (error) {
+      console.error("Error adding charge:", error);
+    }
+  }
+
+  async function handleDeleteCharge(chargeId) {
+    const docRef = doc(db, "gardens", id);
+    const updatedCharges = (garden.charges || []).filter(charge => charge.id !== chargeId);
+    try {
+      await updateDoc(docRef, { charges: updatedCharges });
+    } catch (error) {
+      console.error("Error deleting charge:", error);
+    }
+  }
 
 async function handleAddVisit() {
   if (!tasksDone.trim() && !nextTasks.trim()) return;
@@ -694,6 +733,9 @@ async function handleUpdateOutDays() {
       <div className={styles.section}>
         <div className={styles.notesHeader}>
           <div className={styles.label}>הערות:</div>
+          <div className={styles.notesDescription}>
+            מספר טלפון, קודים, הערות חשובות וכו'
+          </div>
         </div>
 
         {garden.notes?.length > 0 ? (
@@ -733,6 +775,55 @@ async function handleUpdateOutDays() {
         </button>
       </div>
 
+      {/* Charges Section */}
+      <div className={styles.section}>
+        <div className={styles.chargesHeader}>
+          <div className={styles.label}>💰 פריטים שנרכשו/הוחלפו:</div>
+        </div>
+
+        {garden.charges?.length > 0 ? (
+          <div className={styles.chargesList}>
+            {garden.charges.map((charge) => (
+              <div key={charge.id} className={styles.chargeItem}>
+                <div className={styles.chargeContent}>
+                  <span className={styles.chargeName}>{charge.name}</span>
+                  <span className={styles.chargeDate}>{formatDate(charge.date)}</span>
+                </div>
+                <button
+                  className={styles.deleteButton}
+                  onClick={() => handleDeleteCharge(charge.id)}
+                >
+                  ✕
+                </button>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p className={styles.noCharges}>אין פריטים עדיין.</p>
+        )}
+
+        {addingCharge && (
+          <div className={styles.chargeInputWrapper}>
+            <input
+              type="text"
+              placeholder="שם הפריט (למשל: סוללה למערכת השקיה)"
+              className={styles.chargeInput}
+              value={newChargeName}
+              onChange={(e) => setNewChargeName(e.target.value)}
+            />
+            <input
+              type="date"
+              className={styles.chargeInput}
+              value={newChargeDate}
+              onChange={(e) => setNewChargeDate(e.target.value)}
+            />
+            <button className={styles.saveNoteButton} onClick={handleAddCharge}>שמור</button>
+          </div>
+        )}
+        <button className={styles.button} onClick={() => setAddingCharge(!addingCharge)}>
+          {addingCharge ? "בטל" : "+ הוסף פריט"}
+        </button>
+      </div>
 
       {/* Visit Logs Section */}
       <div className={styles.section}>

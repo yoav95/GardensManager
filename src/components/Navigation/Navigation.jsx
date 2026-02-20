@@ -2,7 +2,7 @@ import { getAuth, signOut } from "firebase/auth";
 import TopButton from "../TopButton/TopButton.jsx";
 import styles from "../../App.module.css";
 
-function Navigation({ view, setView, gardenCount, totalBadgeCount, shoppingCount, user }) {
+function Navigation({ view, setView, gardenCount, totalBadgeCount, shoppingCount, chargesCount, user }) {
   const auth = getAuth();
 
   async function handleLogout() {
@@ -41,6 +41,14 @@ function Navigation({ view, setView, gardenCount, totalBadgeCount, shoppingCount
         active={view === "shopping"}
         onClick={() => setView("shopping")}
         badge={shoppingCount}
+        badgeVariant="info"
+      />
+
+      <TopButton
+        label="חיובים"
+        active={view === "charges"}
+        onClick={() => setView("charges")}
+        badge={chargesCount}
         badgeVariant="info"
       />
     </div>
