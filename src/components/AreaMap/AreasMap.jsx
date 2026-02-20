@@ -51,7 +51,7 @@ export default function AreasMap() {
   const { gardens } = useGardensContext();
   const [gardensGeoJson, setGardensGeoJson] = useState(null);
   const [mapBounds, setMapBounds] = useState(DEFAULT_BOUNDS);
-  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(true);
   const [userLocation, setUserLocation] = useState(null);
   const [locationLoading, setLocationLoading] = useState(false);
   const [locationError, setLocationError] = useState(null);
@@ -176,6 +176,20 @@ export default function AreasMap() {
       document.removeEventListener("webkitfullscreenchange", handleFullscreenChange);
       document.removeEventListener("msfullscreenchange", handleFullscreenChange);
     };
+  }, []);
+
+  // Auto-enter fullscreen on component mount
+  useEffect(() => {
+    const container = mapContainerRef.current;
+    if (container && !document.fullscreenElement) {
+      if (container.requestFullscreen) {
+        container.requestFullscreen();
+      } else if (container.webkitRequestFullscreen) {
+        container.webkitRequestFullscreen();
+      } else if (container.msRequestFullscreen) {
+        container.msRequestFullscreen();
+      }
+    }
   }, []);
 
   return (
